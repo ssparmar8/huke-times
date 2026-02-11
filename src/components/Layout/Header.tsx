@@ -21,7 +21,7 @@ export default function Header({ currentPath, onNavigate }: HeaderProps) {
   return (
     <header className="sticky top-0 z-50 shadow-lg">
       {/* Announcement Bar */}
-      <div className="relative bg-[#1C1C1C] text-white py-3 overflow-hidden">
+      <div className="relative bg-[#333333] text-white py-3 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="flex flex-wrap justify-center items-center gap-4">
             <span className="inline-flex items-center gap-2 backdrop-blur-lg bg-white/10 border border-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
@@ -48,19 +48,19 @@ export default function Header({ currentPath, onNavigate }: HeaderProps) {
             <div className="flex items-center gap-6">
               <a 
                 href={`mailto:${companyInfo.email}`} 
-                className="group flex items-center gap-2 text-[#B0B0B0] hover:text-[#1C1C1C] transition-all"
+                className="group flex items-center gap-2 text-[#888888] hover:text-[#333333] transition-all"
               >
                 <Mail size={14} />
                 <span className="hidden sm:inline text-sm font-medium">{companyInfo.email}</span>
               </a>
               <a 
                 href={`tel:${companyInfo.phone}`} 
-                className="group flex items-center gap-2 text-[#B0B0B0] hover:text-[#1C1C1C] transition-all"
+                className="group flex items-center gap-2 text-[#888888] hover:text-[#333333] transition-all"
               >
                 <Phone size={14} />
                 <span className="text-sm font-medium">{companyInfo.phone}</span>
               </a>
-              <div className="hidden lg:flex items-center gap-2 text-[#B0B0B0] text-sm">
+              <div className="hidden lg:flex items-center gap-2 text-[#888888] text-sm">
                 <MapPin size={14} />
                 <span className="font-medium">Rajkot, Gujarat</span>
               </div>
@@ -71,7 +71,7 @@ export default function Header({ currentPath, onNavigate }: HeaderProps) {
               href={`https://wa.me/${companyInfo.whatsapp.replace(/[^0-9]/g, '')}?text=Hello! I'd like to inquire about your products.`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 backdrop-blur-md bg-[#1C1C1C] hover:bg-[#2C2C2C] text-white px-5 py-2 rounded-lg transition-all shadow-lg transform hover:scale-105"
+              className="inline-flex items-center gap-2 backdrop-blur-md bg-[#333333] hover:bg-[#2C2C2C] text-white px-5 py-2 rounded-lg transition-all shadow-lg transform hover:scale-105"
             >
               <MessageCircle size={16} />
               <span className="text-sm font-semibold">WhatsApp Us</span>
@@ -89,7 +89,7 @@ export default function Header({ currentPath, onNavigate }: HeaderProps) {
               className="group flex items-center cursor-pointer" 
               onClick={() => onNavigate('/')}
             >
-              <div className="text-3xl md:text-4xl font-bold text-[#1C1C1C] tracking-tight group-hover:text-[#2C2C2C] transition-colors">
+              <div className="text-3xl md:text-4xl font-bold text-[#333333] tracking-tight group-hover:text-[#2C2C2C] transition-colors">
                 Huke <span className="font-light">Times</span> <span className="text-xl font-normal ml-1">LLP</span>
               </div>
             </div>
@@ -102,8 +102,8 @@ export default function Header({ currentPath, onNavigate }: HeaderProps) {
                   onClick={() => onNavigate(item.path)}
                   className={`px-5 py-2.5 font-medium transition-all rounded-lg ${
                     currentPath === item.path
-                      ? 'bg-[#1C1C1C] text-white shadow-lg'
-                      : 'text-[#B0B0B0] hover:text-[#1C1C1C] hover:bg-gray-100'
+                      ? 'bg-[#333333] text-white shadow-lg'
+                      : 'text-[#888888] hover:text-[#333333] hover:bg-gray-100'
                   }`}
                 >
                   {item.name}
@@ -114,7 +114,7 @@ export default function Header({ currentPath, onNavigate }: HeaderProps) {
             {/* Desktop CTA Button */}
             <button
               onClick={() => onNavigate('/contact')}
-              className="hidden lg:flex items-center gap-2 backdrop-blur-md bg-[#1C1C1C] hover:bg-[#2C2C2C] text-white px-6 py-2.5 rounded-lg transition-all font-semibold shadow-lg transform hover:scale-105"
+              className="hidden lg:flex items-center gap-2 backdrop-blur-md bg-[#333333] hover:bg-[#2C2C2C] text-white px-6 py-2.5 rounded-lg transition-all font-semibold shadow-lg transform hover:scale-105"
             >
               <ShoppingBag size={18} />
               <span>Request Quote</span>
@@ -126,9 +126,9 @@ export default function Header({ currentPath, onNavigate }: HeaderProps) {
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? (
-                <X size={24} className="text-[#1C1C1C]" />
+                <X size={24} className="text-[#333333]" />
               ) : (
-                <Menu size={24} className="text-[#1C1C1C]" />
+                <Menu size={24} className="text-[#333333]" />
               )}
             </button>
           </div>
@@ -146,8 +146,8 @@ export default function Header({ currentPath, onNavigate }: HeaderProps) {
                     }}
                     className={`w-full text-left py-4 px-5 rounded-lg transition-all ${
                       currentPath === item.path
-                        ? 'bg-[#1C1C1C] text-white font-semibold shadow-lg'
-                        : 'text-[#B0B0B0] hover:bg-gray-100 hover:text-[#1C1C1C]'
+                        ? 'bg-[#333333] text-white font-semibold shadow-lg'
+                        : 'text-[#888888] hover:bg-gray-100 hover:text-[#333333]'
                     }`}
                   >
                     {item.name}
@@ -161,7 +161,7 @@ export default function Header({ currentPath, onNavigate }: HeaderProps) {
                       onNavigate('/contact');
                       setMobileMenuOpen(false);
                     }}
-                    className="w-full backdrop-blur-md bg-[#1C1C1C] hover:bg-[#2C2C2C] text-white font-semibold py-4 px-5 rounded-lg transition-all shadow-lg flex items-center justify-center gap-2"
+                    className="w-full backdrop-blur-md bg-[#333333] hover:bg-[#2C2C2C] text-white font-semibold py-4 px-5 rounded-lg transition-all shadow-lg flex items-center justify-center gap-2"
                   >
                     <ShoppingBag size={18} />
                     <span>Request Quote</span>
@@ -170,7 +170,7 @@ export default function Header({ currentPath, onNavigate }: HeaderProps) {
                     href={`https://wa.me/${companyInfo.whatsapp.replace(/[^0-9]/g, '')}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 w-full backdrop-blur-md border-2 border-[#1C1C1C] text-[#1C1C1C] hover:bg-[#1C1C1C] hover:text-white font-semibold py-4 px-5 rounded-lg transition-all"
+                    className="flex items-center justify-center gap-2 w-full backdrop-blur-md border-2 border-[#333333] text-[#333333] hover:bg-[#333333] hover:text-white font-semibold py-4 px-5 rounded-lg transition-all"
                   >
                     <MessageCircle size={18} />
                     <span>WhatsApp Us</span>

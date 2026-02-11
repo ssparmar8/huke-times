@@ -31,27 +31,27 @@ export default function ProductDetail({ slug, onNavigate }: ProductDetailProps) 
       {/* Breadcrumb */}
       <section className="bg-white py-4 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-2 text-sm text-[#B0B0B0]">
-            <button onClick={() => onNavigate('/')} className="hover:text-[#1C1C1C]">
+          <div className="flex items-center gap-2 text-sm text-[#888888]">
+            <button onClick={() => onNavigate('/')} className="hover:text-[#333333]">
               Home
             </button>
             <span>/</span>
-            <button onClick={() => onNavigate('/products')} className="hover:text-[#1C1C1C]">
+            <button onClick={() => onNavigate('/products')} className="hover:text-[#333333]">
               Products
             </button>
             <span>/</span>
-            <span className="text-[#1C1C1C]">{product.name}</span>
+            <span className="text-[#333333]">{product.name}</span>
           </div>
         </div>
       </section>
 
       {/* Product Details */}
-      <section className="py-16 bg-white">
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Product Image */}
             <div>
-              <div className="backdrop-blur-lg bg-white/80 border border-white/20 rounded-lg overflow-hidden shadow-sm">
+              <div className="bg-white border-2 border-gray-100 rounded-3xl overflow-hidden shadow-lg">
                 <img
                   src={product.images[0]}
                   alt={product.name}
@@ -62,35 +62,35 @@ export default function ProductDetail({ slug, onNavigate }: ProductDetailProps) 
 
             {/* Product Info */}
             <div>
-              <div className="text-sm text-[#1C1C1C] font-semibold mb-2">
+              <div className="text-sm text-[#333333] font-semibold mb-2">
                 {product.category === 'mens-watches' ? 'Mens Wrist Watch' : 'Watch Parts'}
               </div>
-              <h1 className="text-4xl font-bold mb-6 text-[#1C1C1C]">{product.name}</h1>
+              <h1 className="text-4xl md:text-5xl font-extrabold mb-6 text-[#333333]">{product.name}</h1>
 
               {/* Price & MOQ */}
-              <div className="backdrop-blur-lg bg-[#FAFAFA]/90 border border-white/30 rounded-lg p-6 mb-6 shadow-lg">
+              <div className="bg-gray-50 border-2 border-gray-100 rounded-3xl p-8 mb-6 shadow-lg">
                 <div className="mb-4">
-                  <div className="text-sm text-[#B0B0B0] mb-1">Price</div>
-                  <div className="text-4xl font-bold text-[#1C1C1C]">
+                  <div className="text-sm text-[#888888] mb-1">Price</div>
+                  <div className="text-4xl font-bold text-[#333333]">
                     {product.price.currency}{product.price.min}
                     {product.price.max && ` - ${product.price.currency}${product.price.max}`}
                   </div>
-                  <div className="text-[#B0B0B0]">per piece</div>
+                  <div className="text-[#888888]">per piece</div>
                 </div>
                 <div className="border-t border-gray-100 pt-4">
-                  <div className="text-sm text-[#B0B0B0] mb-1">Minimum Order Quantity</div>
-                  <div className="text-2xl font-bold text-[#1C1C1C]">{product.moq} Pieces</div>
+                  <div className="text-sm text-[#888888] mb-1">Minimum Order Quantity</div>
+                  <div className="text-2xl font-bold text-[#333333]">{product.moq} Pieces</div>
                 </div>
               </div>
 
               {/* Features */}
-              <div className="mb-6">
-                <h3 className="text-xl font-bold mb-4 text-[#1C1C1C]">Key Features</h3>
+              <div className="mb-8">
+                <h3 className="text-2xl font-extrabold mb-4 text-[#333333]">Key Features</h3>
                 <div className="grid grid-cols-2 gap-3">
                   {product.features.map((feature, index) => (
                     <div key={index} className="flex items-center">
-                      <CheckCircle size={18} className="text-[#1C1C1C] mr-2 flex-shrink-0" />
-                      <span className="text-[#B0B0B0]">{feature}</span>
+                      <CheckCircle size={18} className="text-[#333333] mr-2 flex-shrink-0" />
+                      <span className="text-[#888888]">{feature}</span>
                     </div>
                   ))}
                 </div>
@@ -100,7 +100,7 @@ export default function ProductDetail({ slug, onNavigate }: ProductDetailProps) 
               <div className="space-y-3">
                 <button
                   onClick={() => onNavigate('/contact')}
-                  className="w-full backdrop-blur-md bg-[#1C1C1C] hover:bg-[#2C2C2C] text-white font-bold py-4 px-6 rounded-lg transition transform hover:scale-105 shadow-lg"
+                  className="w-full backdrop-blur-md bg-[#333333] hover:bg-[#444444] text-white font-bold py-4 px-6 rounded-lg transition transform hover:scale-105 shadow-lg"
                 >
                   Send Enquiry
                 </button>
@@ -108,13 +108,13 @@ export default function ProductDetail({ slug, onNavigate }: ProductDetailProps) 
                   href={`https://wa.me/${companyInfo.whatsapp.replace(/[^0-9]/g, '')}?text=I'm interested in ${product.name}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full backdrop-blur-md bg-white/90 hover:bg-white border-2 border-[#1C1C1C] text-[#1C1C1C] font-bold py-4 px-6 rounded-lg transition text-center shadow-lg"
+                  className="block w-full backdrop-blur-md bg-white/90 hover:bg-white border-2 border-[#333333] text-[#333333] font-bold py-4 px-6 rounded-lg transition text-center shadow-lg"
                 >
                   WhatsApp Us
                 </a>
                 <a
                   href={`tel:${companyInfo.phone}`}
-                  className="block w-full backdrop-blur-md bg-white/90 hover:bg-white border border-white/40 text-[#1C1C1C] font-bold py-4 px-6 rounded-lg transition text-center shadow-lg"
+                  className="block w-full backdrop-blur-md bg-white/90 hover:bg-white border border-white/40 text-[#333333] font-bold py-4 px-6 rounded-lg transition text-center shadow-lg"
                 >
                   Call Now
                 </a>
@@ -123,9 +123,9 @@ export default function ProductDetail({ slug, onNavigate }: ProductDetailProps) 
           </div>
 
           {/* Specifications */}
-          <div className="mt-16">
-            <h2 className="text-3xl font-bold mb-8 text-[#1C1C1C]">Product Specifications</h2>
-            <div className="backdrop-blur-lg bg-white/80 border border-white/20 rounded-lg shadow-sm overflow-hidden">
+          <div className="mt-24">
+            <h2 className="text-4xl font-extrabold mb-12 text-[#333333]">Product Specifications</h2>
+            <div className="bg-white border-2 border-gray-100 rounded-3xl shadow-lg overflow-hidden">
               <table className="w-full">
                 <tbody>
                   {product.specifications.map((spec, index) => (
@@ -133,10 +133,10 @@ export default function ProductDetail({ slug, onNavigate }: ProductDetailProps) 
                       key={index}
                       className={index % 2 === 0 ? 'bg-[#FAFAFA]' : 'bg-white'}
                     >
-                      <td className="px-6 py-4 font-semibold text-[#1C1C1C] border-r border-gray-100 w-1/3">
+                      <td className="px-6 py-4 font-semibold text-[#333333] border-r border-gray-100 w-1/3">
                         {spec.label}
                       </td>
-                      <td className="px-6 py-4 text-[#B0B0B0]">{spec.value}</td>
+                      <td className="px-6 py-4 text-[#888888]">{spec.value}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -147,12 +147,12 @@ export default function ProductDetail({ slug, onNavigate }: ProductDetailProps) 
       </section>
 
       {/* Related Products */}
-      <section className="py-16 bg-[#FAFAFA]">
+      <section className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold mb-8 text-[#1C1C1C]">More Products</h2>
+          <h2 className="text-4xl font-extrabold mb-12 text-[#333333]">More Products</h2>
           <button
             onClick={() => onNavigate('/products')}
-            className="backdrop-blur-md bg-[#1C1C1C] border border-[#2C2C2C] hover:bg-[#2C2C2C] text-white font-bold py-3 px-8 rounded-lg transition shadow-lg"
+            className="backdrop-blur-md bg-[#333333] border border-[#2C2C2C] hover:bg-[#444444] text-white font-bold py-3 px-8 rounded-lg transition shadow-lg"
           >
             View All Products
           </button>

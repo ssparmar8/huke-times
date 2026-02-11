@@ -1,4 +1,4 @@
-import { Factory, Settings, Sparkles, Star, ArrowRight, CheckCircle, TrendingUp, Award, Users, Globe, ShoppingBag, Quote } from 'lucide-react';
+import { Factory, Settings, Sparkles, Star, ArrowRight, CheckCircle, TrendingUp, Award, Users, Globe, ShoppingBag, Quote, Shield, Truck, Phone, Clock, Zap, Target } from 'lucide-react';
 import { products } from '../data/products';
 import { testimonials } from '../data/testimonials';
 import { companyDescription } from '../data/company';
@@ -9,78 +9,94 @@ interface HomeProps {
 
 export default function Home({ onNavigate }: HomeProps) {
   return (
-    <div>
+    <div className="overflow-hidden">
       {/* Hero Section */}
-      <section className="relative bg-[#1C1C1C] text-white py-24 md:py-32 overflow-hidden">
-        {/* Decorative Elements */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-10 w-72 h-72 blur-3xl"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 blur-3xl"></div>
+      <section className="relative bg-[#333333] text-white py-28 md:py-36 overflow-hidden">
+        {/* Subtle Pattern Overlay */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMC41Ii8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')]"></div>
         </div>
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
+            {/* Animated Badge */}
+            <div className="inline-flex items-center gap-2 backdrop-blur-xl bg-white/10 border border-white/30 text-white px-5 py-2.5 rounded-full text-sm font-bold mb-8 shadow-2xl hover:bg-white/20 transition-all duration-300 cursor-default">
+              <Sparkles size={16} className="text-white" />
+              <span>Trusted by 500+ Businesses Across India</span>
+            </div>
+
             {/* Trust Badges */}
-            <div className="flex flex-wrap justify-center gap-4 mb-8">
-              <span className="inline-flex items-center gap-2 backdrop-blur-lg bg-white/10 border border-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+            <div className="flex flex-wrap justify-center gap-3 mb-10">
+              <span className="inline-flex items-center gap-2 backdrop-blur-xl bg-white/10 border border-white/25 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg hover:bg-white/20 hover:scale-105 transition-all duration-300">
                 <Award size={16} className="text-white" />
                 ISO Certified
               </span>
-              <span className="inline-flex items-center gap-2 backdrop-blur-lg bg-white/10 border border-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
-                <CheckCircle size={16} className="text-white" />
+              <span className="inline-flex items-center gap-2 backdrop-blur-xl bg-white/10 border border-white/25 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg hover:bg-white/20 hover:scale-105 transition-all duration-300">
+                <Shield size={16} className="text-white" />
                 Premium Quality
               </span>
-              <span className="inline-flex items-center gap-2 backdrop-blur-lg bg-white/10 border border-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
-                <Globe size={16} className="text-white" />
+              <span className="inline-flex items-center gap-2 backdrop-blur-xl bg-white/10 border border-white/25 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg hover:bg-white/20 hover:scale-105 transition-all duration-300">
+                <Truck size={16} className="text-white" />
                 Pan India Delivery
               </span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              Crafting <span className="text-white">Timeless</span>
-              <br className="hidden md:block" />
-              <span className="text-white">Elegance</span>
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold mb-6 leading-[1.1] tracking-tight">
+              <span className="block text-white">
+                Crafting Timeless
+              </span>
+              <span className="block text-gray-300">
+                Elegance
+              </span>
             </h1>
             
-            <p className="text-xl md:text-3xl mb-4 text-white font-semibold">
+            <p className="text-xl md:text-3xl mb-4 text-white/90 font-bold tracking-wide">
               {companyDescription.tagline}
             </p>
             
-            <p className="text-base md:text-lg max-w-3xl mx-auto mb-10 text-[#B0B0B0] leading-relaxed">
+            <p className="text-base md:text-xl max-w-3xl mx-auto mb-12 text-gray-300 leading-relaxed">
               {companyDescription.intro}
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <button
                 onClick={() => onNavigate('/products')}
-                className="group inline-flex items-center justify-center gap-2 backdrop-blur-md bg-white/90 hover:bg-gray-100 border border-white/20 text-[#1C1C1C] font-bold py-4 px-8 rounded-lg transition transform hover:scale-105 shadow-lg"
+                className="group relative inline-flex items-center justify-center gap-3 bg-white hover:bg-gray-50 text-[#333333] font-bold py-4 px-9 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl overflow-hidden"
               >
-                <ShoppingBag size={20} />
-                <span>Explore Products</span>
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-purple-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <ShoppingBag size={22} className="relative z-10" />
+                <span className="relative z-10 text-lg">Explore Products</span>
+                <ArrowRight size={20} className="relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
               </button>
               <button
                 onClick={() => onNavigate('/contact')}
-                className="group inline-flex items-center justify-center gap-2 backdrop-blur-md bg-white/10 border-2 border-white text-white hover:bg-white hover:text-[#1C1C1C] font-bold py-4 px-8 rounded-lg transition"
+                className="group inline-flex items-center justify-center gap-3 backdrop-blur-xl bg-white/10 border-2 border-white/50 text-white hover:bg-white hover:text-[#333333] font-bold py-4 px-9 rounded-xl transition-all duration-300 hover:shadow-2xl"
               >
-                <span>Contact Us</span>
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                <Phone size={20} />
+                <span className="text-lg">Contact Us</span>
+                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform duration-300" />
               </button>
             </div>
             
-            {/* Quick Stats */}
-            <div className="flex flex-wrap justify-center gap-8 mt-12 text-sm">
-              <div className="flex items-center gap-2 backdrop-blur-md bg-white/10 border border-white/20 px-4 py-2 rounded-full">
-                <CheckCircle size={16} className="text-white" />
-                <span className="text-[#B0B0B0]">4.7★ Rated</span>
+            {/* Enhanced Quick Stats */}
+            <div className="flex flex-wrap justify-center gap-6 mt-12">
+              <div className="group flex items-center gap-3 backdrop-blur-xl bg-white/10 border border-white/20 px-6 py-3 rounded-full hover:bg-white/20 transition-all duration-300 cursor-default">
+                <div className="bg-white p-1.5 rounded-full">
+                  <Star size={14} fill="#333333" className="text-[#333333]" />
+                </div>
+                <span className="text-white font-bold">4.7★ Rated</span>
               </div>
-              <div className="flex items-center gap-2 backdrop-blur-md bg-white/10 border border-white/20 px-4 py-2 rounded-full">
-                <Users size={16} className="text-white" />
-                <span className="text-[#B0B0B0]">20-50 Experts</span>
+              <div className="group flex items-center gap-3 backdrop-blur-xl bg-white/10 border border-white/20 px-6 py-3 rounded-full hover:bg-white/20 transition-all duration-300 cursor-default">
+                <div className="bg-white p-1.5 rounded-full">
+                  <Users size={14} className="text-[#333333]" />
+                </div>
+                <span className="text-white font-bold">20-50 Experts</span>
               </div>
-              <div className="flex items-center gap-2 backdrop-blur-md bg-white/10 border border-white/20 px-4 py-2 rounded-full">
-                <TrendingUp size={16} className="text-white" />
-                <span className="text-[#B0B0B0]">Since 2022</span>
+              <div className="group flex items-center gap-3 backdrop-blur-xl bg-white/10 border border-white/20 px-6 py-3 rounded-full hover:bg-white/20 transition-all duration-300 cursor-default">
+                <div className="bg-white p-1.5 rounded-full">
+                  <Clock size={14} className="text-[#333333]" />
+                </div>
+                <span className="text-white font-bold">Since 2022</span>
               </div>
             </div>
           </div>
@@ -88,58 +104,88 @@ export default function Home({ onNavigate }: HomeProps) {
       </section>
 
       {/* Core Pillars */}
-      <section className="py-20 bg-white">
+      <section className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-[#1C1C1C]">Why Choose Us</h2>
-            <p className="text-lg text-[#B0B0B0] max-w-2xl mx-auto">
-              Three pillars of excellence that define our commitment to craftsmanship
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center gap-2 bg-[#333333] text-white px-5 py-2 rounded-full text-sm font-bold mb-6 shadow-lg">
+              <Target size={16} />
+              <span>OUR STRENGTHS</span>
+            </div>
+            <h2 className="text-4xl md:text-6xl font-extrabold mb-6 text-[#333333] tracking-tight">
+              Why Choose <span className="text-[#333333]">Huke Times</span>
+            </h2>
+            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Three pillars of excellence that define our commitment to craftsmanship and quality
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="group bg-white p-10 rounded-2xl shadow-sm hover:shadow-xl text-center border border-gray-100 hover:border-[#1C1C1C] transition-all duration-300 hover:-translate-y-2">
-              <div className="flex justify-center mb-6">
-                <div className="bg-[#1C1C1C] p-4 rounded-2xl group-hover:scale-110 transition-transform duration-300">
-                  <Factory size={40} className="text-white" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+            <div className="group relative bg-white p-10 rounded-3xl shadow-lg hover:shadow-2xl text-center border-2 border-gray-100 hover:border-[#333333] transition-all duration-500 hover:-translate-y-3 overflow-hidden">
+              {/* Gray Overlay on Hover */}
+              <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
+              
+              <div className="relative z-10">
+                <div className="flex justify-center mb-8">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-[#333333] rounded-2xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
+                    <div className="relative bg-[#333333] p-5 rounded-2xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-xl">
+                      <Factory size={44} className="text-white" />
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-[#1C1C1C]">Who We Are</h3>
-              <p className="text-[#B0B0B0] leading-relaxed">
-                Based in Rajkot, Gujarat, we are committed to the fine craft of watchmaking with dedication to quality and perfection.
-              </p>
-              <div className="mt-6 inline-flex items-center gap-2 text-[#1C1C1C] font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity">
-                <span>Learn More</span>
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                <h3 className="text-2xl font-extrabold mb-4 text-[#333333] transition-colors duration-300">Who We Are</h3>
+                <p className="text-gray-600 leading-relaxed text-base mb-6">
+                  Based in Rajkot, Gujarat, we are committed to the fine craft of watchmaking with dedication to quality and perfection.
+                </p>
+                <div className="inline-flex items-center gap-2 text-[#333333] font-bold text-sm opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                  <span>Learn More</span>
+                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
+                </div>
               </div>
             </div>
-            <div className="group bg-white p-10 rounded-2xl shadow-sm hover:shadow-xl text-center border border-gray-100 hover:border-[#1C1C1C] transition-all duration-300 hover:-translate-y-2">
-              <div className="flex justify-center mb-6">
-                <div className="bg-[#1C1C1C] p-4 rounded-2xl group-hover:scale-110 transition-transform duration-300">
-                  <Settings size={40} className="text-white" />
+            <div className="group relative bg-white p-10 rounded-3xl shadow-lg hover:shadow-2xl text-center border-2 border-gray-100 hover:border-[#333333] transition-all duration-500 hover:-translate-y-3 overflow-hidden">
+              {/* Gray Overlay on Hover */}
+              <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
+              
+              <div className="relative z-10">
+                <div className="flex justify-center mb-8">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-[#333333] rounded-2xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
+                    <div className="relative bg-[#333333] p-5 rounded-2xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-xl">
+                      <Zap size={44} className="text-white" />
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-[#1C1C1C]">Innovation in Every Tick</h3>
-              <p className="text-[#B0B0B0] leading-relaxed">
-                Our team of talented engineers and artisans create timepieces that are both stylish and practical with cutting-edge innovation.
-              </p>
-              <div className="mt-6 inline-flex items-center gap-2 text-[#1C1C1C] font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity">
-                <span>Learn More</span>
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                <h3 className="text-2xl font-extrabold mb-4 text-[#333333] transition-colors duration-300">Innovation in Every Tick</h3>
+                <p className="text-gray-600 leading-relaxed text-base mb-6">
+                  Our team of talented engineers and artisans create timepieces that are both stylish and practical with cutting-edge innovation.
+                </p>
+                <div className="inline-flex items-center gap-2 text-[#333333] font-bold text-sm opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                  <span>Learn More</span>
+                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
+                </div>
               </div>
             </div>
-            <div className="group bg-white p-10 rounded-2xl shadow-sm hover:shadow-xl text-center border border-gray-100 hover:border-[#1C1C1C] transition-all duration-300 hover:-translate-y-2">
-              <div className="flex justify-center mb-6">
-                <div className="bg-[#1C1C1C] p-4 rounded-2xl group-hover:scale-110 transition-transform duration-300">
-                  <Sparkles size={40} className="text-white" />
+            <div className="group relative bg-white p-10 rounded-3xl shadow-lg hover:shadow-2xl text-center border-2 border-gray-100 hover:border-[#333333] transition-all duration-500 hover:-translate-y-3 overflow-hidden">
+              {/* Gray Overlay on Hover */}
+              <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
+              
+              <div className="relative z-10">
+                <div className="flex justify-center mb-8">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-[#333333] rounded-2xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
+                    <div className="relative bg-[#333333] p-5 rounded-2xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-xl">
+                      <Sparkles size={44} className="text-white" />
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-[#1C1C1C]">Commitment to Quality</h3>
-              <p className="text-[#B0B0B0] leading-relaxed">
-                Quality cannot be compromised. Every watch undergoes thorough testing and multiple quality inspections for perfection.
-              </p>
-              <div className="mt-6 inline-flex items-center gap-2 text-[#1C1C1C] font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity">
-                <span>Learn More</span>
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                <h3 className="text-2xl font-extrabold mb-4 text-[#333333] transition-colors duration-300">Commitment to Quality</h3>
+                <p className="text-gray-600 leading-relaxed text-base mb-6">
+                  Quality cannot be compromised. Every watch undergoes thorough testing and multiple quality inspections for perfection.
+                </p>
+                <div className="inline-flex items-center gap-2 text-[#333333] font-bold text-sm opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                  <span>Learn More</span>
+                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
+                </div>
               </div>
             </div>
           </div>
@@ -147,222 +193,267 @@ export default function Home({ onNavigate }: HomeProps) {
       </section>
 
       {/* Featured Products */}
-      <section className="py-20 bg-[#FAFAFA]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 backdrop-blur-md bg-[#1C1C1C] border border-[#2C2C2C] text-white px-4 py-2 rounded-full text-sm font-semibold mb-4 shadow-lg">
-              <Sparkles size={14} />
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center gap-2 bg-[#333333] text-white px-5 py-2.5 rounded-full text-sm font-bold mb-6 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-default">
+              <Sparkles size={16} />
               <span>FEATURED COLLECTION</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-[#1C1C1C]">
-              Our Latest Products
+            <h2 className="text-4xl md:text-6xl font-extrabold mb-6 text-[#333333] tracking-tight">
+              Our Latest <span className="text-[#333333]">Products</span>
             </h2>
-            <p className="text-lg text-[#B0B0B0] max-w-2xl mx-auto">
-              Discover our premium collection of timepieces crafted with precision
+            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Discover our premium collection of timepieces crafted with precision and care
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {products.slice(0, 4).map((product, index) => (
               <div
                 key={product.id}
-                className="group backdrop-blur-lg bg-white/80 border border-white/20 rounded-2xl shadow-sm overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer hover:border-[#1C1C1C]/30 hover:-translate-y-2"
+                className="group relative bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 cursor-pointer border-2 border-gray-100 hover:border-[#333333] hover:-translate-y-3"
                 onClick={() => onNavigate(`/product/${product.slug}`)}
               >
                 {/* Product Badge */}
                 {index === 0 && (
-                  <div className="absolute top-4 left-4 z-10 backdrop-blur-md bg-[#1C1C1C] border border-[#2C2C2C] text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+                  <div className="absolute top-4 left-4 z-20 bg-[#333333] text-white px-4 py-1.5 rounded-full text-xs font-black shadow-lg">
                     BESTSELLER
                   </div>
                 )}
+                
+                {/* Image Container */}
                 <div className="relative aspect-square bg-gray-50 overflow-hidden">
                   <img
                     src={product.images[0]}
                     alt={product.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300"></div>
+                  {/* Gradient Overlay on Hover */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  
+                  {/* Quick View Button */}
+                  <div className="absolute inset-x-0 bottom-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <button className="w-full bg-white text-[#333333] font-bold py-2.5 rounded-lg hover:bg-gray-100 transition-colors duration-200 flex items-center justify-center gap-2 shadow-xl">
+                      <span>Quick View</span>
+                      <ArrowRight size={16} />
+                    </button>
+                  </div>
                 </div>
+                
+                {/* Product Info */}
                 <div className="p-6">
-                  <h3 className="font-bold text-lg mb-3 text-[#1C1C1C] group-hover:text-[#2C2C2C] transition-colors">
+                  <h3 className="font-bold text-lg mb-3 text-[#333333] transition-colors duration-300 line-clamp-2 min-h-[56px]">
                     {product.name}
                   </h3>
-                  <div className="flex items-baseline gap-2 mb-3">
-                    <p className="text-[#1C1C1C] font-bold text-2xl">
+                  <div className="flex items-baseline gap-2 mb-4">
+                    <p className="text-[#333333] font-extrabold text-2xl">
                       {product.price.currency}{product.price.min}
                     </p>
                     {product.price.max && (
-                      <span className="text-[#B0B0B0] text-sm">- {product.price.currency}{product.price.max}</span>
+                      <span className="text-gray-500 text-sm font-medium">- {product.price.currency}{product.price.max}</span>
                     )}
                   </div>
-                  <div className="flex items-center gap-2 text-[#B0B0B0] text-sm mb-4">
-                    <CheckCircle size={14} className="text-[#1C1C1C]" />
-                    <span>MOQ: {product.moq} Pieces</span>
+                  <div className="flex items-center gap-2 text-gray-600 text-sm mb-5 bg-gray-50 px-3 py-2 rounded-lg">
+                    <CheckCircle size={16} className="text-[#333333] flex-shrink-0" />
+                    <span className="font-semibold">MOQ: {product.moq} Pieces</span>
                   </div>
-                  <button className="group/btn w-full backdrop-blur-md bg-[#1C1C1C] border border-[#2C2C2C] hover:bg-[#2C2C2C] text-white font-bold py-3 px-4 rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg">
+                  
+                  <button className="w-full bg-[#333333] hover:bg-[#444444] text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl group/btn">
                     <span>View Details</span>
-                    <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
+                    <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform duration-300" />
                   </button>
                 </div>
               </div>
             ))}
           </div>
-          <div className="text-center mt-16">
+          <div className="text-center mt-20">
             <button
               onClick={() => onNavigate('/products')}
-              className="group inline-flex items-center gap-2 backdrop-blur-md bg-[#1C1C1C] hover:bg-[#2C2C2C] text-white font-bold py-4 px-10 rounded-lg transition-all transform hover:scale-105 shadow-lg"
+              className="group inline-flex items-center gap-3 bg-[#333333] hover:bg-[#444444] text-white font-bold py-5 px-12 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
             >
-              <span>View All Products</span>
-              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              <ShoppingBag size={20} />
+              <span className="text-lg">View All Products</span>
+              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform duration-300" />
             </button>
           </div>
         </div>
       </section>
 
       {/* Company Stats */}
-      <section className="py-20 bg-white border-y border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#1C1C1C]">Our Journey in Numbers</h2>
-            <p className="text-lg text-[#B0B0B0]">Trusted by businesses across India</p>
+      <section className="py-24 bg-gray-50 border-y border-gray-200 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-[#333333]">Our Journey in <span className="text-[#333333]">Numbers</span></h2>
+            <p className="text-lg md:text-xl text-gray-600">Trusted by businesses across India</p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="group text-center p-8 bg-white rounded-2xl border border-gray-100 hover:border-[#1C1C1C] transition-all hover:shadow-lg">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-[#1C1C1C] rounded-2xl mb-4 group-hover:scale-110 transition-transform">
-                <TrendingUp size={28} className="text-white" />
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            <div className="group relative text-center p-8 lg:p-10 bg-white rounded-3xl border-2 border-gray-100 hover:border-[#333333] transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 overflow-hidden">
+              <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10">
+                <div className="inline-flex items-center justify-center w-20 h-20 bg-[#333333] rounded-2xl mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-xl">
+                  <TrendingUp size={32} className="text-white" />
+                </div>
+                <div className="text-5xl lg:text-6xl font-black text-[#333333] mb-3">2022</div>
+                <div className="text-gray-600 font-bold text-sm lg:text-base">Year Established</div>
               </div>
-              <div className="text-5xl font-bold text-[#1C1C1C] mb-2">2022</div>
-              <div className="text-[#B0B0B0] font-medium">Year Established</div>
             </div>
-            <div className="group text-center p-8 bg-white rounded-2xl border border-gray-100 hover:border-[#1C1C1C] transition-all hover:shadow-lg">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-[#1C1C1C] rounded-2xl mb-4 group-hover:scale-110 transition-transform">
-                <Users size={28} className="text-white" />
+            <div className="group relative text-center p-8 lg:p-10 bg-white rounded-3xl border-2 border-gray-100 hover:border-[#333333] transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 overflow-hidden">
+              <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10">
+                <div className="inline-flex items-center justify-center w-20 h-20 bg-[#333333] rounded-2xl mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-xl">
+                  <Users size={32} className="text-white" />
+                </div>
+                <div className="text-5xl lg:text-6xl font-black text-[#333333] mb-3">20-50</div>
+                <div className="text-gray-600 font-bold text-sm lg:text-base">Skilled Employees</div>
               </div>
-              <div className="text-5xl font-bold text-[#1C1C1C] mb-2">20-50</div>
-              <div className="text-[#B0B0B0] font-medium">Skilled Employees</div>
             </div>
-            <div className="group text-center p-8 bg-white rounded-2xl border border-gray-100 hover:border-[#1C1C1C] transition-all hover:shadow-lg">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-[#1C1C1C] rounded-2xl mb-4 group-hover:scale-110 transition-transform">
-                <ShoppingBag size={28} className="text-white" />
+            <div className="group relative text-center p-8 lg:p-10 bg-white rounded-3xl border-2 border-gray-100 hover:border-[#333333] transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 overflow-hidden">
+              <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10">
+                <div className="inline-flex items-center justify-center w-20 h-20 bg-[#333333] rounded-2xl mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-xl">
+                  <ShoppingBag size={32} className="text-white" />
+                </div>
+                <div className="text-5xl lg:text-6xl font-black text-[#333333] mb-3">5+</div>
+                <div className="text-gray-600 font-bold text-sm lg:text-base">Product Categories</div>
               </div>
-              <div className="text-5xl font-bold text-[#1C1C1C] mb-2">5+</div>
-              <div className="text-[#B0B0B0] font-medium">Product Categories</div>
             </div>
-            <div className="group text-center p-8 bg-white rounded-2xl border border-gray-100 hover:border-[#1C1C1C] transition-all hover:shadow-lg">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-[#1C1C1C] rounded-2xl mb-4 group-hover:scale-110 transition-transform">
-                <Star size={28} className="text-white" fill="white" />
+            <div className="group relative text-center p-8 lg:p-10 bg-white rounded-3xl border-2 border-gray-100 hover:border-[#333333] transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 overflow-hidden">
+              <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10">
+                <div className="inline-flex items-center justify-center w-20 h-20 bg-[#333333] rounded-2xl mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-xl">
+                  <Star size={32} className="text-white" fill="white" />
+                </div>
+                <div className="text-5xl lg:text-6xl font-black text-[#333333] mb-3">4.7★</div>
+                <div className="text-gray-600 font-bold text-sm lg:text-base">Customer Rating</div>
               </div>
-              <div className="text-5xl font-bold text-[#1C1C1C] mb-2">4.7★</div>
-              <div className="text-[#B0B0B0] font-medium">Customer Rating</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Testimonials Preview */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 backdrop-blur-md bg-[#1C1C1C] border border-[#2C2C2C] text-white px-4 py-2 rounded-full text-sm font-semibold mb-4 shadow-lg">
-              <Star size={14} fill="white" />
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center gap-2 bg-[#333333] text-white px-5 py-2.5 rounded-full text-sm font-bold mb-6 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-default">
+              <Star size={16} fill="white" />
               <span>CUSTOMER REVIEWS</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-[#1C1C1C]">
-              What Our Customers Say
+            <h2 className="text-4xl md:text-6xl font-extrabold mb-6 text-[#333333] tracking-tight">
+              What Our <span className="text-[#333333]">Customers</span> Say
             </h2>
-            <p className="text-lg text-[#B0B0B0] max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Real experiences from satisfied clients who trust our quality
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.slice(0, 3).map((testimonial) => (
-              <div key={testimonial.id} className="group relative backdrop-blur-lg bg-white/80 border border-white/20 p-8 rounded-2xl shadow-sm hover:shadow-xl hover:border-[#1C1C1C]/30 transition-all duration-300 hover:-translate-y-2">
+              <div key={testimonial.id} className="group relative bg-white border-2 border-gray-100 p-8 lg:p-10 rounded-3xl shadow-lg hover:shadow-2xl hover:border-[#333333] transition-all duration-500 hover:-translate-y-3 overflow-hidden">
+                {/* Gray Background on Hover */}
+                <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
+                
                 {/* Quote Icon */}
-                <div className="absolute top-6 right-6 opacity-10 group-hover:opacity-20 transition-opacity">
-                  <Quote size={48} className="text-[#1C1C1C]" />
+                <div className="absolute top-6 right-6 opacity-5 group-hover:opacity-10 transition-opacity duration-500">
+                  <Quote size={80} className="text-[#333333]" fill="currentColor" />
                 </div>
                 
-                <div className="relative">
-                  <div className="flex items-center gap-1 mb-4">
+                <div className="relative z-10">
+                  <div className="flex items-center gap-1.5 mb-5">
                     {Array.from({ length: testimonial.rating }).map((_, i) => (
-                      <Star key={i} size={18} fill="#1C1C1C" className="text-[#1C1C1C]" />
+                      <Star key={i} size={20} fill="#333333" className="text-[#333333]" />
                     ))}
-                    <span className="ml-2 text-sm font-bold text-[#1C1C1C]">{testimonial.rating}.0</span>
+                    <span className="ml-2 text-base font-black text-[#333333]">{testimonial.rating}.0</span>
                   </div>
                   {testimonial.review && (
-                    <p className="text-[#B0B0B0] mb-6 leading-relaxed">"{testimonial.review}"</p>
+                    <p className="text-gray-700 mb-6 leading-relaxed text-base font-medium italic">"{testimonial.review}"</p>
                   )}
-                  <div className="border-t border-gray-200 pt-4">
-                    <p className="font-bold text-[#1C1C1C] mb-1">{testimonial.customerName}</p>
-                    <p className="text-sm text-[#B0B0B0] mb-1">{testimonial.product}</p>
-                    <p className="text-xs text-[#B0B0B0]">{testimonial.date}</p>
+                  <div className="border-t-2 border-gray-200 pt-5">
+                    <p className="font-extrabold text-[#333333] mb-2 text-lg">{testimonial.customerName}</p>
+                    <p className="text-sm text-gray-600 mb-1 font-semibold">{testimonial.product}</p>
+                    <p className="text-xs text-gray-500 font-medium">{testimonial.date}</p>
                   </div>
                 </div>
+                
+                {/* Decorative Corner */}
+                <div className="absolute bottom-0 right-0 w-24 h-24 bg-gray-200/20 rounded-tl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
             ))}
           </div>
-          <div className="text-center mt-16">
+          <div className="text-center mt-20">
             <button
               onClick={() => onNavigate('/testimonials')}
-              className="group inline-flex items-center gap-2 backdrop-blur-md bg-white/90 hover:bg-[#1C1C1C] border-2 border-white/20 text-[#1C1C1C] hover:text-white border-[#1C1C1C] font-bold py-4 px-10 rounded-lg transition-all transform hover:scale-105 shadow-lg"
+              className="group inline-flex items-center gap-3 bg-[#333333] hover:bg-[#444444] text-white font-bold py-5 px-12 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
             >
-              <span>View All Testimonials</span>
-              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              <Star size={20} fill="white" />
+              <span className="text-lg">View All Testimonials</span>
+              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform duration-300" />
             </button>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-24 bg-[#1C1C1C] text-white overflow-hidden">
-        {/* Decorative Elements */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 right-10 w-72 h-72 blur-3xl"></div>
-          <div className="absolute bottom-10 left-10 w-96 h-96 blur-3xl"></div>
+      <section className="relative py-28 bg-[#333333] text-white overflow-hidden">
+        {/* Subtle Pattern Overlay */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMC41Ii8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')]"></div>
         </div>
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
-          <div className="inline-flex items-center gap-2 backdrop-blur-lg bg-white/10 border border-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 shadow-lg">
-            <Award size={16} />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <div className="inline-flex items-center gap-2 backdrop-blur-xl bg-white/10 border border-white/30 text-white px-5 py-2.5 rounded-full text-sm font-bold mb-8 shadow-2xl hover:bg-white/20 transition-all duration-300 cursor-default">
+            <Award size={18} className="text-white" />
             <span>START YOUR JOURNEY WITH US</span>
           </div>
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-            Ready to Experience
-            <br />
-            <span className="text-white">Excellence?</span>
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-extrabold mb-6 leading-[1.1] tracking-tight">
+            <span className="block text-white">
+              Ready to Experience
+            </span>
+            <span className="block text-gray-300 mt-2">
+              Excellence?
+            </span>
           </h2>
-          <p className="text-xl md:text-2xl mb-10 text-[#B0B0B0] max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl mb-12 text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Contact us today for bulk orders and custom requirements
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-5 justify-center mb-16">
             <button
               onClick={() => onNavigate('/contact')}
-              className="group inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-100 text-[#1C1C1C] font-bold py-4 px-10 rounded-lg transition transform hover:scale-105 shadow-xl"
+              className="group relative inline-flex items-center justify-center gap-3 bg-white hover:bg-gray-100 text-[#333333] font-bold py-5 px-12 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-2xl overflow-hidden"
             >
-              <span>Get in Touch</span>
-              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              <div className="absolute inset-0 bg-gray-200 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+              <Phone size={22} className="relative z-10" />
+              <span className="relative z-10 text-lg">Get in Touch</span>
+              <ArrowRight size={20} className="relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
             </button>
             <button
               onClick={() => onNavigate('/products')}
-              className="group inline-flex items-center justify-center gap-2 backdrop-blur-md bg-white/10 border-2 border-white text-white hover:bg-white hover:text-[#1C1C1C] font-bold py-4 px-10 rounded-lg transition"
+              className="group inline-flex items-center justify-center gap-3 backdrop-blur-xl bg-white/10 border-2 border-white/50 text-white hover:bg-white hover:text-[#333333] font-bold py-5 px-12 rounded-xl transition-all duration-300 shadow-2xl"
             >
-              <ShoppingBag size={18} />
-              <span>Browse Products</span>
+              <ShoppingBag size={20} />
+              <span className="text-lg">Browse Products</span>
+              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform duration-300" />
             </button>
           </div>
           
           {/* Trust Indicators */}
-          <div className="flex flex-wrap justify-center gap-8 mt-16 pt-12 border-t border-white/10">
-            <div className="flex items-center gap-2 text-[#B0B0B0]">
-              <CheckCircle size={20} className="text-white" />
-              <span>Premium Quality Assured</span>
+          <div className="flex flex-wrap justify-center gap-8 lg:gap-12 pt-12 border-t border-white/20">
+            <div className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors duration-300 cursor-default group">
+              <div className="bg-white p-2 rounded-full group-hover:scale-110 transition-transform duration-300">
+                <CheckCircle size={20} className="text-[#333333]" />
+              </div>
+              <span className="font-semibold">Premium Quality Assured</span>
             </div>
-            <div className="flex items-center gap-2 text-[#B0B0B0]">
-              <CheckCircle size={20} className="text-white" />
-              <span>Pan India Delivery</span>
+            <div className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors duration-300 cursor-default group">
+              <div className="bg-white p-2 rounded-full group-hover:scale-110 transition-transform duration-300">
+                <Truck size={20} className="text-[#333333]" />
+              </div>
+              <span className="font-semibold">Pan India Delivery</span>
             </div>
-            <div className="flex items-center gap-2 text-[#B0B0B0]">
-              <CheckCircle size={20} className="text-white" />
-              <span>Bulk Order Discounts</span>
+            <div className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors duration-300 cursor-default group">
+              <div className="bg-white p-2 rounded-full group-hover:scale-110 transition-transform duration-300">
+                <Award size={20} className="text-[#333333]" />
+              </div>
+              <span className="font-semibold">Bulk Order Discounts</span>
             </div>
           </div>
         </div>
@@ -370,3 +461,4 @@ export default function Home({ onNavigate }: HomeProps) {
     </div>
   );
 }
+
