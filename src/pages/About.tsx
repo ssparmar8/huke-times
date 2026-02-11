@@ -55,7 +55,7 @@ export default function About() {
                 ))}
               </ul>
             </div>
-            <div className="bg-white p-12 rounded-lg shadow-sm border border-gray-100">
+            <div className="backdrop-blur-lg bg-white/80 border border-white/20 p-12 rounded-lg shadow-sm hover:shadow-xl transition-all">
               <div className="text-center text-[#1C1C1C]">
                 <div className="flex justify-center mb-4">
                   <Settings size={64} className="text-[#1C1C1C]" />
@@ -88,7 +88,7 @@ export default function About() {
       <section className="py-16 bg-[#FAFAFA]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="bg-white p-12 rounded-lg shadow-sm border border-gray-100 order-2 md:order-1">
+            <div className="backdrop-blur-lg bg-white/80 border border-white/20 p-12 rounded-lg shadow-sm hover:shadow-xl transition-all order-2 md:order-1">
               <div className="text-center text-[#1C1C1C]">
                 <div className="flex justify-center mb-4">
                   <Sparkles size={64} className="text-[#1C1C1C]" />
@@ -122,7 +122,7 @@ export default function About() {
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-[#1C1C1C]">
             Company Details
           </h2>
-          <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100">
+          <div className="max-w-4xl mx-auto backdrop-blur-lg bg-white/80 border border-white/20 rounded-lg shadow-sm overflow-hidden">
             <table className="w-full">
               <tbody>
                 {companyDetails.map((detail, index) => (

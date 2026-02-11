@@ -51,7 +51,7 @@ export default function ProductDetail({ slug, onNavigate }: ProductDetailProps) 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Product Image */}
             <div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100">
+              <div className="backdrop-blur-lg bg-white/80 border border-white/20 rounded-lg overflow-hidden shadow-sm">
                 <img
                   src={product.images[0]}
                   alt={product.name}
@@ -68,7 +68,7 @@ export default function ProductDetail({ slug, onNavigate }: ProductDetailProps) 
               <h1 className="text-4xl font-bold mb-6 text-[#1C1C1C]">{product.name}</h1>
 
               {/* Price & MOQ */}
-              <div className="bg-[#FAFAFA] border border-gray-100 rounded-lg p-6 mb-6">
+              <div className="backdrop-blur-lg bg-[#FAFAFA]/90 border border-white/30 rounded-lg p-6 mb-6 shadow-lg">
                 <div className="mb-4">
                   <div className="text-sm text-[#B0B0B0] mb-1">Price</div>
                   <div className="text-4xl font-bold text-[#1C1C1C]">
@@ -100,7 +100,7 @@ export default function ProductDetail({ slug, onNavigate }: ProductDetailProps) 
               <div className="space-y-3">
                 <button
                   onClick={() => onNavigate('/contact')}
-                  className="w-full bg-[#1C1C1C] hover:bg-[#2C2C2C] text-white font-bold py-4 px-6 rounded-lg transition transform hover:scale-105"
+                  className="w-full backdrop-blur-md bg-[#1C1C1C] hover:bg-[#2C2C2C] text-white font-bold py-4 px-6 rounded-lg transition transform hover:scale-105 shadow-lg"
                 >
                   Send Enquiry
                 </button>
@@ -108,13 +108,13 @@ export default function ProductDetail({ slug, onNavigate }: ProductDetailProps) 
                   href={`https://wa.me/${companyInfo.whatsapp.replace(/[^0-9]/g, '')}?text=I'm interested in ${product.name}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full bg-white hover:bg-gray-50 border-2 border-[#1C1C1C] text-[#1C1C1C] font-bold py-4 px-6 rounded-lg transition text-center"
+                  className="block w-full backdrop-blur-md bg-white/90 hover:bg-white border-2 border-[#1C1C1C] text-[#1C1C1C] font-bold py-4 px-6 rounded-lg transition text-center shadow-lg"
                 >
                   WhatsApp Us
                 </a>
                 <a
                   href={`tel:${companyInfo.phone}`}
-                  className="block w-full bg-white hover:bg-gray-50 border border-gray-200 text-[#1C1C1C] font-bold py-4 px-6 rounded-lg transition text-center"
+                  className="block w-full backdrop-blur-md bg-white/90 hover:bg-white border border-white/40 text-[#1C1C1C] font-bold py-4 px-6 rounded-lg transition text-center shadow-lg"
                 >
                   Call Now
                 </a>
@@ -125,7 +125,7 @@ export default function ProductDetail({ slug, onNavigate }: ProductDetailProps) 
           {/* Specifications */}
           <div className="mt-16">
             <h2 className="text-3xl font-bold mb-8 text-[#1C1C1C]">Product Specifications</h2>
-            <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100">
+            <div className="backdrop-blur-lg bg-white/80 border border-white/20 rounded-lg shadow-sm overflow-hidden">
               <table className="w-full">
                 <tbody>
                   {product.specifications.map((spec, index) => (
@@ -152,7 +152,7 @@ export default function ProductDetail({ slug, onNavigate }: ProductDetailProps) 
           <h2 className="text-3xl font-bold mb-8 text-[#1C1C1C]">More Products</h2>
           <button
             onClick={() => onNavigate('/products')}
-            className="bg-[#1C1C1C] hover:bg-[#2C2C2C] text-white font-bold py-3 px-8 rounded-lg transition"
+            className="backdrop-blur-md bg-[#1C1C1C] border border-[#2C2C2C] hover:bg-[#2C2C2C] text-white font-bold py-3 px-8 rounded-lg transition shadow-lg"
           >
             View All Products
           </button>
