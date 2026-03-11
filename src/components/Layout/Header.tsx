@@ -20,25 +20,6 @@ export default function Header({ currentPath, onNavigate }: HeaderProps) {
 
   return (
     <header className="sticky top-0 z-50 shadow-lg">
-      {/* Announcement Bar */}
-      <div className="relative bg-[#333333] text-white py-3 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="flex flex-wrap justify-center items-center gap-4">
-            <span className="inline-flex items-center gap-2 backdrop-blur-lg bg-white/10 border border-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
-              <Sparkles size={14} className="text-white" />
-              Premium Quality Watches
-            </span>
-            <span className="inline-flex items-center gap-2 backdrop-blur-lg bg-white/10 border border-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
-              <Award size={14} className="text-white" />
-              ISO Certified
-            </span>
-            <span className="hidden sm:inline-flex items-center gap-2 backdrop-blur-lg bg-white/10 border border-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
-              <ShoppingBag size={14} className="text-white" />
-              Pan India Delivery
-            </span>
-          </div>
-        </div>
-      </div>
 
       {/* Contact Bar */}
       <div className="bg-white border-b border-gray-200">
