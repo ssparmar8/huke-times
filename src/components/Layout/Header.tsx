@@ -1,13 +1,47 @@
-import { useState } from 'react';
-import { Mail, Phone, Menu, X, MessageCircle, MapPin, ShoppingBag, Sparkles, Award } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faXmark, faCommentDots, faBagShopping, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { companyInfo } from '../../data/company';
 
-const navigation = [
-  { name: 'Home', path: '/' },
-  { name: 'About Us', path: '/about' },
-  { name: 'Products', path: '/products' },
-  { name: 'Testimonials', path: '/testimonials' },
-  { name: 'Contact', path: '/contact' },
+type DropdownItem = { label: string; path: string };
+
+type NavItem = {
+  name: string;
+  path?: string;
+  dropdown?: DropdownItem[];
+};
+
+const navigation: NavItem[] = [
+  { name: 'HOME', path: '/' },
+  {
+    name: 'COMPANY',
+    dropdown: [
+      { label: 'About Us', path: '/about' },
+      { label: 'Sustainability', path: '/sustainability' },
+      { label: 'Careers', path: '/careers' },
+      { label: 'Blog', path: '/blog' },
+      { label: 'Testimonials', path: '/testimonials' },
+    ],
+  },
+  { name: 'PRODUCTS', path: '/products' },
+  {
+    name: 'SUPPORT',
+    dropdown: [
+      { label: 'Contact Us', path: '/contact' },
+      { label: 'FAQs', path: '/faqs' },
+      { label: 'Watch Care', path: '/watch-care' },
+      { label: 'Warranty', path: '/warranty' },
+      { label: 'Warranty Registration', path: '/warranty-registration' },
+    ],
+  },
+  {
+    name: 'POLICIES',
+    dropdown: [
+      { label: 'Shipping Policy', path: '/shipping' },
+      { label: 'Return & Refund Policy', path: '/refunds' },
+      { label: 'Privacy Policy', path: '/privacy' },
+    ],
+  },
 ];
 
 interface HeaderProps {
@@ -15,152 +49,212 @@ interface HeaderProps {
   onNavigate: (path: string) => void;
 }
 
+function DropdownMenu({ items, onNavigate, onClose }: { items: DropdownItem[]; onNavigate: (p: string) => void; onClose: () => void }) {
+  return (
+    <div className="absolute top-full left-0 mt-0 min-w-[200px] bg-white border border-[#e5e5e5] border-t-0 shadow-lg z-50">
+      {items.map(item => (
+        <button
+          key={item.path}
+          onClick={() => { onNavigate(item.path); onClose(); }}
+          className="w-full text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider text-gray-500 hover:text-black hover:bg-[#f5f5f5] transition-colors border-b border-[#f0f0f0] last:border-b-0"
+        >
+          {item.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 export default function Header({ currentPath, onNavigate }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [announcementVisible, setAnnouncementVisible] = useState(true);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
+        setOpenDropdown(null);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  const isActiveSection = (item: NavItem) => {
+    if (item.path) return currentPath === item.path;
+    return item.dropdown?.some(d => currentPath === d.path) ?? false;
+  };
 
   return (
-    <header className="sticky top-0 z-50 shadow-lg">
+    <header className="sticky top-0 z-50" ref={headerRef}>
 
-      {/* Contact Bar */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-          <div className="flex flex-wrap justify-between items-center gap-4">
-            {/* Left: Contact Info */}
-            <div className="flex items-center gap-6">
-              <a 
-                href={`mailto:${companyInfo.email}`} 
-                className="group flex items-center gap-2 text-[#888888] hover:text-[#333333] transition-all"
+      {/* Announcement Bar */}
+      {announcementVisible && (
+        <div className="bg-black text-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center justify-between gap-4">
+            <div className="flex-1" />
+            <p className="text-center text-xs sm:text-sm font-medium tracking-wide">
+              Premium Wrist Watches &mdash; Manufacturer &amp; Supplier &nbsp;&middot;&nbsp; Pan India Delivery &nbsp;&middot;&nbsp; ISO Certified
+            </p>
+            <div className="flex-1 flex justify-end">
+              <button
+                onClick={() => setAnnouncementVisible(false)}
+                className="text-white/60 hover:text-white transition-colors text-lg leading-none"
+                aria-label="Dismiss"
               >
-                <Mail size={14} />
-                <span className="hidden sm:inline text-sm font-medium">{companyInfo.email}</span>
-              </a>
-              <a 
-                href={`tel:${companyInfo.phone}`} 
-                className="group flex items-center gap-2 text-[#888888] hover:text-[#333333] transition-all"
-              >
-                <Phone size={14} />
-                <span className="text-sm font-medium">{companyInfo.phone}</span>
-              </a>
-              <div className="hidden lg:flex items-center gap-2 text-[#888888] text-sm">
-                <MapPin size={14} />
-                <span className="font-medium">Rajkot, Gujarat</span>
-              </div>
+                &#x2715;
+              </button>
             </div>
-
-            {/* Right: WhatsApp CTA */}
-            <a
-              href={`https://wa.me/${companyInfo.whatsapp.replace(/[^0-9]/g, '')}?text=Hello! I'd like to inquire about your products.`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 backdrop-blur-md bg-[#333333] hover:bg-[#2C2C2C] text-white px-5 py-2 rounded-lg transition-all shadow-lg transform hover:scale-105"
-            >
-              <MessageCircle size={16} />
-              <span className="text-sm font-semibold">WhatsApp Us</span>
-            </a>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Main Header */}
-      <div className="bg-white border-b border-gray-100">
+      <div className="bg-white border-b border-[#e5e5e5]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-5">
+          <div className="flex justify-between items-center h-16 md:h-20">
+
             {/* Logo */}
-            <div 
-              className="group flex items-center cursor-pointer" 
-              onClick={() => onNavigate('/')}
-            >
-              <div className="text-3xl md:text-4xl font-bold text-[#333333] tracking-tight group-hover:text-[#2C2C2C] transition-colors">
-                Huke <span className="font-light">Times</span> <span className="text-xl font-normal ml-1">LLP</span>
-              </div>
-            </div>
+            <button onClick={() => onNavigate('/')} className="flex items-baseline group flex-shrink-0">
+              <span className="text-2xl md:text-3xl font-black tracking-tight text-black uppercase group-hover:text-gray-700 transition-colors">HUKE</span>
+              <span className="text-2xl md:text-3xl font-thin tracking-tight text-black uppercase ml-2 group-hover:text-gray-700 transition-colors">TIMES</span>
+              <span className="text-xs font-medium text-gray-400 ml-2 tracking-widest">LLP</span>
+            </button>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-2">
-              {navigation.map((item) => (
-                <button
-                  key={item.path}
-                  onClick={() => onNavigate(item.path)}
-                  className={`px-5 py-2.5 font-medium transition-all rounded-lg ${
-                    currentPath === item.path
-                      ? 'bg-[#333333] text-white shadow-lg'
-                      : 'text-[#888888] hover:text-[#333333] hover:bg-gray-100'
-                  }`}
-                >
-                  {item.name}
-                </button>
-              ))}
+            <nav className="hidden md:flex items-stretch h-full">
+              {navigation.map((item) => {
+                const active = isActiveSection(item);
+                const isOpen = openDropdown === item.name;
+                return (
+                  <div key={item.name} className="relative flex items-stretch">
+                    {item.path ? (
+                      <button
+                        onClick={() => onNavigate(item.path!)}
+                        className={`relative flex items-center px-4 text-xs font-semibold tracking-widest transition-colors ${
+                          active ? 'text-black' : 'text-gray-400 hover:text-black'
+                        }`}
+                      >
+                        {item.name}
+                        {active && <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-black" />}
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => setOpenDropdown(isOpen ? null : item.name)}
+                        className={`relative flex items-center gap-1 px-4 text-xs font-semibold tracking-widest transition-colors ${
+                          active || isOpen ? 'text-black' : 'text-gray-400 hover:text-black'
+                        }`}
+                      >
+                        {item.name}
+                        <FontAwesomeIcon icon={faChevronDown} size="xs" className={`transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+                        {(active || isOpen) && <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-black" />}
+                      </button>
+                    )}
+                    {item.dropdown && isOpen && (
+                      <DropdownMenu
+                        items={item.dropdown}
+                        onNavigate={onNavigate}
+                        onClose={() => setOpenDropdown(null)}
+                      />
+                    )}
+                  </div>
+                );
+              })}
             </nav>
 
-            {/* Desktop CTA Button */}
+            {/* Desktop CTA */}
             <button
               onClick={() => onNavigate('/contact')}
-              className="hidden lg:flex items-center gap-2 backdrop-blur-md bg-[#333333] hover:bg-[#2C2C2C] text-white px-6 py-2.5 rounded-lg transition-all font-semibold shadow-lg transform hover:scale-105"
+              className="hidden lg:flex items-center gap-2 bg-black hover:bg-gray-800 text-white px-5 py-2.5 text-xs font-bold tracking-widest uppercase transition-colors"
             >
-              <ShoppingBag size={18} />
-              <span>Request Quote</span>
+              <FontAwesomeIcon icon={faBagShopping} size="sm" />
+              REQUEST QUOTE
             </button>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Toggle */}
             <button
-              className="md:hidden p-2.5 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+              className="md:hidden p-2 text-black"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
             >
-              {mobileMenuOpen ? (
-                <X size={24} className="text-[#333333]" />
-              ) : (
-                <Menu size={24} className="text-[#333333]" />
-              )}
+              {mobileMenuOpen ? <FontAwesomeIcon icon={faXmark} size="xl" /> : <FontAwesomeIcon icon={faBars} size="xl" />}
             </button>
           </div>
-
-          {/* Mobile Navigation */}
-          {mobileMenuOpen && (
-            <nav className="md:hidden pb-6 border-t border-gray-100 mt-2">
-              <div className="space-y-2 pt-4">
-                {navigation.map((item) => (
-                  <button
-                    key={item.path}
-                    onClick={() => {
-                      onNavigate(item.path);
-                      setMobileMenuOpen(false);
-                    }}
-                    className={`w-full text-left py-4 px-5 rounded-lg transition-all ${
-                      currentPath === item.path
-                        ? 'bg-[#333333] text-white font-semibold shadow-lg'
-                        : 'text-[#888888] hover:bg-gray-100 hover:text-[#333333]'
-                    }`}
-                  >
-                    {item.name}
-                  </button>
-                ))}
-                
-                {/* Mobile CTAs */}
-                <div className="pt-6 mt-6 border-t border-gray-100 space-y-3">
-                  <button
-                    onClick={() => {
-                      onNavigate('/contact');
-                      setMobileMenuOpen(false);
-                    }}
-                    className="w-full backdrop-blur-md bg-[#333333] hover:bg-[#2C2C2C] text-white font-semibold py-4 px-5 rounded-lg transition-all shadow-lg flex items-center justify-center gap-2"
-                  >
-                    <ShoppingBag size={18} />
-                    <span>Request Quote</span>
-                  </button>
-                  <a
-                    href={`https://wa.me/${companyInfo.whatsapp.replace(/[^0-9]/g, '')}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 w-full backdrop-blur-md border-2 border-[#333333] text-[#333333] hover:bg-[#333333] hover:text-white font-semibold py-4 px-5 rounded-lg transition-all"
-                  >
-                    <MessageCircle size={18} />
-                    <span>WhatsApp Us</span>
-                  </a>
-                </div>
-              </div>
-            </nav>
-          )}
         </div>
+
+        {/* Mobile Navigation */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t border-[#e5e5e5] max-h-[80vh] overflow-y-auto">
+            <div className="max-w-7xl mx-auto px-4 py-4 space-y-1">
+              {navigation.map((item) => {
+                const active = isActiveSection(item);
+                const expanded = mobileExpanded === item.name;
+                return (
+                  <div key={item.name}>
+                    {item.path ? (
+                      <button
+                        onClick={() => { onNavigate(item.path!); setMobileMenuOpen(false); }}
+                        className={`w-full text-left py-3 px-4 text-xs font-bold tracking-widest uppercase transition-colors ${
+                          active ? 'text-black bg-[#f5f5f5]' : 'text-gray-400 hover:text-black hover:bg-[#f5f5f5]'
+                        }`}
+                      >
+                        {item.name}
+                      </button>
+                    ) : (
+                      <>
+                        <button
+                          onClick={() => setMobileExpanded(expanded ? null : item.name)}
+                          className={`w-full text-left py-3 px-4 text-xs font-bold tracking-widest uppercase transition-colors flex items-center justify-between ${
+                            active || expanded ? 'text-black bg-[#f5f5f5]' : 'text-gray-400 hover:text-black hover:bg-[#f5f5f5]'
+                          }`}
+                        >
+                          {item.name}
+                          <FontAwesomeIcon icon={faChevronDown} size="xs" className={`transition-transform ${expanded ? 'rotate-180' : ''}`} />
+                        </button>
+                        {expanded && item.dropdown && (
+                          <div className="bg-[#fafafa] border-l-2 border-black ml-4">
+                            {item.dropdown.map(sub => (
+                              <button
+                                key={sub.path}
+                                onClick={() => { onNavigate(sub.path); setMobileMenuOpen(false); setMobileExpanded(null); }}
+                                className={`w-full text-left py-3 px-5 text-xs font-semibold tracking-wider uppercase transition-colors ${
+                                  currentPath === sub.path ? 'text-black' : 'text-gray-500 hover:text-black'
+                                }`}
+                              >
+                                {sub.label}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </div>
+                );
+              })}
+              <div className="pt-4 border-t border-[#e5e5e5] space-y-2">
+                <button
+                  onClick={() => { onNavigate('/contact'); setMobileMenuOpen(false); }}
+                  className="w-full bg-black text-white font-bold py-3 px-4 text-xs tracking-widest uppercase flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors"
+                >
+                  <FontAwesomeIcon icon={faBagShopping} size="sm" />
+                  REQUEST QUOTE
+                </button>
+                <a
+                  href={`https://wa.me/${companyInfo.whatsapp.replace(/[^0-9]/g, '')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full border border-black text-black font-bold py-3 px-4 text-xs tracking-widest uppercase flex items-center justify-center gap-2 hover:bg-black hover:text-white transition-colors"
+                >
+                  <FontAwesomeIcon icon={faCommentDots} size="sm" />
+                  WHATSAPP US
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );

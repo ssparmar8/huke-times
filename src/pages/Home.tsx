@@ -1,4 +1,5 @@
-import { Factory, Settings, Sparkles, Star, ArrowRight, CheckCircle, TrendingUp, Award, Users, Globe, ShoppingBag, Quote, Shield, Truck, Phone, Clock, Zap, Target } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faIndustry, faStar, faArrowRight, faCircleCheck, faChartLine, faAward, faUsers, faBagShopping, faQuoteLeft, faShield, faTruck, faPhone, faBolt, faWandMagicSparkles } from '@fortawesome/free-solid-svg-icons';
 import { products } from '../data/products';
 import { testimonials } from '../data/testimonials';
 import { companyDescription } from '../data/company';
@@ -9,429 +10,375 @@ interface HomeProps {
 
 export default function Home({ onNavigate }: HomeProps) {
   return (
-    <div className="overflow-hidden">
-      {/* Hero Section */}
-      <section className="relative bg-[#0D1B2A] text-white py-28 md:py-36 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0D1B2A] via-[#1a2d4a] to-[#0D1B2A]"></div>
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#10B981] to-transparent"></div>
+    <div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center">
-            <div className="inline-flex items-center gap-2 bg-[#10B981]/10 border border-[#10B981]/40 text-[#6EE7B7] px-5 py-2.5 rounded-full text-sm font-bold mb-8 shadow-2xl hover:bg-[#10B981]/20 transition-all duration-300 cursor-default">
-              <Sparkles size={16} className="text-[#10B981]" />
-              <span>Trusted by 500+ Businesses Across India</span>
-            </div>
-
-            <div className="flex flex-wrap justify-center gap-3 mb-10">
-              <span className="inline-flex items-center gap-2 bg-white/5 border border-[#10B981]/30 text-gray-300 px-4 py-2 rounded-full text-sm font-semibold shadow-lg hover:bg-[#10B981]/10 hover:text-white hover:scale-105 transition-all duration-300">
-                <Award size={16} className="text-[#10B981]" />
-                ISO Certified
-              </span>
-              <span className="inline-flex items-center gap-2 bg-white/5 border border-[#10B981]/30 text-gray-300 px-4 py-2 rounded-full text-sm font-semibold shadow-lg hover:bg-[#10B981]/10 hover:text-white hover:scale-105 transition-all duration-300">
-                <Shield size={16} className="text-[#10B981]" />
-                Premium Quality
-              </span>
-              <span className="inline-flex items-center gap-2 bg-white/5 border border-[#10B981]/30 text-gray-300 px-4 py-2 rounded-full text-sm font-semibold shadow-lg hover:bg-[#10B981]/10 hover:text-white hover:scale-105 transition-all duration-300">
-                <Truck size={16} className="text-[#10B981]" />
-                Pan India Delivery
-              </span>
-            </div>
-
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold mb-6 leading-[1.1] tracking-tight">
-              <span className="block text-white">Crafting Timeless</span>
-              <span className="block text-[#10B981]">Elegance</span>
-            </h1>
-
-            <p className="text-xl md:text-3xl mb-4 text-white/90 font-bold tracking-wide">
-              {companyDescription.tagline}
+      {/* ── HERO ── */}
+      <section className="bg-black text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+          <div className="max-w-4xl">
+            <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-6">
+              Manufacturer &amp; Supplier · Rajkot, Gujarat · Est. 2022
             </p>
-
-            <p className="text-base md:text-xl max-w-3xl mx-auto mb-12 text-gray-400 leading-relaxed">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.0] tracking-tight mb-8 uppercase">
+              Crafting<br />
+              <span className="text-white">Timeless</span><br />
+              <span className="text-gray-400">Elegance.</span>
+            </h1>
+            <p className="text-lg md:text-xl text-gray-400 max-w-2xl mb-10 leading-relaxed">
               {companyDescription.intro}
             </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <div className="flex flex-wrap gap-4">
               <button
                 onClick={() => onNavigate('/products')}
-                className="group inline-flex items-center justify-center gap-3 bg-[#10B981] hover:bg-[#059669] text-[#0D1B2A] font-bold py-4 px-9 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
+                className="inline-flex items-center gap-3 bg-white text-black font-bold py-4 px-8 text-sm tracking-widest uppercase hover:bg-gray-100 transition-colors"
               >
-                <ShoppingBag size={22} />
-                <span className="text-lg">Explore Products</span>
-                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform duration-300" />
+                <FontAwesomeIcon icon={faBagShopping} />
+                EXPLORE PRODUCTS
               </button>
               <button
                 onClick={() => onNavigate('/contact')}
-                className="group inline-flex items-center justify-center gap-3 bg-white/5 border-2 border-white/30 text-white hover:bg-white hover:text-[#0D1B2A] font-bold py-4 px-9 rounded-xl transition-all duration-300 hover:shadow-2xl"
+                className="inline-flex items-center gap-3 border border-white/30 text-white font-bold py-4 px-8 text-sm tracking-widest uppercase hover:bg-white/10 transition-colors"
               >
-                <Phone size={20} />
-                <span className="text-lg">Contact Us</span>
-                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform duration-300" />
+                <FontAwesomeIcon icon={faPhone} />
+                GET A QUOTE
               </button>
             </div>
-
-            <div className="flex flex-wrap justify-center gap-6 mt-12">
-              <div className="flex items-center gap-3 bg-white/5 border border-white/10 px-6 py-3 rounded-full hover:bg-white/10 transition-all duration-300 cursor-default">
-                <div className="bg-[#10B981] p-1.5 rounded-full">
-                  <Star size={14} fill="#0D1B2A" className="text-[#0D1B2A]" />
-                </div>
-                <span className="text-white font-bold">4.7★ Rated</span>
-              </div>
-              <div className="flex items-center gap-3 bg-white/5 border border-white/10 px-6 py-3 rounded-full hover:bg-white/10 transition-all duration-300 cursor-default">
-                <div className="bg-[#10B981] p-1.5 rounded-full">
-                  <Users size={14} className="text-[#0D1B2A]" />
-                </div>
-                <span className="text-white font-bold">20-50 Experts</span>
-              </div>
-              <div className="flex items-center gap-3 bg-white/5 border border-white/10 px-6 py-3 rounded-full hover:bg-white/10 transition-all duration-300 cursor-default">
-                <div className="bg-[#10B981] p-1.5 rounded-full">
-                  <Clock size={14} className="text-[#0D1B2A]" />
-                </div>
-                <span className="text-white font-bold">Since 2022</span>
-              </div>
-            </div>
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#F7F8FC] to-transparent"></div>
       </section>
 
-      {/* Core Pillars */}
-      <section className="py-24 bg-[#F7F8FC]">
+      {/* ── TRUST BADGES ── */}
+      <section className="border-y border-[#e5e5e5] bg-[#f5f5f5]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex flex-wrap justify-center gap-6 md:gap-12 lg:gap-20">
+            {[
+              { icon: faAward, label: 'ISO Certified' },
+              { icon: faShield, label: 'Premium Quality' },
+              { icon: faTruck, label: 'Pan India Delivery' },
+              { icon: faUsers, label: '500+ B2B Clients' },
+              { icon: faStar, label: '4.7★ Rated' },
+            ].map(({ icon, label }) => (
+              <div key={label} className="flex items-center gap-2.5 text-gray-600">
+                <FontAwesomeIcon icon={icon} size="lg" className="text-black flex-shrink-0" />
+                <span className="text-xs font-bold tracking-wider uppercase">{label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CATEGORY SPLIT ── */}
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <button
+              onClick={() => onNavigate('/products')}
+              className="group relative overflow-hidden bg-black aspect-[4/3] flex items-end p-8 text-left"
+            >
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
+              <div className="relative z-20">
+                <p className="text-xs text-gray-300 tracking-[0.2em] uppercase mb-2">Huke Times</p>
+                <h3 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight mb-4">Men's<br />Collection</h3>
+                <span className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-white border-b border-white/40 pb-0.5 group-hover:border-white transition-colors">
+                  Explore Now <FontAwesomeIcon icon={faArrowRight} size="xs" />
+                </span>
+              </div>
+            </button>
+            <button
+              onClick={() => onNavigate('/products')}
+              className="group relative overflow-hidden bg-[#1a1a1a] aspect-[4/3] flex items-end p-8 text-left"
+            >
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
+              <div className="relative z-20">
+                <p className="text-xs text-gray-300 tracking-[0.2em] uppercase mb-2">Huke Times</p>
+                <h3 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight mb-4">Women's<br />Collection</h3>
+                <span className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-white border-b border-white/40 pb-0.5 group-hover:border-white transition-colors">
+                  Explore Now <FontAwesomeIcon icon={faArrowRight} size="xs" />
+                </span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FEATURED PRODUCTS ── */}
+      <section className="bg-[#f5f5f5] py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 bg-[#1B2A47] text-white px-5 py-2 rounded-full text-sm font-bold mb-6 shadow-lg">
-              <Target size={16} className="text-[#10B981]" />
-              <span>OUR STRENGTHS</span>
+          <div className="flex items-end justify-between mb-12">
+            <div>
+              <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-3">FEATURED COLLECTION</p>
+              <h2 className="text-3xl md:text-4xl font-black text-black uppercase tracking-tight">
+                Our Latest Products
+              </h2>
             </div>
-            <h2 className="text-4xl md:text-6xl font-extrabold mb-4 text-[#1B2A47] tracking-tight">
-              Why Choose <span className="text-[#10B981]">Huke Times</span>
-            </h2>
-            <div className="w-24 h-1 bg-[#10B981] mx-auto mb-6 rounded-full"></div>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Three pillars of excellence that define our commitment to craftsmanship and quality
-            </p>
+            <button
+              onClick={() => onNavigate('/products')}
+              className="hidden sm:inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-black border-b border-black pb-0.5 hover:text-gray-500 hover:border-gray-500 transition-colors"
+            >
+              View All <FontAwesomeIcon icon={faArrowRight} size="xs" />
+            </button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
-            <div className="group relative bg-white p-10 rounded-3xl shadow-md hover:shadow-2xl text-center border border-gray-100 hover:border-[#10B981] transition-all duration-500 hover:-translate-y-3 overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#10B981] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-t-3xl"></div>
-              <div className="relative z-10">
-                <div className="flex justify-center mb-8">
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-[#10B981] rounded-2xl blur-lg opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                    <div className="relative bg-[#1B2A47] group-hover:bg-[#10B981] p-5 rounded-2xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-xl">
-                      <Factory size={44} className="text-white" />
-                    </div>
-                  </div>
-                </div>
-                <h3 className="text-2xl font-extrabold mb-4 text-[#1B2A47]">Who We Are</h3>
-                <p className="text-gray-600 leading-relaxed text-base mb-6">
-                  Based in Rajkot, Gujarat, we are committed to the fine craft of watchmaking with dedication to quality and perfection.
-                </p>
-                <div className="inline-flex items-center gap-2 text-[#10B981] font-bold text-sm opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                  <span>Learn More</span>
-                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
-                </div>
-              </div>
-            </div>
-            <div className="group relative bg-white p-10 rounded-3xl shadow-md hover:shadow-2xl text-center border border-gray-100 hover:border-[#10B981] transition-all duration-500 hover:-translate-y-3 overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#10B981] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-t-3xl"></div>
-              <div className="relative z-10">
-                <div className="flex justify-center mb-8">
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-[#10B981] rounded-2xl blur-lg opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                    <div className="relative bg-[#1B2A47] group-hover:bg-[#10B981] p-5 rounded-2xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-xl">
-                      <Zap size={44} className="text-white" />
-                    </div>
-                  </div>
-                </div>
-                <h3 className="text-2xl font-extrabold mb-4 text-[#1B2A47]">Innovation in Every Tick</h3>
-                <p className="text-gray-600 leading-relaxed text-base mb-6">
-                  Our team of talented engineers and artisans create timepieces that are both stylish and practical with cutting-edge innovation.
-                </p>
-                <div className="inline-flex items-center gap-2 text-[#10B981] font-bold text-sm opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                  <span>Learn More</span>
-                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
-                </div>
-              </div>
-            </div>
-            <div className="group relative bg-white p-10 rounded-3xl shadow-md hover:shadow-2xl text-center border border-gray-100 hover:border-[#10B981] transition-all duration-500 hover:-translate-y-3 overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#10B981] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-t-3xl"></div>
-              <div className="relative z-10">
-                <div className="flex justify-center mb-8">
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-[#10B981] rounded-2xl blur-lg opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                    <div className="relative bg-[#1B2A47] group-hover:bg-[#10B981] p-5 rounded-2xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-xl">
-                      <Sparkles size={44} className="text-white" />
-                    </div>
-                  </div>
-                </div>
-                <h3 className="text-2xl font-extrabold mb-4 text-[#1B2A47]">Commitment to Quality</h3>
-                <p className="text-gray-600 leading-relaxed text-base mb-6">
-                  Quality cannot be compromised. Every watch undergoes thorough testing and multiple quality inspections for perfection.
-                </p>
-                <div className="inline-flex items-center gap-2 text-[#10B981] font-bold text-sm opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                  <span>Learn More</span>
-                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Featured Products */}
-      <section className="py-24 bg-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 bg-[#1B2A47] text-white px-5 py-2.5 rounded-full text-sm font-bold mb-6 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-default">
-              <Sparkles size={16} className="text-[#10B981]" />
-              <span>FEATURED COLLECTION</span>
-            </div>
-            <h2 className="text-4xl md:text-6xl font-extrabold mb-4 text-[#1B2A47] tracking-tight">
-              Our Latest <span className="text-[#10B981]">Products</span>
-            </h2>
-            <div className="w-24 h-1 bg-[#10B981] mx-auto mb-6 rounded-full"></div>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Discover our premium collection of timepieces crafted with precision and care
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[#e5e5e5]">
             {products.slice(0, 4).map((product, index) => (
               <div
                 key={product.id}
-                className="group relative bg-white rounded-3xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-500 cursor-pointer border border-gray-100 hover:border-[#10B981] hover:-translate-y-3"
+                className="group relative bg-white cursor-pointer overflow-hidden"
                 onClick={() => onNavigate(`/product/${product.slug}`)}
               >
                 {index === 0 && (
-                  <div className="absolute top-4 left-4 z-20 bg-[#10B981] text-[#0D1B2A] px-4 py-1.5 rounded-full text-xs font-black shadow-lg">
+                  <div className="absolute top-3 left-3 z-20 bg-black text-white px-2.5 py-1 text-xs font-black tracking-widest">
                     BESTSELLER
                   </div>
                 )}
 
-                <div className="relative aspect-square bg-gray-50 overflow-hidden">
+                <div className="relative aspect-square overflow-hidden bg-[#f5f5f5]">
                   <img
                     src={product.images[0]}
                     alt={product.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B2A]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                  <div className="absolute inset-x-0 bottom-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <button className="w-full bg-[#10B981] text-[#0D1B2A] font-bold py-2.5 rounded-lg hover:bg-[#059669] transition-colors duration-200 flex items-center justify-center gap-2 shadow-xl">
-                      <span>Quick View</span>
-                      <ArrowRight size={16} />
+                  <div className="absolute inset-x-0 bottom-0 p-4 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <button className="w-full text-white text-xs font-bold tracking-widest uppercase flex items-center justify-center gap-2 py-2">
+                      QUICK VIEW <FontAwesomeIcon icon={faArrowRight} size="xs" />
                     </button>
                   </div>
                 </div>
 
-                <div className="p-6">
-                  <h3 className="font-bold text-lg mb-3 text-[#1B2A47] line-clamp-2 min-h-[56px]">
+                <div className="p-5 border-t border-[#e5e5e5]">
+                  <p className="text-xs text-gray-400 font-bold tracking-widest uppercase mb-1">HUKE TIMES</p>
+                  <h3 className="font-bold text-sm text-black line-clamp-2 mb-3 min-h-[40px]">
                     {product.name}
                   </h3>
-                  <div className="flex items-baseline gap-2 mb-4">
-                    <p className="text-[#10B981] font-extrabold text-2xl">
+                  <div className="flex items-center justify-between">
+                    <p className="text-lg font-black text-black">
                       {product.price.currency}{product.price.min}
+                      {product.price.max && <span className="text-sm text-gray-400 font-normal">–{product.price.currency}{product.price.max}</span>}
                     </p>
-                    {product.price.max && (
-                      <span className="text-gray-500 text-sm font-medium">- {product.price.currency}{product.price.max}</span>
-                    )}
+                    <span className="text-xs text-gray-500 font-medium">MOQ: {product.moq}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-gray-600 text-sm mb-5 bg-[#F7F8FC] px-3 py-2 rounded-lg">
-                    <CheckCircle size={16} className="text-[#1B2A47] flex-shrink-0" />
-                    <span className="font-semibold">MOQ: {product.moq} Pieces</span>
-                  </div>
-
-                  <button className="w-full bg-[#1B2A47] hover:bg-[#10B981] hover:text-[#0D1B2A] text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl group/btn">
-                    <span>View Details</span>
-                    <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform duration-300" />
+                  <button className="mt-4 w-full bg-black text-white text-xs font-bold tracking-widest uppercase py-3 hover:bg-gray-800 transition-colors flex items-center justify-center gap-2">
+                    VIEW DETAILS <FontAwesomeIcon icon={faArrowRight} size="xs" />
                   </button>
                 </div>
               </div>
             ))}
           </div>
-          <div className="text-center mt-20">
+
+          <div className="text-center mt-10 sm:hidden">
             <button
               onClick={() => onNavigate('/products')}
-              className="group inline-flex items-center gap-3 bg-[#1B2A47] hover:bg-[#10B981] hover:text-[#0D1B2A] text-white font-bold py-5 px-12 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
+              className="inline-flex items-center gap-2 bg-black text-white text-xs font-bold tracking-widest uppercase py-4 px-10 hover:bg-gray-800 transition-colors"
             >
-              <ShoppingBag size={20} />
-              <span className="text-lg">View All Products</span>
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform duration-300" />
+              VIEW ALL PRODUCTS <FontAwesomeIcon icon={faArrowRight} size="xs" />
             </button>
           </div>
         </div>
       </section>
 
-      {/* Company Stats */}
-      <section className="py-24 bg-[#0D1B2A] relative overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#10B981] to-transparent"></div>
-        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#10B981] to-transparent"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-white">Our Journey in <span className="text-[#10B981]">Numbers</span></h2>
-            <div className="w-24 h-1 bg-[#10B981] mx-auto mb-4 rounded-full"></div>
-            <p className="text-lg md:text-xl text-gray-400">Trusted by businesses across India</p>
+      {/* ── WHY CHOOSE US ── */}
+      <section className="bg-white py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-3">OUR STRENGTHS</p>
+            <h2 className="text-3xl md:text-4xl font-black text-black uppercase tracking-tight">Why Choose Huke Times</h2>
+            <div className="w-16 h-0.5 bg-black mx-auto mt-6" />
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-            <div className="group relative text-center p-8 lg:p-10 bg-white/5 rounded-3xl border border-white/10 hover:border-[#10B981]/50 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 overflow-hidden">
-              <div className="absolute inset-0 bg-[#10B981]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
-              <div className="relative z-10">
-                <div className="inline-flex items-center justify-center w-20 h-20 bg-[#1B2A47] border border-[#10B981]/30 rounded-2xl mb-6 group-hover:scale-110 group-hover:rotate-6 group-hover:bg-[#10B981] transition-all duration-500 shadow-xl">
-                  <TrendingUp size={32} className="text-[#10B981] group-hover:text-[#0D1B2A] transition-colors duration-500" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#e5e5e5]">
+            {[
+              {
+                icon: faIndustry,
+                title: 'Who We Are',
+                desc: 'Based in Rajkot, Gujarat — committed to the fine craft of watchmaking with dedication to quality and perfection.'
+              },
+              {
+                icon: faBolt,
+                title: 'Innovation in Every Tick',
+                desc: 'Engineers and artisans creating timepieces that are both stylish and practical, combining age-old methods with cutting-edge innovation.'
+              },
+              {
+                icon: faWandMagicSparkles,
+                title: 'Commitment to Quality',
+                desc: 'Every watch undergoes thorough testing and multiple quality inspections. Great care in every aspect — from material selection to final delivery.'
+              },
+            ].map(({ icon, title, desc }) => (
+              <div key={title} className="bg-white p-10 group hover:bg-black transition-colors duration-300">
+                <div className="mb-6 w-12 h-12 bg-[#f5f5f5] group-hover:bg-white/10 flex items-center justify-center transition-colors duration-300">
+                  <FontAwesomeIcon icon={icon} size="xl" className="text-black group-hover:text-white transition-colors duration-300" />
                 </div>
-                <div className="text-5xl lg:text-6xl font-black text-white mb-3 group-hover:text-[#10B981] transition-colors duration-300">2022</div>
-                <div className="text-gray-400 font-bold text-sm lg:text-base">Year Established</div>
-              </div>
-            </div>
-            <div className="group relative text-center p-8 lg:p-10 bg-white/5 rounded-3xl border border-white/10 hover:border-[#10B981]/50 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 overflow-hidden">
-              <div className="absolute inset-0 bg-[#10B981]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
-              <div className="relative z-10">
-                <div className="inline-flex items-center justify-center w-20 h-20 bg-[#1B2A47] border border-[#10B981]/30 rounded-2xl mb-6 group-hover:scale-110 group-hover:rotate-6 group-hover:bg-[#10B981] transition-all duration-500 shadow-xl">
-                  <Users size={32} className="text-[#10B981] group-hover:text-[#0D1B2A] transition-colors duration-500" />
+                <h3 className="text-lg font-black text-black group-hover:text-white uppercase tracking-tight mb-4 transition-colors duration-300">{title}</h3>
+                <p className="text-sm text-gray-500 group-hover:text-gray-300 leading-relaxed transition-colors duration-300">{desc}</p>
+                <div className="mt-6 inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-black group-hover:text-white border-b border-black group-hover:border-white pb-0.5 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                  Learn More <FontAwesomeIcon icon={faArrowRight} size="xs" />
                 </div>
-                <div className="text-5xl lg:text-6xl font-black text-white mb-3 group-hover:text-[#10B981] transition-colors duration-300">20-50</div>
-                <div className="text-gray-400 font-bold text-sm lg:text-base">Skilled Employees</div>
-              </div>
-            </div>
-            <div className="group relative text-center p-8 lg:p-10 bg-white/5 rounded-3xl border border-white/10 hover:border-[#10B981]/50 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 overflow-hidden">
-              <div className="absolute inset-0 bg-[#10B981]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
-              <div className="relative z-10">
-                <div className="inline-flex items-center justify-center w-20 h-20 bg-[#1B2A47] border border-[#10B981]/30 rounded-2xl mb-6 group-hover:scale-110 group-hover:rotate-6 group-hover:bg-[#10B981] transition-all duration-500 shadow-xl">
-                  <ShoppingBag size={32} className="text-[#10B981] group-hover:text-[#0D1B2A] transition-colors duration-500" />
-                </div>
-                <div className="text-5xl lg:text-6xl font-black text-white mb-3 group-hover:text-[#10B981] transition-colors duration-300">5+</div>
-                <div className="text-gray-400 font-bold text-sm lg:text-base">Product Categories</div>
-              </div>
-            </div>
-            <div className="group relative text-center p-8 lg:p-10 bg-white/5 rounded-3xl border border-white/10 hover:border-[#10B981]/50 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 overflow-hidden">
-              <div className="absolute inset-0 bg-[#10B981]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
-              <div className="relative z-10">
-                <div className="inline-flex items-center justify-center w-20 h-20 bg-[#1B2A47] border border-[#10B981]/30 rounded-2xl mb-6 group-hover:scale-110 group-hover:rotate-6 group-hover:bg-[#10B981] transition-all duration-500 shadow-xl">
-                  <Star size={32} fill="currentColor" className="text-[#10B981] group-hover:text-[#0D1B2A] transition-colors duration-500" />
-                </div>
-                <div className="text-5xl lg:text-6xl font-black text-white mb-3 group-hover:text-[#10B981] transition-colors duration-300">4.7★</div>
-                <div className="text-gray-400 font-bold text-sm lg:text-base">Customer Rating</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Preview */}
-      <section className="py-24 bg-[#F7F8FC] relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 bg-[#1B2A47] text-white px-5 py-2.5 rounded-full text-sm font-bold mb-6 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-default">
-              <Star size={16} fill="currentColor" className="text-[#10B981]" />
-              <span>CUSTOMER REVIEWS</span>
-            </div>
-            <h2 className="text-4xl md:text-6xl font-extrabold mb-4 text-[#1B2A47] tracking-tight">
-              What Our <span className="text-[#10B981]">Customers</span> Say
-            </h2>
-            <div className="w-24 h-1 bg-[#10B981] mx-auto mb-6 rounded-full"></div>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Real experiences from satisfied clients who trust our quality
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.slice(0, 3).map((testimonial) => (
-              <div key={testimonial.id} className="group relative bg-white border border-gray-100 p-8 lg:p-10 rounded-3xl shadow-md hover:shadow-2xl hover:border-[#10B981] transition-all duration-500 hover:-translate-y-3 overflow-hidden">
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#10B981] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-t-3xl"></div>
-
-                <div className="absolute top-6 right-6 opacity-5 group-hover:opacity-10 transition-opacity duration-500">
-                  <Quote size={80} className="text-[#10B981]" fill="currentColor" />
-                </div>
-
-                <div className="relative z-10">
-                  <div className="flex items-center gap-1.5 mb-5">
-                    {Array.from({ length: testimonial.rating }).map((_, i) => (
-                      <Star key={i} size={20} fill="#10B981" className="text-[#10B981]" />
-                    ))}
-                    <span className="ml-2 text-base font-black text-[#1B2A47]">{testimonial.rating}.0</span>
-                  </div>
-                  {testimonial.review && (
-                    <p className="text-gray-700 mb-6 leading-relaxed text-base font-medium italic">"{testimonial.review}"</p>
-                  )}
-                  <div className="border-t-2 border-gray-100 pt-5">
-                    <p className="font-extrabold text-[#1B2A47] mb-2 text-lg">{testimonial.customerName}</p>
-                    <p className="text-sm text-gray-600 mb-1 font-semibold">{testimonial.product}</p>
-                    <p className="text-xs text-gray-500 font-medium">{testimonial.date}</p>
-                  </div>
-                </div>
-
-                <div className="absolute bottom-0 right-0 w-24 h-24 bg-[#10B981]/5 rounded-tl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
             ))}
           </div>
-          <div className="text-center mt-20">
+        </div>
+      </section>
+
+      {/* ── STATS ── */}
+      <section className="bg-black text-white py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-3">OUR JOURNEY</p>
+            <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight">In Numbers</h2>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/10">
+            {[
+              { icon: faChartLine, value: '2022', label: 'Year Established' },
+              { icon: faUsers, value: '20–50', label: 'Skilled Employees' },
+              { icon: faBagShopping, value: '5+', label: 'Product Categories' },
+              { icon: faStar, value: '4.7★', label: 'Customer Rating' },
+            ].map(({ icon, value, label }) => (
+              <div key={label} className="bg-black p-8 lg:p-10 text-center group hover:bg-white transition-colors duration-300">
+                <FontAwesomeIcon icon={icon} size="xl" className="mx-auto mb-5 text-white group-hover:text-black transition-colors duration-300" />
+                <div className="text-4xl lg:text-5xl font-black mb-2 text-white group-hover:text-black transition-colors duration-300">{value}</div>
+                <div className="text-xs font-bold tracking-widest uppercase text-gray-400 group-hover:text-gray-600 transition-colors duration-300">{label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── TESTIMONIALS ── */}
+      <section className="bg-[#f5f5f5] py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-3">CUSTOMER REVIEWS</p>
+            <h2 className="text-3xl md:text-4xl font-black text-black uppercase tracking-tight">What Our Customers Say</h2>
+            <div className="w-16 h-0.5 bg-black mx-auto mt-6" />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {testimonials.slice(0, 3).map((testimonial) => (
+              <div key={testimonial.id} className="bg-white p-8 border border-[#e5e5e5] hover:border-black hover:shadow-lg transition-all duration-300 group relative">
+                <FontAwesomeIcon icon={faQuoteLeft} size="2x" className="text-[#e5e5e5] group-hover:text-gray-200 absolute top-6 right-6 transition-colors duration-300" />
+                <div className="flex items-center gap-1 mb-5">
+                  {Array.from({ length: testimonial.rating }).map((_, i) => (
+                    <FontAwesomeIcon key={i} icon={faStar} size="sm" className="text-black" />
+                  ))}
+                  <span className="ml-2 text-sm font-black text-black">{testimonial.rating}.0</span>
+                </div>
+                {testimonial.review && (
+                  <p className="text-gray-600 mb-6 leading-relaxed text-sm italic">"{testimonial.review}"</p>
+                )}
+                <div className="border-t border-[#e5e5e5] pt-5">
+                  <p className="font-black text-black text-base">{testimonial.customerName}</p>
+                  <p className="text-xs text-gray-500 mt-1 font-semibold uppercase tracking-wider">{testimonial.product}</p>
+                  <p className="text-xs text-gray-400 mt-0.5">{testimonial.date}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-12">
             <button
               onClick={() => onNavigate('/testimonials')}
-              className="group inline-flex items-center gap-3 bg-[#1B2A47] hover:bg-[#10B981] hover:text-[#0D1B2A] text-white font-bold py-5 px-12 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
+              className="inline-flex items-center gap-2 bg-black text-white text-xs font-bold tracking-widest uppercase py-4 px-10 hover:bg-gray-800 transition-colors"
             >
-              <Star size={20} fill="white" className="text-white" />
-              <span className="text-lg">View All Testimonials</span>
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform duration-300" />
+              VIEW ALL REVIEWS <FontAwesomeIcon icon={faArrowRight} size="xs" />
             </button>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="relative py-28 bg-[#0D1B2A] text-white overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#10B981] to-transparent"></div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 bg-[#10B981]/10 border border-[#10B981]/40 text-[#6EE7B7] px-5 py-2.5 rounded-full text-sm font-bold mb-8 shadow-2xl hover:bg-[#10B981]/20 transition-all duration-300 cursor-default">
-            <Award size={18} className="text-[#10B981]" />
-            <span>START YOUR JOURNEY WITH US</span>
+      {/* ── WORKMANSHIP ── */}
+      <section className="bg-white border-t border-[#e5e5e5] py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-3">Our Craft</p>
+            <h2 className="text-4xl sm:text-5xl font-black uppercase">HUKE'S WORKMANSHIP</h2>
           </div>
-          <h2 className="text-4xl sm:text-5xl md:text-7xl font-extrabold mb-6 leading-[1.1] tracking-tight">
-            <span className="block text-white">Ready to Experience</span>
-            <span className="block text-[#10B981] mt-2">Excellence?</span>
+          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#e5e5e5]">
+            <div className="p-8 md:p-10">
+              <h3 className="text-sm font-black uppercase mb-4 tracking-wider">Who We Are</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">{companyDescription.intro}</p>
+            </div>
+            <div className="p-8 md:p-10">
+              <h3 className="text-sm font-black uppercase mb-4 tracking-wider">{companyDescription.innovation.title}</h3>
+              <ul className="space-y-2">
+                {companyDescription.innovation.points.slice(0, 4).map((point, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
+                    <span className="text-black mt-1 flex-shrink-0">—</span>
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="p-8 md:p-10">
+              <h3 className="text-sm font-black uppercase mb-4 tracking-wider">{companyDescription.quality.title}</h3>
+              <ul className="space-y-2">
+                {companyDescription.quality.points.slice(0, 4).map((point, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
+                    <span className="text-black mt-1 flex-shrink-0">—</span>
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── NEWSLETTER ── */}
+      <section className="bg-black text-white py-14 border-t border-[#1a1a1a]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-3">Stay Updated</p>
+          <h2 className="text-3xl sm:text-4xl font-black uppercase mb-2">Get Wholesale Pricing Updates</h2>
+          <p className="text-gray-400 text-sm mb-8">Subscribe for new product launches, bulk offers, and trade updates.</p>
+          <div className="flex flex-col sm:flex-row gap-0 max-w-md mx-auto">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="flex-1 px-5 py-3 bg-white text-black placeholder-gray-400 text-sm focus:outline-none"
+            />
+            <button className="bg-white text-black font-black text-xs uppercase tracking-widest px-8 py-3 border-l border-gray-200 hover:bg-gray-100 transition-colors whitespace-nowrap">
+              SUBSCRIBE
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <section className="bg-white border-t border-[#e5e5e5] py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-4">START YOUR JOURNEY</p>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-black uppercase tracking-tight leading-tight mb-6">
+            Ready to Experience<br />Excellence?
           </h2>
-          <p className="text-xl md:text-2xl mb-12 text-gray-400 max-w-3xl mx-auto leading-relaxed">
-            Contact us today for bulk orders and custom requirements
+          <p className="text-lg text-gray-500 max-w-2xl mx-auto mb-10">
+            Contact us today for bulk orders and custom requirements. Trusted by 500+ businesses across India.
           </p>
-          <div className="flex flex-col sm:flex-row gap-5 justify-center mb-16">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-14">
             <button
               onClick={() => onNavigate('/contact')}
-              className="group inline-flex items-center justify-center gap-3 bg-[#10B981] hover:bg-[#059669] text-[#0D1B2A] font-bold py-5 px-12 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-2xl"
+              className="inline-flex items-center justify-center gap-3 bg-black text-white font-bold py-4 px-10 text-sm tracking-widest uppercase hover:bg-gray-800 transition-colors"
             >
-              <Phone size={22} />
-              <span className="text-lg">Get in Touch</span>
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform duration-300" />
+                <FontAwesomeIcon icon={faPhone} />
+              GET IN TOUCH
             </button>
             <button
               onClick={() => onNavigate('/products')}
-              className="group inline-flex items-center justify-center gap-3 bg-white/5 border-2 border-white/30 text-white hover:bg-white hover:text-[#0D1B2A] font-bold py-5 px-12 rounded-xl transition-all duration-300 shadow-2xl"
+              className="inline-flex items-center justify-center gap-3 border border-black text-black font-bold py-4 px-10 text-sm tracking-widest uppercase hover:bg-black hover:text-white transition-colors"
             >
-              <ShoppingBag size={20} />
-              <span className="text-lg">Browse Products</span>
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform duration-300" />
+                <FontAwesomeIcon icon={faBagShopping} />
+              BROWSE PRODUCTS
             </button>
           </div>
-
-          <div className="flex flex-wrap justify-center gap-8 lg:gap-12 pt-12 border-t border-white/10">
-            <div className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors duration-300 cursor-default group">
-              <div className="bg-[#10B981] p-2 rounded-full group-hover:scale-110 transition-transform duration-300">
-                <CheckCircle size={20} className="text-[#0D1B2A]" />
+          <div className="flex flex-wrap justify-center gap-8 pt-10 border-t border-[#e5e5e5]">
+            {[
+              { icon: faCircleCheck, text: 'Premium Quality Assured' },
+              { icon: faTruck, text: 'Pan India Delivery' },
+              { icon: faAward, text: 'Bulk Order Discounts' },
+            ].map(({ icon, text }) => (
+              <div key={text} className="flex items-center gap-2 text-gray-500 text-sm">
+                <FontAwesomeIcon icon={icon} size="1x" className="text-black" />
+                <span className="font-semibold">{text}</span>
               </div>
-              <span className="font-semibold">Premium Quality Assured</span>
-            </div>
-            <div className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors duration-300 cursor-default group">
-              <div className="bg-[#10B981] p-2 rounded-full group-hover:scale-110 transition-transform duration-300">
-                <Truck size={20} className="text-[#0D1B2A]" />
-              </div>
-              <span className="font-semibold">Pan India Delivery</span>
-            </div>
-            <div className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors duration-300 cursor-default group">
-              <div className="bg-[#10B981] p-2 rounded-full group-hover:scale-110 transition-transform duration-300">
-                <Award size={20} className="text-[#0D1B2A]" />
-              </div>
-              <span className="font-semibold">Bulk Order Discounts</span>
-            </div>
+            ))}
           </div>
         </div>
       </section>
+
     </div>
   );
 }

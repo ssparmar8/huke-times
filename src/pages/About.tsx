@@ -1,11 +1,12 @@
-import { CheckCircle, Settings, Sparkles } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { companyInfo, companyDescription } from '../data/company';
 
 export default function About() {
   const companyDetails = [
     { label: 'Nature of Business', value: companyInfo.natureOfBusiness },
     { label: 'Number of Employees', value: companyInfo.employees },
-    { label: 'Year of Establishment', value: companyInfo.established },
+    { label: 'Year of Establishment', value: String(companyInfo.established) },
     { label: 'Market Covered', value: companyInfo.marketCovered },
     { label: 'Name of CEO', value: companyInfo.ceos.join(' & ') },
     { label: 'Annual Turnover', value: companyInfo.annualTurnover },
@@ -14,136 +15,86 @@ export default function About() {
 
   return (
     <div>
-      {/* Hero Section */}
-      <section className="relative bg-[#333333] text-white py-28 md:py-32 overflow-hidden">
-        {/* Subtle Pattern Overlay */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMC41Ii8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')]"></div>
-        </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center">
-            <h1 className="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">About Us</h1>
-            <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
-              {companyInfo.legalName} - Manufacturer & Supplier from Rajkot, India
-            </p>
+      {/* Page Header */}
+      <section className="bg-black text-white py-14">
+        <div className="max-w-[1300px] mx-auto px-6 lg:px-8">
+          <div className="flex items-center gap-2 text-xs text-gray-400 mb-4 uppercase tracking-widest">
+            <span>Home</span>
+            <span>/</span>
+            <span>About Us</span>
           </div>
+          <h1 className="text-5xl md:text-6xl font-black uppercase">About Us</h1>
+          <p className="text-gray-400 mt-3 text-sm uppercase tracking-wider">
+            {companyInfo.legalName} &mdash; Manufacturer &amp; Supplier from Rajkot, India
+          </p>
         </div>
       </section>
 
-      {/* Company Description */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-            <p className="text-xl text-gray-700 leading-relaxed mb-8">
-              {companyDescription.intro}
-            </p>
-            <p className="text-xl text-gray-700 leading-relaxed">
-              Our commitment to quality and desire for perfection fuel our journey in creating exceptional timepieces.
-            </p>
+      {/* Workmanship 3-Col */}
+      <section className="bg-white border-b border-[#e5e5e5] py-20">
+        <div className="max-w-[1300px] mx-auto px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <p className="text-xs text-gray-400 uppercase tracking-widest mb-3">Our Story</p>
+            <h2 className="text-4xl md:text-5xl font-black uppercase">HUKE'S WORKMANSHIP</h2>
           </div>
-        </div>
-      </section>
-
-      {/* Innovation Section */}
-      <section className="py-24 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-extrabold mb-8 text-[#333333]">
-                {companyDescription.innovation.title}
-              </h2>
-              <ul className="space-y-5">
-                {companyDescription.innovation.points.map((point, index) => (
-                  <li key={index} className="flex items-start">
-                    <CheckCircle size={22} className="text-[#333333] mr-3 mt-1 flex-shrink-0" />
-                    <span className="text-gray-700 text-lg">{point}</span>
+          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#e5e5e5]">
+            <div className="p-8 md:p-10">
+              <h3 className="text-sm font-black uppercase mb-4 tracking-wider">Who We Are</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">{companyDescription.intro}</p>
+            </div>
+            <div className="p-8 md:p-10">
+              <h3 className="text-sm font-black uppercase mb-4 tracking-wider">{companyDescription.innovation.title}</h3>
+              <ul className="space-y-3">
+                {companyDescription.innovation.points.map((point, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
+                    <FontAwesomeIcon icon={faCircleCheck} size="sm" className="text-black mt-0.5 flex-shrink-0" />
+                    <span>{point}</span>
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="bg-white border-2 border-gray-100 p-12 rounded-3xl shadow-lg hover:shadow-2xl hover:border-[#333333] transition-all duration-500 hover:-translate-y-2">
-              <div className="text-center">
-                <div className="flex justify-center mb-6">
-                  <div className="bg-[#333333] p-6 rounded-2xl">
-                    <Settings size={64} className="text-white" />
-                  </div>
-                </div>
-                <h3 className="text-2xl font-extrabold mb-3 text-[#333333]">Precision Engineering</h3>
-                <p className="text-gray-600 text-lg">
-                  Combining traditional craftsmanship with modern technology
-                </p>
-              </div>
+            <div className="p-8 md:p-10">
+              <h3 className="text-sm font-black uppercase mb-4 tracking-wider">{companyDescription.quality.title}</h3>
+              <ul className="space-y-3">
+                {companyDescription.quality.points.map((point, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
+                    <FontAwesomeIcon icon={faCircleCheck} size="sm" className="text-black mt-0.5 flex-shrink-0" />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Beyond Watchmaking */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-4xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-8 text-[#333333]">
+      {/* Manufacturing Section */}
+      <section className="py-20 bg-[#f5f5f5] border-b border-[#e5e5e5]">
+        <div className="max-w-[1300px] mx-auto px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-black uppercase mb-6">
               {companyDescription.manufacturing.title}
             </h2>
-            <p className="text-xl text-gray-700 leading-relaxed">
-              {companyDescription.manufacturing.description}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Quality Commitment */}
-      <section className="py-24 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="bg-white border-2 border-gray-100 p-12 rounded-3xl shadow-lg hover:shadow-2xl hover:border-[#333333] transition-all duration-500 hover:-translate-y-2 order-2 md:order-1">
-              <div className="text-center">
-                <div className="flex justify-center mb-6">
-                  <div className="bg-[#333333] p-6 rounded-2xl">
-                    <Sparkles size={64} className="text-white" />
-                  </div>
-                </div>
-                <h3 className="text-2xl font-extrabold mb-3 text-[#333333]">Quality First</h3>
-                <p className="text-gray-600 text-lg">
-                  Every watch undergoes rigorous quality control
-                </p>
-              </div>
-            </div>
-            <div className="order-1 md:order-2">
-              <h2 className="text-4xl md:text-5xl font-extrabold mb-8 text-[#333333]">
-                {companyDescription.quality.title}
-              </h2>
-              <ul className="space-y-5">
-                {companyDescription.quality.points.map((point, index) => (
-                  <li key={index} className="flex items-start">
-                    <CheckCircle size={22} className="text-[#333333] mr-3 mt-1 flex-shrink-0" />
-                    <span className="text-gray-700 text-lg">{point}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <p className="text-gray-600 leading-relaxed">{companyDescription.manufacturing.description}</p>
           </div>
         </div>
       </section>
 
       {/* Company Details Table */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-16 text-[#333333]">
+      <section className="py-20 bg-white">
+        <div className="max-w-[1300px] mx-auto px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-black uppercase text-center mb-12">
             Company Details
           </h2>
-          <div className="max-w-4xl mx-auto bg-white border-2 border-gray-100 rounded-3xl shadow-lg overflow-hidden">
+          <div className="max-w-3xl mx-auto border border-[#e5e5e5]">
             <table className="w-full">
               <tbody>
                 {companyDetails.map((detail, index) => (
-                  <tr
-                    key={index}
-                    className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}
-                  >
-                    <td className="px-8 py-5 font-bold text-[#333333] border-r-2 border-gray-100">
+                  <tr key={index} className={index % 2 === 0 ? 'bg-[#f5f5f5]' : 'bg-white'}>
+                    <td className="px-6 py-4 font-bold text-black border-r border-[#e5e5e5] text-sm uppercase tracking-wide w-1/2">
                       {detail.label}
                     </td>
-                    <td className="px-8 py-5 text-gray-700">{detail.value}</td>
+                    <td className="px-6 py-4 text-gray-600 text-sm">{detail.value}</td>
                   </tr>
                 ))}
               </tbody>
@@ -152,19 +103,15 @@ export default function About() {
         </div>
       </section>
 
-      {/* Location */}
-      <section className="relative py-28 bg-[#333333] text-white overflow-hidden">
-        {/* Subtle Pattern Overlay */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMC41Ii8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')]"></div>
-        </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-8">Our Location</h2>
-          <div className="text-xl text-gray-300 space-y-3">
+      {/* Location Strip */}
+      <section className="bg-black text-white py-16">
+        <div className="max-w-[1300px] mx-auto px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-black uppercase mb-6">Our Location</h2>
+          <div className="text-gray-400 text-sm space-y-1.5 uppercase tracking-wider">
             <p>{companyInfo.address.street}</p>
             <p>{companyInfo.address.area}</p>
             <p>
-              {companyInfo.address.city}, {companyInfo.address.state} - {companyInfo.address.pincode}
+              {companyInfo.address.city}, {companyInfo.address.state} &mdash; {companyInfo.address.pincode}
             </p>
             <p>{companyInfo.address.country}</p>
           </div>

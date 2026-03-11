@@ -1,4 +1,5 @@
-import { CheckCircle } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { getProductBySlug } from '../data/products';
 import { companyInfo } from '../data/company';
 
@@ -51,7 +52,7 @@ export default function ProductDetail({ slug, onNavigate }: ProductDetailProps) 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Product Image */}
             <div>
-              <div className="bg-white border-2 border-gray-100 rounded-3xl overflow-hidden shadow-lg">
+              <div className="bg-white border border-[#e5e5e5] overflow-hidden">
                 <img
                   src={product.images[0]}
                   alt={product.name}
@@ -68,7 +69,7 @@ export default function ProductDetail({ slug, onNavigate }: ProductDetailProps) 
               <h1 className="text-4xl md:text-5xl font-extrabold mb-6 text-[#333333]">{product.name}</h1>
 
               {/* Price & MOQ */}
-              <div className="bg-gray-50 border-2 border-gray-100 rounded-3xl p-8 mb-6 shadow-lg">
+              <div className="bg-[#f5f5f5] border border-[#e5e5e5] p-8 mb-6">
                 <div className="mb-4">
                   <div className="text-sm text-[#888888] mb-1">Price</div>
                   <div className="text-4xl font-bold text-[#333333]">
@@ -89,7 +90,7 @@ export default function ProductDetail({ slug, onNavigate }: ProductDetailProps) 
                 <div className="grid grid-cols-2 gap-3">
                   {product.features.map((feature, index) => (
                     <div key={index} className="flex items-center">
-                      <CheckCircle size={18} className="text-[#333333] mr-2 flex-shrink-0" />
+                      <FontAwesomeIcon icon={faCircleCheck} size="lg" className="text-[#333333] mr-2 flex-shrink-0" />
                       <span className="text-[#888888]">{feature}</span>
                     </div>
                   ))}
@@ -100,7 +101,7 @@ export default function ProductDetail({ slug, onNavigate }: ProductDetailProps) 
               <div className="space-y-3">
                 <button
                   onClick={() => onNavigate('/contact')}
-                  className="w-full backdrop-blur-md bg-[#333333] hover:bg-[#444444] text-white font-bold py-4 px-6 rounded-lg transition transform hover:scale-105 shadow-lg"
+                  className="w-full bg-black hover:bg-gray-800 text-white font-black text-sm uppercase tracking-wider py-4 px-6 transition"
                 >
                   Send Enquiry
                 </button>
@@ -108,13 +109,13 @@ export default function ProductDetail({ slug, onNavigate }: ProductDetailProps) 
                   href={`https://wa.me/${companyInfo.whatsapp.replace(/[^0-9]/g, '')}?text=I'm interested in ${product.name}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full backdrop-blur-md bg-white/90 hover:bg-white border-2 border-[#333333] text-[#333333] font-bold py-4 px-6 rounded-lg transition text-center shadow-lg"
+                  className="block w-full bg-white hover:bg-[#f5f5f5] border border-black text-black font-black text-sm uppercase tracking-wider py-4 px-6 transition text-center"
                 >
                   WhatsApp Us
                 </a>
                 <a
                   href={`tel:${companyInfo.phone}`}
-                  className="block w-full backdrop-blur-md bg-white/90 hover:bg-white border border-white/40 text-[#333333] font-bold py-4 px-6 rounded-lg transition text-center shadow-lg"
+                  className="block w-full bg-white hover:bg-[#f5f5f5] border border-[#e5e5e5] text-black font-bold py-4 px-6 transition text-center"
                 >
                   Call Now
                 </a>
@@ -125,7 +126,7 @@ export default function ProductDetail({ slug, onNavigate }: ProductDetailProps) 
           {/* Specifications */}
           <div className="mt-24">
             <h2 className="text-4xl font-extrabold mb-12 text-[#333333]">Product Specifications</h2>
-            <div className="bg-white border-2 border-gray-100 rounded-3xl shadow-lg overflow-hidden">
+            <div className="bg-white border border-[#e5e5e5] overflow-hidden">
               <table className="w-full">
                 <tbody>
                   {product.specifications.map((spec, index) => (
@@ -147,12 +148,12 @@ export default function ProductDetail({ slug, onNavigate }: ProductDetailProps) 
       </section>
 
       {/* Related Products */}
-      <section className="py-24 bg-gray-50">
+      <section className="py-16 bg-[#f5f5f5]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-extrabold mb-12 text-[#333333]">More Products</h2>
           <button
             onClick={() => onNavigate('/products')}
-            className="backdrop-blur-md bg-[#333333] border border-[#2C2C2C] hover:bg-[#444444] text-white font-bold py-3 px-8 rounded-lg transition shadow-lg"
+            className="bg-black hover:bg-gray-800 text-white font-black text-xs uppercase tracking-widest py-3 px-8 transition"
           >
             View All Products
           </button>

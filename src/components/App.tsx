@@ -6,6 +6,16 @@ import Products from '../pages/Products';
 import ProductDetail from '../pages/ProductDetail';
 import Contact from '../pages/Contact';
 import Testimonials from '../pages/Testimonials';
+import FAQs from '../pages/FAQs';
+import WatchCare from '../pages/WatchCare';
+import WarrantyRegistration from '../pages/WarrantyRegistration';
+import Warranty from '../pages/Warranty';
+import Sustainability from '../pages/Sustainability';
+import Careers from '../pages/Careers';
+import Blog from '../pages/Blog';
+import PrivacyPolicy from '../pages/PrivacyPolicy';
+import ShippingPolicy from '../pages/ShippingPolicy';
+import RefundPolicy from '../pages/RefundPolicy';
 
 function App() {
   const [currentPath, setCurrentPath] = useState('/');
@@ -57,6 +67,26 @@ function App() {
         return <Contact />;
       case '/testimonials':
         return <Testimonials />;
+      case '/faqs':
+        return <FAQs />;
+      case '/watch-care':
+        return <WatchCare />;
+      case '/warranty-registration':
+        return <WarrantyRegistration />;
+      case '/warranty':
+        return <Warranty />;
+      case '/sustainability':
+        return <Sustainability />;
+      case '/careers':
+        return <Careers />;
+      case '/blog':
+        return <Blog />;
+      case '/privacy':
+        return <PrivacyPolicy />;
+      case '/shipping':
+        return <ShippingPolicy />;
+      case '/refunds':
+        return <RefundPolicy />;
       default:
         return <Home onNavigate={navigate} />;
     }
