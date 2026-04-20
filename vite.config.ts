@@ -6,6 +6,9 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 // https://vitejs.dev/config https://vitest.dev/config
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
+  server: {
+    allowedHosts: ['quicken-dreadful-prelaunch.ngrok-free.dev']
+  },
   test: {
     globals: true,
     environment: 'happy-dom',
