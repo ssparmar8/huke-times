@@ -1,22 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import Layout from './Layout/Layout';
 import Home from '../pages/Home';
-import About from '../pages/About';
-import Products from '../pages/Products';
-import ProductDetail from '../pages/ProductDetail';
-import Contact from '../pages/Contact';
-import Testimonials from '../pages/Testimonials';
-import FAQs from '../pages/FAQs';
-import WatchCare from '../pages/WatchCare';
-import WarrantyRegistration from '../pages/WarrantyRegistration';
-import Warranty from '../pages/Warranty';
-import Sustainability from '../pages/Sustainability';
-import Careers from '../pages/Careers';
-import Blog from '../pages/Blog';
-import PrivacyPolicy from '../pages/PrivacyPolicy';
-import ShippingPolicy from '../pages/ShippingPolicy';
-import RefundPolicy from '../pages/RefundPolicy';
 import { products } from '../data/products';
+
+const About = lazy(() => import('../pages/About'));
+const Products = lazy(() => import('../pages/Products'));
+const ProductDetail = lazy(() => import('../pages/ProductDetail'));
+const Contact = lazy(() => import('../pages/Contact'));
+const Testimonials = lazy(() => import('../pages/Testimonials'));
+const FAQs = lazy(() => import('../pages/FAQs'));
+const WatchCare = lazy(() => import('../pages/WatchCare'));
+const WarrantyRegistration = lazy(() => import('../pages/WarrantyRegistration'));
+const Warranty = lazy(() => import('../pages/Warranty'));
+const Sustainability = lazy(() => import('../pages/Sustainability'));
+const Careers = lazy(() => import('../pages/Careers'));
+const Blog = lazy(() => import('../pages/Blog'));
+const PrivacyPolicy = lazy(() => import('../pages/PrivacyPolicy'));
+const ShippingPolicy = lazy(() => import('../pages/ShippingPolicy'));
+const RefundPolicy = lazy(() => import('../pages/RefundPolicy'));
 
 const SEO_MAP: Record<string, { title: string; description: string }> = {
   '/': {
@@ -81,7 +82,7 @@ const SEO_MAP: Record<string, { title: string; description: string }> = {
   },
 };
 
-function setPageMeta(title: string, description: string) {
+function setPageMeta(title: string, description: string, path: string) {
   document.title = title;
   let metaDesc = document.querySelector<HTMLMetaElement>('meta[name="description"]');
   if (metaDesc) metaDesc.setAttribute('content', description);
@@ -93,6 +94,10 @@ function setPageMeta(title: string, description: string) {
   if (twitterTitle) twitterTitle.setAttribute('content', title);
   let twitterDesc = document.querySelector<HTMLMetaElement>('meta[name="twitter:description"]');
   if (twitterDesc) twitterDesc.setAttribute('content', description);
+  let canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+  if (canonical) canonical.setAttribute('href', `https://www.huketimes.in${path}`);
+  let ogUrl = document.querySelector<HTMLMetaElement>('meta[property="og:url"]');
+  if (ogUrl) ogUrl.setAttribute('content', `https://www.huketimes.in${path}`);
 }
 
 function App() {
@@ -121,12 +126,13 @@ function App() {
       if (product) {
         setPageMeta(
           `${product.name} – Huke Times | Buy Wholesale`,
-          `Buy ${product.name} in bulk from Huke Times LLP, Rajkot. Starting at ${product.price.currency}${product.price.min}. MOQ: ${product.moq} pcs. Premium quality, Pan India delivery.`
+          `Buy ${product.name} in bulk from Huke Times LLP, Rajkot. Starting at ${product.price.currency}${product.price.min}. MOQ: ${product.moq} pcs. Premium quality, Pan India delivery.`,
+          currentPath
         );
       }
     } else {
       const seo = SEO_MAP[currentPath] ?? SEO_MAP['/'];
-      setPageMeta(seo.title, seo.description);
+      setPageMeta(seo.title, seo.description, currentPath);
     }
   }, [currentPath, productSlug]);
 
@@ -151,33 +157,33 @@ function App() {
       case '/':
         return <Home onNavigate={navigate} />;
       case '/about':
-        return <About />;
+        return <About onNavigate={navigate} />;
       case '/products':
         return <Products onNavigate={navigate} />;
       case '/contact':
         return <Contact />;
       case '/testimonials':
-        return <Testimonials />;
+        return <Testimonials onNavigate={navigate} />;
       case '/faqs':
-        return <FAQs />;
+        return <FAQs onNavigate={navigate} />;
       case '/watch-care':
-        return <WatchCare />;
+        return <WatchCare onNavigate={navigate} />;
       case '/warranty-registration':
-        return <WarrantyRegistration />;
+        return <WarrantyRegistration onNavigate={navigate} />;
       case '/warranty':
-        return <Warranty />;
+        return <Warranty onNavigate={navigate} />;
       case '/sustainability':
-        return <Sustainability />;
+        return <Sustainability onNavigate={navigate} />;
       case '/careers':
-        return <Careers />;
+        return <Careers onNavigate={navigate} />;
       case '/blog':
-        return <Blog />;
+        return <Blog onNavigate={navigate} />;
       case '/privacy':
-        return <PrivacyPolicy />;
+        return <PrivacyPolicy onNavigate={navigate} />;
       case '/shipping':
-        return <ShippingPolicy />;
+        return <ShippingPolicy onNavigate={navigate} />;
       case '/refunds':
-        return <RefundPolicy />;
+        return <RefundPolicy onNavigate={navigate} />;
       default:
         return <Home onNavigate={navigate} />;
     }
@@ -185,7 +191,9 @@ function App() {
 
   return (
     <Layout currentPath={currentPath} onNavigate={navigate}>
-      {renderPage()}
+      <Suspense fallback={<div className="min-h-screen" />}>
+        {renderPage()}
+      </Suspense>
     </Layout>
   );
 }

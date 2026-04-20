@@ -3,7 +3,11 @@ import { products } from '../data/products';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 
-export default function WarrantyRegistration() {
+interface WarrantyRegistrationProps {
+  onNavigate: (path: string) => void;
+}
+
+export default function WarrantyRegistration({ onNavigate }: WarrantyRegistrationProps) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -14,11 +18,34 @@ export default function WarrantyRegistration() {
     orderNumber: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log('Warranty registration:', formData);
-    setSubmitted(true);
+    setSubmitting(true);
+    setError('');
+    try {
+      const res = await fetch('https://formspree.io/f/mdaydpgz', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          subject: `Warranty Registration – ${formData.productName} – ${formData.name}`,
+          ...formData,
+        }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        setSubmitted(true);
+        setFormData({ name: '', email: '', phone: '', productName: '', purchaseDate: '', purchaseChannel: '', orderNumber: '' });
+      } else {
+        setError('Something went wrong. Please try again or email us directly.');
+      }
+    } catch {
+      setError('Network error. Please try again or email us directly.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -39,7 +66,7 @@ export default function WarrantyRegistration() {
       <section className="bg-black text-white py-14">
         <div className="max-w-[1300px] mx-auto px-6 lg:px-8">
           <div className="flex items-center gap-2 text-xs text-gray-400 mb-4 uppercase tracking-widest">
-            <span>Home</span>
+            <button onClick={() => onNavigate('/')} className="hover:text-white transition-colors">Home</button>
             <span>/</span>
             <span>Warranty Registration</span>
           </div>
@@ -134,10 +161,12 @@ export default function WarrantyRegistration() {
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-black text-white font-black text-sm uppercase tracking-wider py-4 hover:bg-gray-800 transition-colors"
+                  disabled={submitting}
+                  className="w-full bg-black disabled:bg-gray-400 text-white font-black text-sm uppercase tracking-wider py-4 hover:bg-gray-800 transition-colors"
                 >
-                  Register Warranty
+                  {submitting ? 'Submitting…' : 'Register Warranty'}
                 </button>
+                {error && <p className="text-red-600 text-sm mt-3">{error}</p>}
               </form>
             </>
           )}

@@ -1,4 +1,8 @@
-export default function Warranty() {
+interface WarrantyProps {
+  onNavigate: (path: string) => void;
+}
+
+export default function Warranty({ onNavigate }: WarrantyProps) {
   const covered = [
     'Defects in materials and workmanship under normal use',
     'Movement failure not caused by physical damage',
@@ -24,7 +28,7 @@ export default function Warranty() {
       <section className="bg-black text-white py-14">
         <div className="max-w-[1300px] mx-auto px-6 lg:px-8">
           <div className="flex items-center gap-2 text-xs text-gray-400 mb-4 uppercase tracking-widest">
-            <span>Home</span>
+            <button onClick={() => onNavigate('/')} className="hover:text-white transition-colors">Home</button>
             <span>/</span>
             <span>Warranty</span>
           </div>
@@ -96,7 +100,7 @@ export default function Warranty() {
             <h3 className="text-xs font-black uppercase tracking-widest mb-3">Important Notes</h3>
             <ul className="space-y-2 text-xs text-gray-600">
               <li>— Proof of purchase (invoice or receipt) is required for all warranty claims.</li>
-              <li>— Warranty registration strengthens your claim; register at huketimes.in/warranty-registration.</li>
+              <li>— Warranty registration strengthens your claim; <button onClick={() => onNavigate('/warranty-registration')} className="underline hover:text-white transition-colors">register your warranty here</button>.</li>
               <li>— Warranty service does not extend the original warranty period.</li>
               <li>— Decisions regarding warranty coverage are at the sole discretion of Huke Times LLP.</li>
             </ul>

@@ -4,7 +4,7 @@ export const testimonials: Testimonial[] = [
   {
     id: 1,
     customerName: 'Kuldeep Gupta',
-    product: 'Agro Product',
+    product: 'Mens Premium Chain Wrist Watch',
     date: '05 Feb 2026',
     rating: 5,
     review: 'Most trusted products which are quite handy and useful, great quality'

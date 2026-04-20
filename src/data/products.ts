@@ -19,7 +19,7 @@ export const products: Product[] = [
     specifications: [
       { label: 'Brand Name', value: 'Huke Times' },
       { label: 'Strap Material', value: 'Stainless Steel' },
-      { label: 'Dialer Material', value: 'Stainless Steel' },
+      { label: 'Dial Material', value: 'Stainless Steel' },
       { label: 'Strap Color', value: 'As per requirement' },
       { label: 'Dialer Shape', value: 'Round' },
       { label: 'Display Type', value: 'Analog' },
@@ -59,7 +59,7 @@ export const products: Product[] = [
     specifications: [
       { label: 'Brand Name', value: 'Huke Times' },
       { label: 'Strap Material', value: 'Leather' },
-      { label: 'Dialer Material', value: 'Metal' },
+      { label: 'Dial Material', value: 'Metal' },
       { label: 'Strap Color', value: 'As per requirement' },
       { label: 'Dialer Shape', value: 'Round' },
       { label: 'Display Type', value: 'Analog' },
@@ -93,7 +93,7 @@ export const products: Product[] = [
     specifications: [
       { label: 'Brand Name', value: 'Huke Times' },
       { label: 'Strap Material', value: 'Stainless Steel' },
-      { label: 'Dialer Material', value: 'Stainless Steel' },
+      { label: 'Dial Material', value: 'Stainless Steel' },
       { label: 'Strap Color', value: 'As per requirement' },
       { label: 'Dialer Shape', value: 'Round' },
       { label: 'Display Type', value: 'Analog' },

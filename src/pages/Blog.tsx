@@ -1,4 +1,5 @@
 import { companyInfo } from '../data/company';
+import { unsplashSrcSet } from '../utils';
 
 const posts = [
   {
@@ -51,14 +52,18 @@ const posts = [
   },
 ];
 
-export default function Blog() {
+interface BlogProps {
+  onNavigate: (path: string) => void;
+}
+
+export default function Blog({ onNavigate }: BlogProps) {
   return (
     <div>
       {/* Page Header */}
       <section className="bg-black text-white py-14">
         <div className="max-w-[1300px] mx-auto px-6 lg:px-8">
           <div className="flex items-center gap-2 text-xs text-gray-400 mb-4 uppercase tracking-widest">
-            <span>Home</span>
+            <button onClick={() => onNavigate('/')} className="hover:text-white transition-colors">Home</button>
             <span>/</span>
             <span>Blog</span>
           </div>
@@ -79,7 +84,10 @@ export default function Blog() {
                   <img
                     src={post.image}
                     alt={post.title}
+                    srcSet={unsplashSrcSet(post.image)}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
                   />
                 </div>
                 <div className="p-6">

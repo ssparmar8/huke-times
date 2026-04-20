@@ -94,7 +94,7 @@ export default function Header({ currentPath, onNavigate }: HeaderProps) {
       {/* Announcement Bar */}
       {announcementVisible && (
         <div className="bg-black text-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center justify-between gap-4">
+          <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center justify-between gap-4">
             <div className="flex-1" />
             <p className="text-center text-xs sm:text-sm font-medium tracking-wide">
               Premium Wrist Watches &mdash; Manufacturer &amp; Supplier &nbsp;&middot;&nbsp; Pan India Delivery &nbsp;&middot;&nbsp; ISO Certified
@@ -114,7 +114,7 @@ export default function Header({ currentPath, onNavigate }: HeaderProps) {
 
       {/* Main Header */}
       <div className="bg-white border-b border-[#e5e5e5]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 md:h-20">
 
             {/* Logo */}
@@ -188,7 +188,7 @@ export default function Header({ currentPath, onNavigate }: HeaderProps) {
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
           <div className="md:hidden border-t border-[#e5e5e5] max-h-[80vh] overflow-y-auto">
-            <div className="max-w-7xl mx-auto px-4 py-4 space-y-1">
+            <div className="max-w-[1300px] mx-auto px-4 py-4 space-y-1">
               {navigation.map((item) => {
                 const active = isActiveSection(item);
                 const expanded = mobileExpanded === item.name;

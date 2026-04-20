@@ -46,7 +46,11 @@ const faqs = [
   },
 ];
 
-export default function FAQs() {
+interface FAQsProps {
+  onNavigate: (path: string) => void;
+}
+
+export default function FAQs({ onNavigate }: FAQsProps) {
   const [openItems, setOpenItems] = useState<Record<string, boolean>>({});
 
   const toggle = (key: string) => {
@@ -59,7 +63,7 @@ export default function FAQs() {
       <section className="bg-black text-white py-14">
         <div className="max-w-[1300px] mx-auto px-6 lg:px-8">
           <div className="flex items-center gap-2 text-xs text-gray-400 mb-4 uppercase tracking-widest">
-            <span>Home</span>
+            <button onClick={() => onNavigate('/')} className="hover:text-white transition-colors">Home</button>
             <span>/</span>
             <span>FAQs</span>
           </div>
@@ -87,6 +91,8 @@ export default function FAQs() {
                       <button
                         className="w-full flex items-center justify-between py-5 text-left"
                         onClick={() => toggle(key)}
+                        aria-expanded={isOpen ? true : false}
+                        aria-controls={`faq-answer-${key}`}
                       >
                         <span className="text-sm font-bold text-black pr-4">{item.q}</span>
                         <FontAwesomeIcon
@@ -96,7 +102,7 @@ export default function FAQs() {
                         />
                       </button>
                       {isOpen && (
-                        <div className="pb-5">
+                        <div id={`faq-answer-${key}`} role="region" className="pb-5">
                           <p className="text-sm text-gray-600 leading-relaxed">{item.a}</p>
                         </div>
                       )}

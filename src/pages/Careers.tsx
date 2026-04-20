@@ -27,14 +27,41 @@ const openings = [
   },
 ];
 
-export default function Careers() {
+interface CareersProps {
+  onNavigate: (path: string) => void;
+}
+
+export default function Careers({ onNavigate }: CareersProps) {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', position: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log('Application:', formData);
-    setSubmitted(true);
+    setSubmitting(true);
+    setError('');
+    try {
+      const res = await fetch('https://formspree.io/f/mdaydpgz', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          subject: `Job Application – ${formData.position} – ${formData.name}`,
+          ...formData,
+        }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        setSubmitted(true);
+        setFormData({ name: '', email: '', phone: '', position: '', message: '' });
+      } else {
+        setError('Something went wrong. Please try again or email us directly.');
+      }
+    } catch {
+      setError('Network error. Please try again or email us directly.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -47,7 +74,7 @@ export default function Careers() {
       <section className="bg-black text-white py-14">
         <div className="max-w-[1300px] mx-auto px-6 lg:px-8">
           <div className="flex items-center gap-2 text-xs text-gray-400 mb-4 uppercase tracking-widest">
-            <span>Home</span>
+            <button onClick={() => onNavigate('/')} className="hover:text-white transition-colors">Home</button>
             <span>/</span>
             <span>Careers</span>
           </div>
@@ -171,9 +198,11 @@ export default function Careers() {
                   className="w-full px-4 py-3 border border-[#e5e5e5] focus:outline-none focus:border-black transition-colors text-sm" />
               </div>
               <button type="submit"
-                className="w-full bg-black text-white font-black text-sm uppercase tracking-wider py-4 hover:bg-gray-800 transition-colors">
-                Submit Application
+                disabled={submitting}
+                className="w-full bg-black disabled:bg-gray-400 text-white font-black text-sm uppercase tracking-wider py-4 hover:bg-gray-800 transition-colors">
+                {submitting ? 'Submitting…' : 'Submit Application'}
               </button>
+              {error && <p className="text-red-600 text-sm mt-3">{error}</p>}
             </form>
           )}
         </div>

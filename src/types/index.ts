@@ -57,16 +57,4 @@ export interface CompanyInfo {
   legalStatus: string;
 }
 
-export interface ContactFormData {
-  productService: string;
-  quantity: string;
-  name: string;
-  email: string;
-  mobile: string;
-  details: string;
-}
 
-export interface NavLink {
-  name: string;
-  path: string;
-}

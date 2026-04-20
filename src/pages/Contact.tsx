@@ -4,7 +4,11 @@ import { faEnvelope, faPhone, faCommentDots, faCircleCheck, faTruck, faBriefcase
 import { companyInfo } from '../data/company';
 import { products } from '../data/products';
 
-export default function Contact() {
+interface ContactProps {
+  onNavigate: (path: string) => void;
+}
+
+export default function Contact({ onNavigate }: ContactProps) {
   const [formData, setFormData] = useState({
     productService: '',
     quantity: '',
@@ -15,23 +19,34 @@ export default function Contact() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // In a real application, this would send the data to a backend
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({
-        productService: '',
-        quantity: '',
-        name: '',
-        email: '',
-        mobile: '',
-        details: '',
+    setSubmitting(true);
+    setError('');
+    try {
+      const res = await fetch('https://formspree.io/f/mdaydpgz', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          subject: `New Enquiry from ${formData.name} – ${formData.productService}`,
+          ...formData,
+        }),
       });
-    }, 3000);
+      const data = await res.json();
+      if (data.ok) {
+        setSubmitted(true);
+        setFormData({ productService: '', quantity: '', name: '', email: '', mobile: '', details: '' });
+      } else {
+        setError('Something went wrong. Please try again or email us directly.');
+      }
+    } catch {
+      setError('Network error. Please try again or email us directly.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -47,7 +62,7 @@ export default function Contact() {
       <section className="bg-black text-white py-14">
         <div className="max-w-[1300px] mx-auto px-6 lg:px-8">
           <div className="flex items-center gap-2 text-xs text-gray-400 mb-4 uppercase tracking-widest">
-            <span>Home</span>
+            <button onClick={() => onNavigate('/')} className="hover:text-white transition-colors">Home</button>
             <span>/</span>
             <span>Contact</span>
           </div>
@@ -64,8 +79,13 @@ export default function Contact() {
           <div>
             <h2 className="text-4xl font-extrabold mb-10 text-[#333333]">Send Enquiry</h2>
             {submitted && (
-              <div className="mb-8 p-5 bg-green-50 border border-green-300 text-green-800 font-semibold">
-                Thank you! Your enquiry has been submitted successfully. We'll get back to you soon.
+              <div className="mb-8 p-5 bg-black text-white font-semibold">
+                ✓ Thank you! Your enquiry has been submitted successfully. We'll get back to you soon.
+              </div>
+            )}
+            {error && (
+              <div className="mb-8 p-5 border border-red-400 text-red-700 text-sm">
+                {error}
               </div>
             )}
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -170,10 +190,11 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="w-full bg-black hover:bg-gray-800 text-white font-black text-sm uppercase tracking-wider py-4 px-6 transition-colors flex items-center justify-center gap-2"
+                disabled={submitting}
+                className="w-full bg-black hover:bg-gray-800 disabled:bg-gray-400 text-white font-black text-sm uppercase tracking-wider py-4 px-6 transition-colors flex items-center justify-center gap-2"
               >
                 <FontAwesomeIcon icon={faPaperPlane} size="lg" />
-                <span>Submit Enquiry</span>
+                <span>{submitting ? 'Sending…' : 'Submit Enquiry'}</span>
               </button>
             </form>
           </div>
@@ -262,7 +283,7 @@ export default function Contact() {
 
       {/* Map or Additional Info Section */}
       <section className="py-16 bg-[#f5f5f5] border-t border-[#e5e5e5]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold mb-8 text-[#333333] text-center">Why Choose Us?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center bg-white border border-[#e5e5e5] p-8">

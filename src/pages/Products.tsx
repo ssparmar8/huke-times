@@ -3,6 +3,7 @@ import { products } from '../data/products';
 import { watchImages } from '../data/watchImages';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { unsplashSrcSet } from '../utils';
 
 interface ProductsProps {
   onNavigate: (path: string) => void;
@@ -93,7 +94,10 @@ export default function Products({ onNavigate }: ProductsProps) {
                     <img
                       src={img.url}
                       alt={img.alt}
+                      srcSet={unsplashSrcSet(img.url)}
+                      sizes="(max-width: 640px) 50vw, 25vw"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-colors duration-300 flex items-center justify-center">
                       <span className="text-white text-xs font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300 border border-white px-5 py-2">
@@ -117,7 +121,10 @@ export default function Products({ onNavigate }: ProductsProps) {
                     <img
                       src={product.images[0]}
                       alt={product.name}
+                      srcSet={unsplashSrcSet(product.images[0])}
+                      sizes="(max-width: 640px) 50vw, 25vw"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-colors duration-300 flex items-center justify-center">
                       <span className="text-white text-xs font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300 border border-white px-5 py-2">

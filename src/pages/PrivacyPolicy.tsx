@@ -1,11 +1,15 @@
-export default function PrivacyPolicy() {
+interface PrivacyPolicyProps {
+  onNavigate: (path: string) => void;
+}
+
+export default function PrivacyPolicy({ onNavigate }: PrivacyPolicyProps) {
   return (
     <div>
       {/* Page Header */}
       <section className="bg-black text-white py-14">
         <div className="max-w-[1300px] mx-auto px-6 lg:px-8">
           <div className="flex items-center gap-2 text-xs text-gray-400 mb-4 uppercase tracking-widest">
-            <span>Home</span>
+            <button onClick={() => onNavigate('/')} className="hover:text-white transition-colors">Home</button>
             <span>/</span>
             <span>Privacy Policy</span>
           </div>

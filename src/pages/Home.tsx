@@ -3,6 +3,7 @@ import { faIndustry, faStar, faArrowRight, faCircleCheck, faChartLine, faAward, 
 import { products } from '../data/products';
 import { testimonials } from '../data/testimonials';
 import { companyDescription } from '../data/company';
+import { unsplashSrcSet } from '../utils';
 
 interface HomeProps {
   onNavigate: (path: string) => void;
@@ -15,7 +16,7 @@ export default function Home({ onNavigate }: HomeProps) {
       {/* ── HERO ── */}
       <section className="bg-black text-white relative overflow-hidden" style={{backgroundImage: "url('https://images.unsplash.com/photo-1729078945904-c278d0a1bf0c?w=1920&q=80')", backgroundSize: 'cover', backgroundPosition: 'center top'}}>
         <div className="absolute inset-0 bg-black/75" />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+        <div className="relative z-10 max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
           <div className="max-w-4xl">
             <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-6">
               Manufacturer &amp; Supplier · Rajkot, Gujarat · Est. 2022
@@ -50,7 +51,7 @@ export default function Home({ onNavigate }: HomeProps) {
 
       {/* ── TRUST BADGES ── */}
       <section className="border-y border-[#e5e5e5] bg-[#f5f5f5]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-wrap justify-center gap-6 md:gap-12 lg:gap-20">
             {[
               { icon: faAward, label: 'ISO Certified' },
@@ -70,7 +71,7 @@ export default function Home({ onNavigate }: HomeProps) {
 
       {/* ── CATEGORY SPLIT ── */}
       <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <button
               onClick={() => onNavigate('/products')}
@@ -89,12 +90,12 @@ export default function Home({ onNavigate }: HomeProps) {
             <button
               onClick={() => onNavigate('/products')}
               className="group relative overflow-hidden bg-[#1a1a1a] aspect-[4/3] flex items-end p-8 text-left"
-              style={{backgroundImage: "url('https://images.unsplash.com/photo-1643111998875-0debbdcf2361?w=900&q=80')", backgroundSize: 'cover', backgroundPosition: 'center'}}
+              style={{backgroundImage: "url('https://images.unsplash.com/photo-1590929382053-747686bfab75?w=900&q=80')", backgroundSize: 'cover', backgroundPosition: 'center'}}
             >
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10 z-10" />
               <div className="relative z-20">
                 <p className="text-xs text-gray-300 tracking-[0.2em] uppercase mb-2">Huke Times</p>
-                <h3 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight mb-4">Women's<br />Collection</h3>
+                <h3 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight mb-4">Watch<br />Parts</h3>
                 <span className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-white border-b border-white/40 pb-0.5 group-hover:border-white transition-colors">
                   Explore Now <FontAwesomeIcon icon={faArrowRight} size="xs" />
                 </span>
@@ -106,7 +107,7 @@ export default function Home({ onNavigate }: HomeProps) {
 
       {/* ── FEATURED PRODUCTS ── */}
       <section className="bg-[#f5f5f5] py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between mb-12">
             <div>
               <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-3">FEATURED COLLECTION</p>
@@ -139,7 +140,10 @@ export default function Home({ onNavigate }: HomeProps) {
                   <img
                     src={product.images[0]}
                     alt={product.name}
+                    srcSet={unsplashSrcSet(product.images[0])}
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 300px"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    loading="lazy"
                   />
                   <div className="absolute inset-x-0 bottom-0 p-4 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                     <button className="w-full text-white text-xs font-bold tracking-widest uppercase flex items-center justify-center gap-2 py-2">
@@ -181,7 +185,7 @@ export default function Home({ onNavigate }: HomeProps) {
 
       {/* ── WHY CHOOSE US ── */}
       <section className="bg-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-3">OUR STRENGTHS</p>
             <h2 className="text-3xl md:text-4xl font-black text-black uppercase tracking-tight">Why Choose Huke Times</h2>
@@ -223,7 +227,7 @@ export default function Home({ onNavigate }: HomeProps) {
       {/* ── STATS ── */}
       <section className="bg-black text-white py-20 relative" style={{backgroundImage: "url('https://images.unsplash.com/photo-1705888532119-0c6a5092947a?w=1920&q=80')", backgroundSize: 'cover', backgroundPosition: 'center'}}>
         <div className="absolute inset-0" style={{backgroundColor: 'rgba(0,0,0,0.88)'}} />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative z-10 text-center mb-14">
             <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-3">OUR JOURNEY</p>
             <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight">In Numbers</h2>
@@ -247,7 +251,7 @@ export default function Home({ onNavigate }: HomeProps) {
 
       {/* ── TESTIMONIALS ── */}
       <section className="bg-[#f5f5f5] py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-3">CUSTOMER REVIEWS</p>
             <h2 className="text-3xl md:text-4xl font-black text-black uppercase tracking-tight">What Our Customers Say</h2>
@@ -287,7 +291,7 @@ export default function Home({ onNavigate }: HomeProps) {
 
       {/* ── WORKMANSHIP ── */}
       <section className="bg-white border-t border-[#e5e5e5] py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-3">Our Craft</p>
             <h2 className="text-4xl sm:text-5xl font-black uppercase">HUKE'S WORKMANSHIP</h2>
@@ -325,7 +329,7 @@ export default function Home({ onNavigate }: HomeProps) {
 
       {/* ── NEWSLETTER ── */}
       <section className="bg-black text-white py-14 border-t border-[#1a1a1a]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-3">Stay Updated</p>
           <h2 className="text-3xl sm:text-4xl font-black uppercase mb-2">Get Wholesale Pricing Updates</h2>
           <p className="text-gray-400 text-sm mb-8">Subscribe for new product launches, bulk offers, and trade updates.</p>
@@ -345,7 +349,7 @@ export default function Home({ onNavigate }: HomeProps) {
       {/* ── CTA ── */}
       <section className="bg-white border-t border-[#e5e5e5] py-20 relative overflow-hidden" style={{backgroundImage: "url('https://images.unsplash.com/photo-1729078946064-07a957def7af?w=1920&q=80')", backgroundSize: 'cover', backgroundPosition: 'center'}}>
         <div className="absolute inset-0" style={{backgroundColor: 'rgba(255,255,255,0.92)'}} />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="relative z-10 max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-4">START YOUR JOURNEY</p>
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-black uppercase tracking-tight leading-tight mb-6">
             Ready to Experience<br />Excellence?

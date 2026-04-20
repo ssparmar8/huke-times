@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
-import { getProductBySlug } from '../data/products';
+import { faCircleCheck, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { getProductBySlug, products } from '../data/products';
 import { companyInfo } from '../data/company';
+import { unsplashSrcSet } from '../utils';
 
 interface ProductDetailProps {
   slug: string;
@@ -10,15 +12,16 @@ interface ProductDetailProps {
 
 export default function ProductDetail({ slug, onNavigate }: ProductDetailProps) {
   const product = getProductBySlug(slug);
+  const [activeImage, setActiveImage] = useState(0);
 
   if (!product) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-[#f5f5f5]">
         <div className="text-center">
-          <h1 className="text-4xl font-bold mb-4 text-gray-900">Product Not Found</h1>
+          <h1 className="text-4xl font-black uppercase mb-4 text-black">Product Not Found</h1>
           <button
             onClick={() => onNavigate('/products')}
-            className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-lg transition"
+            className="bg-black text-white font-black text-xs uppercase tracking-widest py-4 px-10 hover:bg-gray-800 transition-colors"
           >
             Back to Products
           </button>
@@ -27,11 +30,13 @@ export default function ProductDetail({ slug, onNavigate }: ProductDetailProps) 
     );
   }
 
+  const relatedProducts = products.filter(p => p.id !== product.id).slice(0, 4);
+
   return (
     <div>
       {/* Breadcrumb */}
       <section className="bg-white py-4 border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-2 text-sm text-[#888888]">
             <button onClick={() => onNavigate('/')} className="hover:text-[#333333]">
               Home
@@ -48,17 +53,35 @@ export default function ProductDetail({ slug, onNavigate }: ProductDetailProps) 
 
       {/* Product Details */}
       <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Product Image */}
+            {/* Product Image + Gallery */}
             <div>
               <div className="bg-white border border-[#e5e5e5] overflow-hidden">
                 <img
-                  src={product.images[0]}
+                  src={product.images[activeImage]}
                   alt={product.name}
+                  srcSet={unsplashSrcSet(product.images[activeImage])}
+                  sizes="(max-width: 1024px) 100vw, 600px"
                   className="w-full h-auto"
+                  loading="lazy"
                 />
               </div>
+              {product.images.length > 1 && (
+                <div className="flex gap-2 mt-3">
+                  {product.images.map((img, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setActiveImage(i)}
+                      className={`w-20 h-20 border-2 overflow-hidden flex-shrink-0 transition-colors ${
+                        activeImage === i ? 'border-black' : 'border-[#e5e5e5] hover:border-gray-400'
+                      }`}
+                    >
+                      <img src={img} alt={`${product.name} view ${i + 1}`} className="w-full h-full object-cover" loading="lazy" />
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Product Info */}
@@ -106,7 +129,7 @@ export default function ProductDetail({ slug, onNavigate }: ProductDetailProps) 
                   Send Enquiry
                 </button>
                 <a
-                  href={`https://wa.me/${companyInfo.whatsapp.replace(/[^0-9]/g, '')}?text=I'm interested in ${product.name}`}
+                  href={`https://wa.me/${companyInfo.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`I'm interested in ${product.name}`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full bg-white hover:bg-[#f5f5f5] border border-black text-black font-black text-sm uppercase tracking-wider py-4 px-6 transition text-center"
@@ -149,14 +172,44 @@ export default function ProductDetail({ slug, onNavigate }: ProductDetailProps) 
 
       {/* Related Products */}
       <section className="py-16 bg-[#f5f5f5]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-extrabold mb-12 text-[#333333]">More Products</h2>
-          <button
-            onClick={() => onNavigate('/products')}
-            className="bg-black hover:bg-gray-800 text-white font-black text-xs uppercase tracking-widest py-3 px-8 transition"
-          >
-            View All Products
-          </button>
+        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-end justify-between mb-10">
+            <h2 className="text-3xl font-black uppercase text-black">More Products</h2>
+            <button
+              onClick={() => onNavigate('/products')}
+              className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-black border-b border-black pb-0.5 hover:text-gray-500 hover:border-gray-500 transition-colors"
+            >
+              View All <FontAwesomeIcon icon={faArrowRight} size="xs" />
+            </button>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-[#e5e5e5]">
+            {relatedProducts.map(p => (
+              <div
+                key={p.id}
+                className="group bg-white cursor-pointer"
+                onClick={() => onNavigate(`/product/${p.slug}`)}
+              >
+                <div className="relative aspect-square overflow-hidden bg-[#f5f5f5]">
+                  <img
+                    src={p.images[0]}
+                    alt={p.name}
+                    srcSet={unsplashSrcSet(p.images[0])}
+                    sizes="(max-width: 640px) 50vw, 25vw"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-4">
+                  <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">HUKE TIMES</p>
+                  <h3 className="text-sm font-bold text-black mb-1 line-clamp-2">{p.name}</h3>
+                  <p className="text-sm font-black text-black">
+                    {p.price.currency}{p.price.min}
+                    {p.price.max && <span className="text-gray-500 font-normal"> &ndash; {p.price.currency}{p.price.max}</span>}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>

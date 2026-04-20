@@ -1,4 +1,8 @@
-export default function WatchCare() {
+interface WatchCareProps {
+  onNavigate: (path: string) => void;
+}
+
+export default function WatchCare({ onNavigate }: WatchCareProps) {
   const sections = [
     {
       title: 'Cleaning',
@@ -62,7 +66,7 @@ export default function WatchCare() {
       <section className="bg-black text-white py-14">
         <div className="max-w-[1300px] mx-auto px-6 lg:px-8">
           <div className="flex items-center gap-2 text-xs text-gray-400 mb-4 uppercase tracking-widest">
-            <span>Home</span>
+            <button onClick={() => onNavigate('/')} className="hover:text-white transition-colors">Home</button>
             <span>/</span>
             <span>Watch Care</span>
           </div>
@@ -109,9 +113,17 @@ export default function WatchCare() {
       <section className="bg-black text-white py-14">
         <div className="max-w-[1300px] mx-auto px-6 lg:px-8 text-center">
           <h2 className="text-xl font-black uppercase mb-3">Need Help with Your Watch?</h2>
-          <p className="text-gray-400 text-sm">
+          <p className="text-gray-400 text-sm mb-8">
             Contact us for service inquiries, care advice, or to register your warranty.
           </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button onClick={() => onNavigate('/contact')} className="bg-white text-black font-black text-xs uppercase tracking-widest px-8 py-3 hover:bg-gray-100 transition-colors">
+              Contact Us
+            </button>
+            <button onClick={() => onNavigate('/warranty-registration')} className="border border-white text-white font-black text-xs uppercase tracking-widest px-8 py-3 hover:bg-white hover:text-black transition-colors">
+              Register Warranty
+            </button>
+          </div>
         </div>
       </section>
     </div>

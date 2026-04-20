@@ -2,14 +2,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faThumbsUp, faQuoteLeft } from '@fortawesome/free-solid-svg-icons';
 import { testimonials, testimonialStats } from '../data/testimonials';
 
-export default function Testimonials() {
+interface TestimonialsProps {
+  onNavigate: (path: string) => void;
+}
+
+export default function Testimonials({ onNavigate }: TestimonialsProps) {
   return (
     <div>
       {/* Page Header */}
       <section className="bg-black text-white py-14">
         <div className="max-w-[1300px] mx-auto px-6 lg:px-8">
           <div className="flex items-center gap-2 text-xs text-gray-400 mb-4 uppercase tracking-widest">
-            <span>Home</span>
+            <button onClick={() => onNavigate('/')} className="hover:text-white transition-colors">Home</button>
             <span>/</span>
             <span>Testimonials</span>
           </div>
@@ -131,10 +135,10 @@ export default function Testimonials() {
             Experience the quality that our customers love
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-black font-black text-xs uppercase tracking-widest px-8 py-3 hover:bg-gray-100 transition-colors">
+            <button onClick={() => onNavigate('/products')} className="bg-white text-black font-black text-xs uppercase tracking-widest px-8 py-3 hover:bg-gray-100 transition-colors">
               View Products
             </button>
-            <button className="border border-white text-white font-black text-xs uppercase tracking-widest px-8 py-3 hover:bg-white hover:text-black transition-colors">
+            <button onClick={() => onNavigate('/contact')} className="border border-white text-white font-black text-xs uppercase tracking-widest px-8 py-3 hover:bg-white hover:text-black transition-colors">
               Contact Us
             </button>
           </div>

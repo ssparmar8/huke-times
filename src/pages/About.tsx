@@ -2,7 +2,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { companyInfo, companyDescription } from '../data/company';
 
-export default function About() {
+interface AboutProps {
+  onNavigate: (path: string) => void;
+}
+
+export default function About({ onNavigate }: AboutProps) {
   const companyDetails = [
     { label: 'Nature of Business', value: companyInfo.natureOfBusiness },
     { label: 'Number of Employees', value: companyInfo.employees },
@@ -20,7 +24,7 @@ export default function About() {
         <div className="absolute inset-0 bg-black/80" />
         <div className="relative z-10 max-w-[1300px] mx-auto px-6 lg:px-8">
           <div className="flex items-center gap-2 text-xs text-gray-400 mb-4 uppercase tracking-widest">
-            <span>Home</span>
+            <button onClick={() => onNavigate('/')} className="hover:text-white transition-colors">Home</button>
             <span>/</span>
             <span>About Us</span>
           </div>
