@@ -161,7 +161,7 @@ function App() {
       case '/products':
         return <Products onNavigate={navigate} />;
       case '/contact':
-        return <Contact />;
+        return <Contact onNavigate={navigate} />;
       case '/testimonials':
         return <Testimonials onNavigate={navigate} />;
       case '/faqs':
