@@ -20,7 +20,7 @@ export default function About({ onNavigate }: AboutProps) {
   return (
     <div>
       {/* Page Header */}
-      <section className="bg-black text-white py-14 relative" style={{backgroundImage: "url('https://images.unsplash.com/photo-1612305604437-af2abfa9fa8d?w=1920&q=80')", backgroundSize: 'cover', backgroundPosition: 'center'}}>
+      <section className="bg-black text-white py-14 relative" style={{backgroundImage: "url('https://plus.unsplash.com/premium_photo-1728582543415-f3acc737f1fe?w=1920&q=80')", backgroundSize: 'cover', backgroundPosition: 'center'}}>
         <div className="absolute inset-0 bg-black/80" />
         <div className="relative z-10 max-w-[1300px] mx-auto px-6 lg:px-8">
           <div className="flex items-center gap-2 text-xs text-gray-400 mb-4 uppercase tracking-widest">
@@ -109,7 +109,7 @@ export default function About({ onNavigate }: AboutProps) {
       </section>
 
       {/* Location Strip */}
-      <section className="bg-black text-white py-16 relative" style={{backgroundImage: "url('https://images.unsplash.com/photo-1635694724073-97cb5c9fedda?w=1920&q=80')", backgroundSize: 'cover', backgroundPosition: 'center'}}>
+      <section className="bg-black text-white py-16 relative" style={{backgroundImage: "url('https://images.unsplash.com/photo-1568154106189-717dc85b0a3b?w=1920&q=80')", backgroundSize: 'cover', backgroundPosition: 'center'}}>
         <div className="absolute inset-0 bg-black/80" />
         <div className="relative z-10 max-w-[1300px] mx-auto px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-black uppercase mb-6">Our Location</h2>

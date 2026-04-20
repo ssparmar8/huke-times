@@ -12,9 +12,9 @@ export const products: Product[] = [
     },
     moq: 2000,
     images: [
-      'https://images.unsplash.com/photo-1629581073069-7bf0ec7bb37f?w=800&q=80',
-      'https://images.unsplash.com/photo-1612305604437-af2abfa9fa8d?w=800&q=80',
-      'https://images.unsplash.com/photo-1735352246756-1abb2a4ba09c?w=800&q=80'
+      'https://images.unsplash.com/photo-1584378687113-8739c327634c?w=800&q=80',
+      'https://images.unsplash.com/photo-1572107679093-7a81fcbb7705?w=800&q=80',
+      'https://images.unsplash.com/photo-1589553557938-d4c3ce169d52?w=800&q=80'
     ],
     specifications: [
       { label: 'Brand Name', value: 'Huke Times' },
@@ -51,10 +51,10 @@ export const products: Product[] = [
     },
     moq: 2000,
     images: [
-      'https://images.unsplash.com/photo-1630552237339-9520955b603c?w=800&q=80',
-      'https://images.unsplash.com/photo-1602479152858-12238c0d691c?w=800&q=80',
-      'https://images.unsplash.com/photo-1534347384071-7f5802bf42a9?w=800&q=80',
-      'https://images.unsplash.com/photo-1605398821964-4d03102140f8?w=800&q=80'
+      'https://images.unsplash.com/photo-1599681906464-ec599150575b?w=800&q=80',
+      'https://images.unsplash.com/photo-1545038110-400f683aa1de?w=800&q=80',
+      'https://images.unsplash.com/photo-1605930039769-1d626ba74eae?w=800&q=80',
+      'https://images.unsplash.com/photo-1694562383035-3b527733e995?w=800&q=80'
     ],
     specifications: [
       { label: 'Brand Name', value: 'Huke Times' },
@@ -86,9 +86,9 @@ export const products: Product[] = [
     },
     moq: 2000,
     images: [
-      'https://images.unsplash.com/photo-1629581069407-a3350f1f5dd6?w=800&q=80',
-      'https://images.unsplash.com/photo-1617265859824-46910d1ad447?w=800&q=80',
-      'https://images.unsplash.com/photo-1705888532119-0c6a5092947a?w=800&q=80'
+      'https://images.unsplash.com/photo-1767009951305-5ed35f62e3c3?w=800&q=80',
+      'https://images.unsplash.com/photo-1568154106189-717dc85b0a3b?w=800&q=80',
+      'https://images.unsplash.com/photo-1589553557938-d4c3ce169d52?w=800&q=80'
     ],
     specifications: [
       { label: 'Brand Name', value: 'Huke Times' },
@@ -123,9 +123,9 @@ export const products: Product[] = [
     },
     moq: 2000,
     images: [
-      'https://images.unsplash.com/photo-1548907228-419a3f3d11d0?w=800&q=80',
-      'https://images.unsplash.com/photo-1568661403059-8e4374bc9e04?w=800&q=80',
-      'https://images.unsplash.com/photo-1492065438790-d3c90cbc6e57?w=800&q=80'
+      'https://images.unsplash.com/photo-1572107679093-7a81fcbb7705?w=800&q=80',
+      'https://images.unsplash.com/photo-1587925358712-091b5ff6cd84?w=800&q=80',
+      'https://images.unsplash.com/photo-1731700538481-8418639c5f1a?w=800&q=80'
     ],
     specifications: [
       { label: 'Brand', value: 'Huke Times' },
@@ -158,9 +158,9 @@ export const products: Product[] = [
     },
     moq: 2000,
     images: [
-      'https://images.unsplash.com/photo-1590929382053-747686bfab75?w=800&q=80',
-      'https://images.unsplash.com/photo-1583312572805-32ece488eb6e?w=800&q=80',
-      'https://images.unsplash.com/photo-1559532276-dc6c87230a31?w=800&q=80'
+      'https://images.unsplash.com/photo-1584378687113-8739c327634c?w=800&q=80',
+      'https://images.unsplash.com/photo-1589553557938-d4c3ce169d52?w=800&q=80',
+      'https://images.unsplash.com/photo-1568154106189-717dc85b0a3b?w=800&q=80'
     ],
     specifications: [
       { label: 'Brand', value: 'Huke Times' },

@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import { products } from '../data/products';
-import { watchImages } from '../data/watchImages';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { unsplashSrcSet } from '../utils';
+import watchJson  from '../../watch.json';
+import watchJson1 from '../../watch-images-1.json';
+import watchJson2 from '../../watch-images-2.json';
+import watchJson3 from '../../watch-images-3.json';
+import watchJson4 from '../../watch-images-4.json';
 
 interface ProductsProps {
   onNavigate: (path: string) => void;
@@ -11,19 +15,30 @@ interface ProductsProps {
 
 const PRODUCTS_PER_PAGE = 12;
 
+const allWatchImages = [
+  ...watchJson.results,
+  ...watchJson1.results,
+  ...watchJson2.results,
+  ...watchJson3.results,
+  ...watchJson4.results,
+].map(r => ({
+  id: r.id,
+  url: r.urls.regular,
+  alt: r.alt_description ?? 'watch',
+}));
+
 export default function Products({ onNavigate }: ProductsProps) {
   const [selectedCategory, setSelectedCategory] = useState<'all' | 'mens-watches' | 'watch-parts'>('all');
   const [currentPage, setCurrentPage] = useState(1);
 
-  // "All Products" uses watchImages from JSON; category filters use catalog
   const isAll = selectedCategory === 'all';
   const filteredProducts = products.filter(p => p.category === selectedCategory);
 
-  const totalItems = isAll ? watchImages.length : filteredProducts.length;
+  const totalItems = isAll ? allWatchImages.length : filteredProducts.length;
   const totalPages = Math.ceil(totalItems / PRODUCTS_PER_PAGE);
 
   const pagedItems = isAll
-    ? watchImages.slice((currentPage - 1) * PRODUCTS_PER_PAGE, currentPage * PRODUCTS_PER_PAGE)
+    ? allWatchImages.slice((currentPage - 1) * PRODUCTS_PER_PAGE, currentPage * PRODUCTS_PER_PAGE)
     : filteredProducts.slice((currentPage - 1) * PRODUCTS_PER_PAGE, currentPage * PRODUCTS_PER_PAGE);
 
   const handleCategoryChange = (cat: typeof selectedCategory) => {
@@ -32,7 +47,7 @@ export default function Products({ onNavigate }: ProductsProps) {
   };
 
   const categories = [
-    { key: 'all', label: 'All Products', count: watchImages.length },
+    { key: 'all', label: 'All Products', count: allWatchImages.length },
     { key: 'mens-watches', label: 'Mens Wrist Watches', count: products.filter(p => p.category === 'mens-watches').length },
     { key: 'watch-parts', label: 'Watch Parts', count: products.filter(p => p.category === 'watch-parts').length },
   ];
@@ -88,7 +103,7 @@ export default function Products({ onNavigate }: ProductsProps) {
           {/* Product Cards */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-[#e5e5e5]">
             {isAll
-              ? (pagedItems as typeof watchImages).map(img => (
+              ? (pagedItems as typeof allWatchImages).map(img => (
                 <div key={img.id} className="group bg-white cursor-pointer">
                   <div className="relative aspect-square overflow-hidden bg-[#f5f5f5]">
                     <img
