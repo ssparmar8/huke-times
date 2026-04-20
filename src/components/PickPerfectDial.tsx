@@ -1,10 +1,33 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, createContext, useContext } from 'react';
 
 /* ── geometry helper ── */
 const pt = (cx: number, cy: number, r: number, deg: number) => {
   const a = (deg - 90) * (Math.PI / 180);
   return { x: cx + r * Math.cos(a), y: cy + r * Math.sin(a) };
 };
+
+/* ── live time ── */
+interface TimeAngles { h: number; m: number; s: number; label: string }
+const TimeCtx = createContext<TimeAngles>({ h: 0, m: 0, s: 0, label: '12:00' });
+
+function useTime(): TimeAngles {
+  const calc = () => {
+    const now = new Date();
+    const hr  = now.getHours(), mn = now.getMinutes(), sc = now.getSeconds();
+    return {
+      h:     (hr % 12 + mn / 60) * 30,          // 0–360°
+      m:     mn * 6 + sc * 0.1,                  // 0–360°
+      s:     sc * 6,                              // 0–360°
+      label: `${hr % 12 || 12}:${String(mn).padStart(2, '0')}`,
+    };
+  };
+  const [t, setT] = useState(calc);
+  useEffect(() => {
+    const id = setInterval(() => setT(calc()), 1000);
+    return () => clearInterval(id);
+  }, []);
+  return t;
+}
 
 const W   = '#dcdcdc';
 const DIM = '#5a5a5a';
@@ -31,17 +54,17 @@ function Base({ id }: { id: string }) {
   );
 }
 
-/* ── animated seconds hand ── */
-function Secs({ start = 130 }: { start?: number }) {
+/* ── live seconds hand (JS-driven, synced to wall clock) ── */
+function Secs() {
+  const { s } = useContext(TimeCtx);
+  const tip  = pt(100, 100,  68, s);
+  const tail = pt(100, 100, -15, s);
   return (
-    <g>
-      {/* @ts-expect-error – SMIL animateTransform */}
-      <animateTransform attributeName="transform" type="rotate"
-        from={`${start} 100 100`} to={`${start + 360} 100 100`}
-        dur="60s" repeatCount="indefinite" />
-      <line x1="100" y1="114" x2="100" y2="33"  stroke={RED} strokeWidth="0.9" strokeLinecap="round" />
+    <>
+      <line x1={tail.x} y1={tail.y} x2={tip.x} y2={tip.y}
+        stroke={RED} strokeWidth="1" strokeLinecap="round" />
       <circle cx="100" cy="100" r="2.5" fill={RED} />
-    </g>
+    </>
   );
 }
 
@@ -58,6 +81,7 @@ const Cap = () => (
    ══════════════════════════════ */
 
 function AnalogDial() {
+  const { h, m } = useContext(TimeCtx);
   return (
     <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
       <Base id="analog" />
@@ -68,15 +92,16 @@ function AnalogDial() {
         return <line key={i} x1={p1.x} y1={p1.y} x2={p2.x} y2={p2.y}
           stroke={major ? W : DIM} strokeWidth={major ? 1.8 : 0.7} strokeLinecap="round" />;
       })}
-      {(() => { const e = pt(100,100,52,300); return <line x1="100" y1="100" x2={e.x} y2={e.y} stroke={W} strokeWidth="4"   strokeLinecap="round" />; })()}
-      {(() => { const e = pt(100,100,65,60);  return <line x1="100" y1="100" x2={e.x} y2={e.y} stroke={W} strokeWidth="2.5" strokeLinecap="round" />; })()}
-      <Secs start={130} />
+      {(() => { const e = pt(100,100,52,h); return <line x1="100" y1="100" x2={e.x} y2={e.y} stroke={W} strokeWidth="4"   strokeLinecap="round" />; })()}
+      {(() => { const e = pt(100,100,65,m); return <line x1="100" y1="100" x2={e.x} y2={e.y} stroke={W} strokeWidth="2.5" strokeLinecap="round" />; })()}
+      <Secs />
       <Cap />
     </svg>
   );
 }
 
 function RomanDial() {
+  const { h, m } = useContext(TimeCtx);
   const labels = ['XII','I','II','III','IV','V','VI','VII','VIII','IX','X','XI'];
   return (
     <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
@@ -89,14 +114,15 @@ function RomanDial() {
           fill={maj ? W : '#999'} fontSize={maj ? '10' : '7.5'}
           fontFamily="Georgia,serif" fontWeight={maj ? 'bold' : 'normal'}>{l}</text>;
       })}
-      {(() => { const e = pt(100,100,50,300); return <line x1="100" y1="100" x2={e.x} y2={e.y} stroke={W} strokeWidth="3.5" strokeLinecap="round" />; })()}
-      {(() => { const e = pt(100,100,63,60);  return <line x1="100" y1="100" x2={e.x} y2={e.y} stroke={W} strokeWidth="2"   strokeLinecap="round" />; })()}
+      {(() => { const e = pt(100,100,50,h); return <line x1="100" y1="100" x2={e.x} y2={e.y} stroke={W} strokeWidth="3.5" strokeLinecap="round" />; })()}
+      {(() => { const e = pt(100,100,63,m); return <line x1="100" y1="100" x2={e.x} y2={e.y} stroke={W} strokeWidth="2"   strokeLinecap="round" />; })()}
       <Cap />
     </svg>
   );
 }
 
 function StickDial() {
+  const { h, m } = useContext(TimeCtx);
   return (
     <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
       <Base id="stick" />
@@ -107,15 +133,20 @@ function StickDial() {
         return <line key={i} x1={p1.x} y1={p1.y} x2={p2.x} y2={p2.y}
           stroke={W} strokeWidth={maj ? 3.5 : 1.8} strokeLinecap="butt" />;
       })}
-      {(() => { const e = pt(100,100,52,300); return <line x1="100" y1="100" x2={e.x} y2={e.y} stroke={W} strokeWidth="5"   strokeLinecap="round" />; })()}
-      {(() => { const e = pt(100,100,66,60);  return <line x1="100" y1="100" x2={e.x} y2={e.y} stroke={W} strokeWidth="2.5" strokeLinecap="round" />; })()}
-      <Secs start={200} />
+      {(() => { const e = pt(100,100,52,h); return <line x1="100" y1="100" x2={e.x} y2={e.y} stroke={W} strokeWidth="5"   strokeLinecap="round" />; })()}
+      {(() => { const e = pt(100,100,66,m); return <line x1="100" y1="100" x2={e.x} y2={e.y} stroke={W} strokeWidth="2.5" strokeLinecap="round" />; })()}
+      <Secs />
       <Cap />
     </svg>
   );
 }
 
 function DigitalDial() {
+  const { label } = useContext(TimeCtx);
+  const now  = new Date();
+  const days = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+  const mons = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  const dateLine = `${days[now.getDay()]}  ${now.getDate()} ${mons[now.getMonth()]}`;
   return (
     <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
       <Base id="digital" />
@@ -123,9 +154,9 @@ function DigitalDial() {
       <rect x="29" y="69" width="142" height="62" rx="5.5" fill="rgba(0,255,80,0.015)" />
       <text x="100" y="103" textAnchor="middle" dominantBaseline="central"
         fill="#6dff78" fontSize="32" fontFamily="'Courier New',monospace"
-        fontWeight="bold" letterSpacing="3">10:10</text>
+        fontWeight="bold" letterSpacing="3">{label}</text>
       <text x="100" y="151" textAnchor="middle"
-        fill={DIM} fontSize="8.5" fontFamily="monospace" letterSpacing="3">SUN  20 APR</text>
+        fill={DIM} fontSize="8.5" fontFamily="monospace" letterSpacing="3">{dateLine}</text>
       {[60,120,240,300].map((a,i) => {
         const p = pt(100,100,83,a);
         return <rect key={i} x={p.x-1.5} y={p.y-1.5} width="3" height="3" fill="#222" />;
@@ -135,6 +166,7 @@ function DigitalDial() {
 }
 
 function ChronographDial() {
+  const { h, m, s } = useContext(TimeCtx);
   const subs = [{ a: 270, l: '60s' }, { a: 150, l: '30m' }, { a: 30, l: '12h' }];
   return (
     <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
@@ -148,6 +180,9 @@ function ChronographDial() {
       })}
       {subs.map(({ a, l }, idx) => {
         const c = pt(100, 100, 36, a);
+        /* sub-dial hand angles: 60s=seconds, 30m=minutes/2, 12h=hours*2 */
+        const subAngle = idx === 0 ? s : idx === 1 ? (new Date().getMinutes() / 30) * 360 : h * 2;
+        const se = pt(c.x, c.y, 10, subAngle);
         return (
           <g key={idx}>
             <circle cx={c.x} cy={c.y} r="18" fill="#0c0c0c" stroke="#282828" strokeWidth="1" />
@@ -155,42 +190,39 @@ function ChronographDial() {
               const p1 = pt(c.x, c.y, 14, j*30), p2 = pt(c.x, c.y, 10, j*30);
               return <line key={j} x1={p1.x} y1={p1.y} x2={p2.x} y2={p2.y} stroke={DIM} strokeWidth="0.6" />;
             })}
-            {(() => { const e = pt(c.x, c.y, 10, 90); return <line x1={c.x} y1={c.y} x2={e.x} y2={e.y} stroke={W} strokeWidth="1.2" strokeLinecap="round" />; })()}
+            <line x1={c.x} y1={c.y} x2={se.x} y2={se.y} stroke={W} strokeWidth="1.2" strokeLinecap="round" />
             <text x={c.x} y={c.y+21} textAnchor="middle" fill={DIM} fontSize="5" fontFamily="sans-serif" letterSpacing="0.5">{l}</text>
           </g>
         );
       })}
-      {(() => { const e = pt(100,100,50,300); return <line x1="100" y1="100" x2={e.x} y2={e.y} stroke={W} strokeWidth="3.5" strokeLinecap="round" />; })()}
-      {(() => { const e = pt(100,100,63,60);  return <line x1="100" y1="100" x2={e.x} y2={e.y} stroke={W} strokeWidth="2"   strokeLinecap="round" />; })()}
-      <Secs start={180} />
+      {(() => { const e = pt(100,100,50,h); return <line x1="100" y1="100" x2={e.x} y2={e.y} stroke={W} strokeWidth="3.5" strokeLinecap="round" />; })()}
+      {(() => { const e = pt(100,100,63,m); return <line x1="100" y1="100" x2={e.x} y2={e.y} stroke={W} strokeWidth="2"   strokeLinecap="round" />; })()}
+      <Secs />
       <Cap />
     </svg>
   );
 }
 
 function AutomaticDial() {
+  const { h, m } = useContext(TimeCtx);
   return (
     <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
       <Base id="auto" />
-      {/* rotor sectors */}
       <path d="M100,100 L100,18 A82,82 0 0,1 182,100 Z" fill="#181818" stroke="#2a2a2a" strokeWidth="0.5" />
       <path d="M100,100 L182,100 A82,82 0 0,1 100,182 Z" fill="#1e1e1e" stroke="#2a2a2a" strokeWidth="0.5" />
-      {/* gear teeth */}
       {Array.from({ length: 40 }, (_, i) => {
         const p1 = pt(100,100,78,i*9), p2 = pt(100,100,83,i*9);
         return <line key={i} x1={p1.x} y1={p1.y} x2={p2.x} y2={p2.y} stroke="#444" strokeWidth="1.5" />;
       })}
-      {/* hub */}
       <circle cx="100" cy="100" r="26" fill="#111"    stroke="#2a2a2a" strokeWidth="1.5" />
       <circle cx="100" cy="100" r="18" fill="#181818" stroke="#333"    strokeWidth="1"   />
-      {/* hour markers */}
       {Array.from({ length: 12 }, (_, i) => {
         const p1 = pt(100,100,86,i*30), p2 = pt(100,100,i%3===0?76:81,i*30);
         return <line key={i} x1={p1.x} y1={p1.y} x2={p2.x} y2={p2.y}
           stroke={W} strokeWidth={i%3===0?2:1} />;
       })}
-      {(() => { const e = pt(100,100,40,300); return <line x1="100" y1="100" x2={e.x} y2={e.y} stroke={W} strokeWidth="3.5" strokeLinecap="round" />; })()}
-      {(() => { const e = pt(100,100,54,60);  return <line x1="100" y1="100" x2={e.x} y2={e.y} stroke={W} strokeWidth="2"   strokeLinecap="round" />; })()}
+      {(() => { const e = pt(100,100,40,h); return <line x1="100" y1="100" x2={e.x} y2={e.y} stroke={W} strokeWidth="3.5" strokeLinecap="round" />; })()}
+      {(() => { const e = pt(100,100,54,m); return <line x1="100" y1="100" x2={e.x} y2={e.y} stroke={W} strokeWidth="2"   strokeLinecap="round" />; })()}
       <text x="100" y="148" textAnchor="middle" fill={DIM} fontSize="6"
         fontFamily="Georgia,serif" letterSpacing="2.5">AUTOMATIC</text>
       <Cap />
@@ -199,6 +231,7 @@ function AutomaticDial() {
 }
 
 function MoonPhaseDial() {
+  const { h, m } = useContext(TimeCtx);
   return (
     <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
       <Base id="moon" />
@@ -207,12 +240,10 @@ function MoonPhaseDial() {
         return <line key={i} x1={p1.x} y1={p1.y} x2={p2.x} y2={p2.y}
           stroke={W} strokeWidth={i%3===0?2:1} strokeLinecap="round" />;
       })}
-      {/* aperture */}
       <ellipse cx="100" cy="148" rx="23" ry="15" fill="#050c1e" stroke="#162038" strokeWidth="1.5" />
       {[[84,142],[117,144],[92,155],[111,153],[100,140]].map(([sx,sy],i) => (
         <circle key={i} cx={sx} cy={sy} r="0.9" fill="rgba(255,255,255,0.65)" />
       ))}
-      {/* crescent */}
       <circle cx="99"  cy="148" r="11" fill="#d4b056" />
       <circle cx="105" cy="148" r="10" fill="#050c1e" />
       <ellipse cx="100" cy="148" rx="23" ry="15" fill="none" stroke="#162038" strokeWidth="1.5" />
@@ -221,8 +252,8 @@ function MoonPhaseDial() {
         return <text key={i} x={p.x} y={p.y} textAnchor="middle" dominantBaseline="central"
           fill={DIM} fontSize="8.5" fontFamily="Georgia,serif">{l}</text>;
       })}
-      {(() => { const e = pt(100,100,50,300); return <line x1="100" y1="100" x2={e.x} y2={e.y} stroke={W} strokeWidth="3.5" strokeLinecap="round" />; })()}
-      {(() => { const e = pt(100,100,63,60);  return <line x1="100" y1="100" x2={e.x} y2={e.y} stroke={W} strokeWidth="2"   strokeLinecap="round" />; })()}
+      {(() => { const e = pt(100,100,50,h); return <line x1="100" y1="100" x2={e.x} y2={e.y} stroke={W} strokeWidth="3.5" strokeLinecap="round" />; })()}
+      {(() => { const e = pt(100,100,63,m); return <line x1="100" y1="100" x2={e.x} y2={e.y} stroke={W} strokeWidth="2"   strokeLinecap="round" />; })()}
       <Cap />
     </svg>
   );
@@ -243,55 +274,26 @@ interface PickPerfectDialProps {
   onNavigate: (path: string) => void;
 }
 
+const N       = dialItems.length;
+const SLIDE_W = 240;  // horizontal slot width per slide (px)
+const CONT_H  = 360;  // carousel window height (px)
+
 export default function PickPerfectDial({ onNavigate }: PickPerfectDialProps) {
   const [current, setCurrent] = useState(2);
-  const sliderRef = useRef<HTMLDivElement>(null);
-  const trackRef  = useRef<HTMLDivElement>(null);
-  const touchX    = useRef(0);
+  const touchX = useRef(0);
+  const time   = useTime();
 
-  const getW = (i: number, active: number) => (i === active ? 220 : 181);
+  const go = (dir: number) => setCurrent(c => (c + dir + N) % N);
 
-  const applyOffset = useCallback((active: number) => {
-    if (!sliderRef.current || !trackRef.current) return;
-    const cw = sliderRef.current.offsetWidth;
-    let offset = cw / 2;
-    for (let i = 0; i < active; i++) offset -= getW(i, active);
-    offset -= getW(active, active) / 2;
-    trackRef.current.style.transform = `translateX(${offset}px)`;
-  }, []);
-
-  /* initial paint without transition flash */
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-    track.style.transition = 'none';
-    applyOffset(current);
-    requestAnimationFrame(() => {
-      track.style.transition = 'transform 0.45s cubic-bezier(0.4,0,0.2,1)';
-    });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => { applyOffset(current); }, [current, applyOffset]);
-
-  useEffect(() => {
-    const onResize = () => applyOffset(current);
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, [current, applyOffset]);
-
-  /* keyboard */
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft')  setCurrent(c => Math.max(0, c - 1));
-      if (e.key === 'ArrowRight') setCurrent(c => Math.min(dialItems.length - 1, c + 1));
+      if (e.key === 'ArrowLeft')  go(-1);
+      if (e.key === 'ArrowRight') go(1);
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const go = (dir: number) =>
-    setCurrent(c => Math.max(0, Math.min(dialItems.length - 1, c + dir)));
 
   return (
     <section
@@ -303,99 +305,103 @@ export default function PickPerfectDial({ onNavigate }: PickPerfectDialProps) {
         if (Math.abs(dx) > 44) go(dx < 0 ? 1 : -1);
       }}
     >
-      <div className="max-w-[1400px] mx-auto">
-        <span className="block text-xs uppercase tracking-[0.125rem] opacity-60 mb-2.5">
-          Pick Perfect Dial
-        </span>
-        <h2 className="mt-2.5 text-[1.75rem] font-medium text-white">
-          Dedicated To Style
-        </h2>
+      <TimeCtx.Provider value={time}>
+        <div className="max-w-[1400px] mx-auto">
+          <span className="block text-xs uppercase tracking-[0.125rem] opacity-60 mb-2.5">
+            Pick Perfect Dial
+          </span>
+          <h2 className="mt-2.5 text-[1.75rem] font-medium text-white">
+            Dedicated To Style
+          </h2>
 
-        <div className="relative mt-[4.375rem]">
-          {/* track */}
-          <div ref={sliderRef} className="flex items-center overflow-hidden w-full">
-            <div ref={trackRef} className="flex items-center" style={{ willChange: 'transform' }}>
+          <div className="relative mt-[4.375rem]">
+            {/* horizontal carousel window */}
+            <div style={{ position: 'relative', height: CONT_H, overflow: 'hidden' }}>
               {dialItems.map(({ label, Dial }, i) => {
                 const isActive = i === current;
+                const raw  = i - current;
+                /* shortest circular distance → smooth infinite wrap */
+                const dist = raw > N / 2 ? raw - N : raw < -N / 2 ? raw + N : raw;
+                const x    = dist * SLIDE_W;
+                const opacity = Math.abs(dist) > 2
+                  ? 0
+                  : isActive ? 1 : Math.max(0.18, 0.42 - (Math.abs(dist) - 1) * 0.14);
+
                 return (
                   <button
                     key={label}
                     onClick={() => isActive ? onNavigate('/products') : setCurrent(i)}
-                    className="flex flex-col items-center outline-none flex-shrink-0 border-0 p-0 bg-transparent"
                     style={{
+                      position: 'absolute',
+                      top: '50%', left: '50%',
                       width: 220,
-                      opacity: isActive ? 1 : 0.35,
-                      transform: isActive ? 'scale(1)' : 'scale(0.82)',
-                      transition: 'opacity 0.4s, transform 0.4s',
+                      display: 'flex', flexDirection: 'column',
+                      alignItems: 'center', justifyContent: 'center',
+                      transform: `translate(calc(-50% + ${x}px), -50%) scale(${isActive ? 1 : 0.82})`,
+                      opacity,
+                      transition: 'transform 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.45s',
+                      border: 'none', background: 'transparent',
+                      cursor: 'pointer', outline: 'none', padding: 0,
                     }}
                   >
-                    {/* dial face + glow */}
                     <div style={{
-                      width:    isActive ? '13.75rem' : '8.75rem',
-                      height:   isActive ? '13.75rem' : '8.75rem',
-                      filter:   isActive ? 'drop-shadow(0 0 20px rgba(255,255,255,0.09))' : 'none',
-                      transition: 'width 0.4s, height 0.4s, filter 0.4s',
+                      width:  isActive ? '13.75rem' : '8.75rem',
+                      height: isActive ? '13.75rem' : '8.75rem',
+                      filter: isActive ? 'drop-shadow(0 0 20px rgba(255,255,255,0.09))' : 'none',
+                      transition: 'width 0.45s, height 0.45s, filter 0.45s',
                     }}>
                       <Dial />
                     </div>
 
-                    {/* label pill */}
-                    <p
-                      className="text-xs tracking-[0.06rem] inline-block"
-                      style={{
-                        marginTop:  isActive ? '1.125rem' : '1.825rem',
-                        background: isActive ? '#fff' : 'transparent',
-                        color:      isActive ? '#333' : '#fff',
-                        padding:    isActive ? '0.5rem 0.75rem' : '0',
-                        fontWeight: isActive ? 600 : 400,
-                        transition: 'margin-top 0.4s, background 0.4s, color 0.4s, padding 0.4s',
-                      }}
-                    >
+                    <p className="text-xs tracking-[0.06rem] inline-block" style={{
+                      marginTop:  isActive ? '1.125rem' : '1.825rem',
+                      background: isActive ? '#fff' : 'transparent',
+                      color:      isActive ? '#333' : '#fff',
+                      padding:    isActive ? '0.5rem 0.75rem' : '0',
+                      fontWeight: isActive ? 600 : 400,
+                      transition: 'all 0.45s',
+                    }}>
                       {label}
                     </p>
                   </button>
                 );
               })}
             </div>
-          </div>
 
-          {/* nav buttons */}
-          <div className="flex justify-center gap-4 mt-10">
-            {([{ d: -1, sym: '‹', a: 'Previous' }, { d: 1, sym: '›', a: 'Next' }] as const).map(({ d, sym, a }) => (
-              <button
-                key={a}
-                onClick={() => go(d)}
-                aria-label={a}
-                className="w-10 h-10 rounded-full flex items-center justify-center text-white text-2xl leading-none"
-                style={{ border: '1px solid rgba(255,255,255,0.35)', background: 'none', transition: 'border-color 0.3s, background 0.3s' }}
-                onMouseEnter={e => { const b = e.currentTarget; b.style.borderColor='#fff'; b.style.background='rgba(255,255,255,0.1)'; }}
-                onMouseLeave={e => { const b = e.currentTarget; b.style.borderColor='rgba(255,255,255,0.35)'; b.style.background='none'; }}
-              >{sym}</button>
-            ))}
-          </div>
+            {/* left / right nav */}
+            <div className="flex justify-center gap-4 mt-6">
+              {([{ d: -1, sym: '‹', a: 'Previous' }, { d: 1, sym: '›', a: 'Next' }] as const).map(({ d, sym, a }) => (
+                <button
+                  key={a}
+                  onClick={() => go(d)}
+                  aria-label={a}
+                  className="w-10 h-10 rounded-full flex items-center justify-center text-white text-2xl leading-none"
+                  style={{ border: '1px solid rgba(255,255,255,0.35)', background: 'none', transition: 'border-color 0.3s, background 0.3s' }}
+                  onMouseEnter={e => { const b = e.currentTarget; b.style.borderColor='#fff'; b.style.background='rgba(255,255,255,0.1)'; }}
+                  onMouseLeave={e => { const b = e.currentTarget; b.style.borderColor='rgba(255,255,255,0.35)'; b.style.background='none'; }}
+                >{sym}</button>
+              ))}
+            </div>
 
-          {/* dot indicators */}
-          <div className="flex justify-center items-center gap-2 mt-5">
-            {dialItems.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrent(i)}
-                aria-label={`Go to ${dialItems[i].label}`}
-                style={{
-                  width:      i === current ? 20 : 6,
-                  height:     6,
-                  borderRadius: 3,
-                  background: i === current ? '#fff' : 'rgba(255,255,255,0.22)',
-                  border:     'none',
-                  padding:    0,
-                  cursor:     'pointer',
-                  transition: 'all 0.35s ease',
-                }}
-              />
-            ))}
+            {/* horizontal dots */}
+            <div className="flex justify-center items-center gap-2 mt-4">
+              {dialItems.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrent(i)}
+                  aria-label={`Go to ${dialItems[i].label}`}
+                  style={{
+                    width: i === current ? 20 : 6, height: 6, borderRadius: 3,
+                    background: i === current ? '#fff' : 'rgba(255,255,255,0.22)',
+                    border: 'none', padding: 0, cursor: 'pointer',
+                    transition: 'all 0.35s ease',
+                  }}
+                />
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </TimeCtx.Provider>
     </section>
   );
 }
