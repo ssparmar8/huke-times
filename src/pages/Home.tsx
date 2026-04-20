@@ -4,6 +4,7 @@ import { products } from '../data/products';
 import { testimonials } from '../data/testimonials';
 import { companyDescription } from '../data/company';
 import { unsplashSrcSet } from '../utils';
+import PickPerfectDial from '../components/PickPerfectDial';
 
 interface HomeProps {
   onNavigate: (path: string) => void;
@@ -104,6 +105,9 @@ export default function Home({ onNavigate }: HomeProps) {
           </div>
         </div>
       </section>
+
+      {/* ── PICK PERFECT DIAL ── */}
+      <PickPerfectDial onNavigate={onNavigate} />
 
       {/* ── FEATURED PRODUCTS ── */}
       <section className="bg-[#f5f5f5] py-20">
