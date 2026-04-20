@@ -13,8 +13,9 @@ export default function Home({ onNavigate }: HomeProps) {
     <div>
 
       {/* ── HERO ── */}
-      <section className="bg-black text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+      <section className="bg-black text-white relative overflow-hidden" style={{backgroundImage: "url('https://images.unsplash.com/photo-1729078945904-c278d0a1bf0c?w=1920&q=80')", backgroundSize: 'cover', backgroundPosition: 'center top'}}>
+        <div className="absolute inset-0 bg-black/75" />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
           <div className="max-w-4xl">
             <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-6">
               Manufacturer &amp; Supplier · Rajkot, Gujarat · Est. 2022
@@ -74,8 +75,9 @@ export default function Home({ onNavigate }: HomeProps) {
             <button
               onClick={() => onNavigate('/products')}
               className="group relative overflow-hidden bg-black aspect-[4/3] flex items-end p-8 text-left"
+              style={{backgroundImage: "url('https://images.unsplash.com/photo-1612305685034-dd20bea3706b?w=900&q=80')", backgroundSize: 'cover', backgroundPosition: 'center'}}
             >
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10 z-10" />
               <div className="relative z-20">
                 <p className="text-xs text-gray-300 tracking-[0.2em] uppercase mb-2">Huke Times</p>
                 <h3 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight mb-4">Men's<br />Collection</h3>
@@ -87,8 +89,9 @@ export default function Home({ onNavigate }: HomeProps) {
             <button
               onClick={() => onNavigate('/products')}
               className="group relative overflow-hidden bg-[#1a1a1a] aspect-[4/3] flex items-end p-8 text-left"
+              style={{backgroundImage: "url('https://images.unsplash.com/photo-1643111998875-0debbdcf2361?w=900&q=80')", backgroundSize: 'cover', backgroundPosition: 'center'}}
             >
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10 z-10" />
               <div className="relative z-20">
                 <p className="text-xs text-gray-300 tracking-[0.2em] uppercase mb-2">Huke Times</p>
                 <h3 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight mb-4">Women's<br />Collection</h3>
@@ -218,13 +221,14 @@ export default function Home({ onNavigate }: HomeProps) {
       </section>
 
       {/* ── STATS ── */}
-      <section className="bg-black text-white py-20">
+      <section className="bg-black text-white py-20 relative" style={{backgroundImage: "url('https://images.unsplash.com/photo-1705888532119-0c6a5092947a?w=1920&q=80')", backgroundSize: 'cover', backgroundPosition: 'center'}}>
+        <div className="absolute inset-0" style={{backgroundColor: 'rgba(0,0,0,0.88)'}} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
+          <div className="relative z-10 text-center mb-14">
             <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-3">OUR JOURNEY</p>
             <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight">In Numbers</h2>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/10">
+          <div className="relative z-10 grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/10">
             {[
               { icon: faChartLine, value: '2022', label: 'Year Established' },
               { icon: faUsers, value: '20–50', label: 'Skilled Employees' },
@@ -339,8 +343,9 @@ export default function Home({ onNavigate }: HomeProps) {
       </section>
 
       {/* ── CTA ── */}
-      <section className="bg-white border-t border-[#e5e5e5] py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="bg-white border-t border-[#e5e5e5] py-20 relative overflow-hidden" style={{backgroundImage: "url('https://images.unsplash.com/photo-1729078946064-07a957def7af?w=1920&q=80')", backgroundSize: 'cover', backgroundPosition: 'center'}}>
+        <div className="absolute inset-0" style={{backgroundColor: 'rgba(255,255,255,0.92)'}} />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-4">START YOUR JOURNEY</p>
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-black uppercase tracking-tight leading-tight mb-6">
             Ready to Experience<br />Excellence?

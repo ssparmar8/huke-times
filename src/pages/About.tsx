@@ -16,8 +16,9 @@ export default function About() {
   return (
     <div>
       {/* Page Header */}
-      <section className="bg-black text-white py-14">
-        <div className="max-w-[1300px] mx-auto px-6 lg:px-8">
+      <section className="bg-black text-white py-14 relative" style={{backgroundImage: "url('https://images.unsplash.com/photo-1612305604437-af2abfa9fa8d?w=1920&q=80')", backgroundSize: 'cover', backgroundPosition: 'center'}}>
+        <div className="absolute inset-0 bg-black/80" />
+        <div className="relative z-10 max-w-[1300px] mx-auto px-6 lg:px-8">
           <div className="flex items-center gap-2 text-xs text-gray-400 mb-4 uppercase tracking-widest">
             <span>Home</span>
             <span>/</span>
@@ -104,8 +105,9 @@ export default function About() {
       </section>
 
       {/* Location Strip */}
-      <section className="bg-black text-white py-16">
-        <div className="max-w-[1300px] mx-auto px-6 lg:px-8 text-center">
+      <section className="bg-black text-white py-16 relative" style={{backgroundImage: "url('https://images.unsplash.com/photo-1635694724073-97cb5c9fedda?w=1920&q=80')", backgroundSize: 'cover', backgroundPosition: 'center'}}>
+        <div className="absolute inset-0 bg-black/80" />
+        <div className="relative z-10 max-w-[1300px] mx-auto px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-black uppercase mb-6">Our Location</h2>
           <div className="text-gray-400 text-sm space-y-1.5 uppercase tracking-wider">
             <p>{companyInfo.address.street}</p>
