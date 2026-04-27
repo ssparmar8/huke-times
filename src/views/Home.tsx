@@ -140,6 +140,7 @@ export default function Home() {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     loading="lazy"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent group-hover:from-black/60 group-hover:via-black/20 transition-all duration-300" />
                   <div className="absolute inset-x-0 bottom-0 p-4 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                     <div className="w-full text-white text-xs font-bold tracking-widest uppercase flex items-center justify-center gap-2 py-2">
                       QUICK VIEW <FontAwesomeIcon icon={faArrowRight} size="xs" />
