@@ -35,3 +35,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# AWS deploy config (contains account-specific ARNs/IDs)
+.aws-deploy-config
