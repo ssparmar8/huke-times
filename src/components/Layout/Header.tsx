@@ -119,13 +119,15 @@ export default function Header() {
       {/* Main Header */}
       <div className="bg-white border-b border-[#e5e5e5]">
         <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16 md:h-20">
+          <div className="flex justify-between items-center py-2">
 
             {/* Logo */}
-            <Link href="/" className="flex items-baseline group flex-shrink-0">
-              <span className="text-2xl md:text-3xl font-black tracking-tight text-black uppercase group-hover:text-gray-700 transition-colors">HUKE</span>
-              <span className="text-2xl md:text-3xl font-thin tracking-tight text-black uppercase ml-2 group-hover:text-gray-700 transition-colors">TIMES</span>
-              <span className="text-xs font-medium text-gray-400 ml-2 tracking-widest">LLP</span>
+            <Link href="/" className="flex items-center flex-shrink-0">
+              <img
+                src="/logo.png"
+                alt="Huke Times LLP"
+                className="h-14 md:h-16 w-auto object-contain"
+              />
             </Link>
 
             {/* Desktop Navigation */}
