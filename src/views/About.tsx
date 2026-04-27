@@ -19,7 +19,7 @@ export default function About() {
     <div>
       {/* Page Header */}
       <section className="bg-black text-white py-14 relative" style={{backgroundImage: "url('/watch-images/watch-10.jpg')", backgroundSize: 'cover', backgroundPosition: 'center'}}>
-        <div className="absolute inset-0 bg-black/80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10" />
         <div className="relative z-10 max-w-[1300px] mx-auto px-6 lg:px-8">
           <div className="flex items-center gap-2 text-xs text-gray-400 mb-4 uppercase tracking-widest">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
@@ -108,7 +108,7 @@ export default function About() {
 
       {/* Location Strip */}
       <section className="bg-black text-white py-16 relative" style={{backgroundImage: "url('/watch-images/watch-32.jpg')", backgroundSize: 'cover', backgroundPosition: 'center'}}>
-        <div className="absolute inset-0 bg-black/80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10" />
         <div className="relative z-10 max-w-[1300px] mx-auto px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-black uppercase mb-6">Our Location</h2>
           <div className="text-gray-400 text-sm space-y-1.5 uppercase tracking-wider">

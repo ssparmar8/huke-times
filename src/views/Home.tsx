@@ -5,6 +5,7 @@ import { products } from '../data/products';
 import { testimonials } from '../data/testimonials';
 import { companyDescription } from '../data/company';
 import PickPerfectDial from '../components/PickPerfectDial';
+import HeroSlider from '../components/HeroSlider';
 
 
 export default function Home() {
@@ -12,29 +13,38 @@ export default function Home() {
     <div>
 
       {/* ── HERO ── */}
-      <section className="bg-black text-white relative overflow-hidden" style={{backgroundImage: "url('/watch-images/watch-11.jpg')", backgroundSize: 'cover', backgroundPosition: 'center top'}}>
-        <div className="absolute inset-0 bg-black/75" />
-        <div className="relative z-10 max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
-          <div className="max-w-4xl">
-            <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-6">
-              Manufacturer &amp; Supplier · Rajkot, Gujarat · Est. 2022
-            </p>
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.0] tracking-tight mb-8 uppercase">
-              Crafting<br />
-              <span className="text-white">Timeless</span><br />
-              <span className="text-gray-400">Elegance.</span>
-            </h1>
-            <p className="text-lg md:text-xl text-gray-400 max-w-2xl mb-10 leading-relaxed">
-              {companyDescription.intro}
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link href="/products" className="inline-flex items-center gap-3 bg-white text-black font-bold py-4 px-8 text-sm tracking-widest uppercase hover:bg-gray-100 transition-colors"><FontAwesomeIcon icon={faBagShopping} />
-                EXPLORE PRODUCTS</Link>
-              <Link href="/contact" className="inline-flex items-center gap-3 border border-white/30 text-white font-bold py-4 px-8 text-sm tracking-widest uppercase hover:bg-white/10 transition-colors"><FontAwesomeIcon icon={faPhone} />
-                GET A QUOTE</Link>
-            </div>
+      <section className="bg-black text-white min-h-[80vh] flex">
+
+        {/* Left – Text (constrained) */}
+        <div className="flex flex-col justify-center py-16 lg:py-24 px-4 sm:px-8 lg:px-16 xl:px-24 w-full lg:w-1/2 shrink-0">
+          <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-6">
+            Manufacturer &amp; Supplier · Rajkot, Gujarat · Est. 2022
+          </p>
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-black leading-[1.0] tracking-tight mb-8 uppercase">
+            Crafting<br />
+            <span className="text-white">Timeless</span><br />
+            <span className="text-gray-400">Elegance.</span>
+          </h1>
+          <p className="text-lg text-gray-400 max-w-lg mb-10 leading-relaxed">
+            {companyDescription.intro}
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <Link href="/products" className="inline-flex items-center gap-3 bg-white text-black font-bold py-4 px-8 text-sm tracking-widest uppercase hover:bg-gray-100 transition-colors">
+              <FontAwesomeIcon icon={faBagShopping} />
+              EXPLORE PRODUCTS
+            </Link>
+            <Link href="/contact" className="inline-flex items-center gap-3 border border-white/30 text-white font-bold py-4 px-8 text-sm tracking-widest uppercase hover:bg-white/10 transition-colors">
+              <FontAwesomeIcon icon={faPhone} />
+              GET A QUOTE
+            </Link>
           </div>
         </div>
+
+        {/* Right – Slider (fills remaining screen width) */}
+        <div className="hidden lg:block relative flex-1">
+          <HeroSlider />
+        </div>
+
       </section>
 
       {/* ── TRUST BADGES ── */}
@@ -206,7 +216,7 @@ export default function Home() {
 
       {/* ── STATS ── */}
       <section className="bg-black text-white py-20 relative" style={{backgroundImage: "url('/watch-images/watch-06.jpg')", backgroundSize: 'cover', backgroundPosition: 'center'}}>
-        <div className="absolute inset-0" style={{backgroundColor: 'rgba(0,0,0,0.88)'}} />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10" />
         <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative z-10 text-center mb-14">
             <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-3">OUR JOURNEY</p>
@@ -322,30 +332,30 @@ export default function Home() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="bg-white border-t border-[#e5e5e5] py-20 relative overflow-hidden" style={{backgroundImage: "url('/watch-images/watch-26.jpg')", backgroundSize: 'cover', backgroundPosition: 'center'}}>
-        <div className="absolute inset-0" style={{backgroundColor: 'rgba(255,255,255,0.92)'}} />
+      <section className="bg-black text-white py-20 relative overflow-hidden" style={{backgroundImage: "url('/watch-images/watch-26.jpg')", backgroundSize: 'cover', backgroundPosition: 'center'}}>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10" />
         <div className="relative z-10 max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-4">START YOUR JOURNEY</p>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-black uppercase tracking-tight leading-tight mb-6">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white uppercase tracking-tight leading-tight mb-6">
             Ready to Experience<br />Excellence?
           </h2>
-          <p className="text-lg text-gray-500 max-w-2xl mx-auto mb-10">
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-10">
             Contact us today for bulk orders and custom requirements. Trusted by 500+ businesses across India.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-14">
-            <Link href="/contact" className="inline-flex items-center justify-center gap-3 bg-black text-white font-bold py-4 px-10 text-sm tracking-widest uppercase hover:bg-gray-800 transition-colors"><FontAwesomeIcon icon={faPhone} />
+            <Link href="/contact" className="inline-flex items-center justify-center gap-3 bg-white text-black font-bold py-4 px-10 text-sm tracking-widest uppercase hover:bg-gray-100 transition-colors"><FontAwesomeIcon icon={faPhone} />
               GET IN TOUCH</Link>
-            <Link href="/products" className="inline-flex items-center justify-center gap-3 border border-black text-black font-bold py-4 px-10 text-sm tracking-widest uppercase hover:bg-black hover:text-white transition-colors"><FontAwesomeIcon icon={faBagShopping} />
+            <Link href="/products" className="inline-flex items-center justify-center gap-3 border border-white/30 text-white font-bold py-4 px-10 text-sm tracking-widest uppercase hover:bg-white/10 transition-colors"><FontAwesomeIcon icon={faBagShopping} />
               BROWSE PRODUCTS</Link>
           </div>
-          <div className="flex flex-wrap justify-center gap-8 pt-10 border-t border-[#e5e5e5]">
+          <div className="flex flex-wrap justify-center gap-8 pt-10 border-t border-white/10">
             {[
               { icon: faCircleCheck, text: 'Premium Quality Assured' },
               { icon: faTruck, text: 'Pan India Delivery' },
               { icon: faAward, text: 'Bulk Order Discounts' },
             ].map(({ icon, text }) => (
-              <div key={text} className="flex items-center gap-2 text-gray-500 text-sm">
-                <FontAwesomeIcon icon={icon} size="1x" className="text-black" />
+              <div key={text} className="flex items-center gap-2 text-gray-400 text-sm">
+                <FontAwesomeIcon icon={icon} size="1x" className="text-white" />
                 <span className="font-semibold">{text}</span>
               </div>
             ))}
