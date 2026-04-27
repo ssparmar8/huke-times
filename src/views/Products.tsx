@@ -4,27 +4,18 @@ import Link from 'next/link';
 import { products } from '../data/products';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { unsplashSrcSet } from '../utils';
-import watchJson  from '../../watch.json';
-import watchJson1 from '../../watch-images-1.json';
-import watchJson2 from '../../watch-images-2.json';
-import watchJson3 from '../../watch-images-3.json';
-import watchJson4 from '../../watch-images-4.json';
 
 
 const PRODUCTS_PER_PAGE = 12;
 
-const allWatchImages = [
-  ...watchJson.results,
-  ...watchJson1.results,
-  ...watchJson2.results,
-  ...watchJson3.results,
-  ...watchJson4.results,
-].map(r => ({
-  id: r.id,
-  url: r.urls.regular,
-  alt: r.alt_description ?? 'watch',
-}));
+const allWatchImages = Array.from({ length: 32 }, (_, i) => {
+  const n = String(i + 1).padStart(2, '0');
+  return {
+    id: `watch-${n}`,
+    url: `/watch-images/watch-${n}.jpg`,
+    alt: `Huke Times wrist watch ${n}`,
+  };
+});
 
 export default function Products() {
   const [selectedCategory, setSelectedCategory] = useState<'all' | 'mens-watches' | 'watch-parts'>('all');
@@ -108,7 +99,6 @@ export default function Products() {
                     <img
                       src={img.url}
                       alt={img.alt}
-                      srcSet={unsplashSrcSet(img.url)}
                       sizes="(max-width: 640px) 50vw, 25vw"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
@@ -135,7 +125,6 @@ export default function Products() {
                     <img
                       src={product.images[0]}
                       alt={product.name}
-                      srcSet={unsplashSrcSet(product.images[0])}
                       sizes="(max-width: 640px) 50vw, 25vw"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"

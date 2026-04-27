@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { getProductBySlug, products } from '../data/products';
 import { companyInfo } from '../data/company';
-import { unsplashSrcSet } from '../utils';
 
 export default function ProductDetail({ slug }: { slug: string }) {
   const product = getProductBySlug(slug);
@@ -58,7 +57,6 @@ export default function ProductDetail({ slug }: { slug: string }) {
                 <img
                   src={product.images[activeImage]}
                   alt={product.name}
-                  srcSet={unsplashSrcSet(product.images[activeImage])}
                   sizes="(max-width: 1024px) 100vw, 600px"
                   className="w-full h-auto"
                   loading="lazy"
@@ -190,7 +188,6 @@ export default function ProductDetail({ slug }: { slug: string }) {
                   <img
                     src={p.images[0]}
                     alt={p.name}
-                    srcSet={unsplashSrcSet(p.images[0])}
                     sizes="(max-width: 640px) 50vw, 25vw"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"

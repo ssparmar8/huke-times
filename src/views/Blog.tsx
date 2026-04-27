@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { companyInfo } from '../data/company';
-import { unsplashSrcSet } from '../utils';
 
 const posts = [
   {
@@ -9,7 +8,7 @@ const posts = [
     category: 'Launch',
     title: 'Huke Times Launches New Range of Premium Wrist Watches for 2026',
     excerpt: 'We are excited to introduce our expanded 2026 catalog, featuring new designs in our mens wrist watch range and a broader selection of precision watch parts for trade buyers.',
-    image: 'https://images.unsplash.com/photo-1552499166-bf7492d04a4f?w=600&q=80',
+    image: '/watch-images/watch-14.jpg',
   },
   {
     slug: 'bulk-order-watch-guide',
@@ -17,7 +16,7 @@ const posts = [
     category: 'Trade',
     title: 'How to Place Bulk Orders for Wrist Watches from Indian Manufacturers',
     excerpt: 'A complete guide for retailers, wholesalers, and importers on how to source premium wrist watches directly from manufacturers like Huke Times in Rajkot, Gujarat.',
-    image: 'https://plus.unsplash.com/premium_photo-1728759442353-d61faf5792b3?w=600&q=80',
+    image: '/watch-images/watch-07.jpg',
   },
   {
     slug: 'watch-parts-manufacturing-rajkot',
@@ -25,23 +24,23 @@ const posts = [
     category: 'Inside Huke Times',
     title: 'Inside Our Watch Parts Manufacturing Facility in Rajkot',
     excerpt: 'Take a closer look at how Huke Times manufactures precision watch components at our state-of-the-art facility in Rajkot, Gujarat — where craftsmanship meets modern engineering.',
-    image: 'https://images.unsplash.com/photo-1731700538481-8418639c5f1a?w=600&q=80',
+    image: '/watch-images/watch-01.jpg',
   },
   {
     slug: 'quartz-vs-mechanical-watches',
     date: 'December 2025',
     category: 'Watch Guide',
-    title: 'Quartz vs Mechanical Watches: A Buyer\'s Guide for Retailers',
+    title: "Quartz vs Mechanical Watches: A Buyer's Guide for Retailers",
     excerpt: 'Understanding the difference between quartz, mechanical, and automatic watch movements is essential for any watch retailer. Here\'s what you need to know.',
-    image: 'https://images.unsplash.com/photo-1605930039769-1d626ba74eae?w=600&q=80',
+    image: '/watch-images/watch-09.jpg',
   },
   {
     slug: 'mens-watch-trends-2026',
     date: 'November 2025',
     category: 'Trends',
-    title: 'Men\'s Watch Trends 2026: What Buyers Are Looking For',
+    title: "Men's Watch Trends 2026: What Buyers Are Looking For",
     excerpt: 'From minimalist dials to bold chronograph designs, here\'s a roundup of the top watch styles trending in the Indian market for 2026 and what retailers should stock.',
-    image: 'https://images.unsplash.com/photo-1629697431383-44b0c0d92ca7?w=600&q=80',
+    image: '/watch-images/watch-23.jpg',
   },
   {
     slug: 'why-source-watches-india',
@@ -49,7 +48,7 @@ const posts = [
     category: 'Trade',
     title: 'Why Sourcing Watches from Indian Manufacturers Makes Business Sense',
     excerpt: 'India\'s watch manufacturing industry has grown significantly over the past decade. Here\'s why sourcing from domestic manufacturers like Huke Times LLP offers quality, cost, and reliability advantages.',
-    image: 'https://images.unsplash.com/photo-1587925358712-091b5ff6cd84?w=600&q=80',
+    image: '/watch-images/watch-25.jpg',
   },
 ];
 
@@ -82,7 +81,6 @@ export default function Blog() {
                   <img
                     src={post.image}
                     alt={post.title}
-                    srcSet={unsplashSrcSet(post.image)}
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"

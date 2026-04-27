@@ -12,9 +12,10 @@ export const products: Product[] = [
     },
     moq: 2000,
     images: [
-      'https://images.unsplash.com/photo-1584378687113-8739c327634c?w=800&q=80',
-      'https://images.unsplash.com/photo-1572107679093-7a81fcbb7705?w=800&q=80',
-      'https://images.unsplash.com/photo-1589553557938-d4c3ce169d52?w=800&q=80'
+      '/watch-images/watch-17.jpg',
+      '/watch-images/watch-20.jpg',
+      '/watch-images/watch-22.jpg',
+      '/watch-images/watch-24.jpg',
     ],
     specifications: [
       { label: 'Brand Name', value: 'Huke Times' },
@@ -51,10 +52,10 @@ export const products: Product[] = [
     },
     moq: 2000,
     images: [
-      'https://images.unsplash.com/photo-1599681906464-ec599150575b?w=800&q=80',
-      'https://images.unsplash.com/photo-1545038110-400f683aa1de?w=800&q=80',
-      'https://images.unsplash.com/photo-1605930039769-1d626ba74eae?w=800&q=80',
-      'https://images.unsplash.com/photo-1694562383035-3b527733e995?w=800&q=80'
+      '/watch-images/watch-31.jpg',
+      '/watch-images/watch-30.jpg',
+      '/watch-images/watch-18.jpg',
+      '/watch-images/watch-29.jpg',
     ],
     specifications: [
       { label: 'Brand Name', value: 'Huke Times' },
@@ -86,9 +87,9 @@ export const products: Product[] = [
     },
     moq: 2000,
     images: [
-      'https://images.unsplash.com/photo-1767009951305-5ed35f62e3c3?w=800&q=80',
-      'https://images.unsplash.com/photo-1568154106189-717dc85b0a3b?w=800&q=80',
-      'https://images.unsplash.com/photo-1589553557938-d4c3ce169d52?w=800&q=80'
+      '/watch-images/watch-19.jpg',
+      '/watch-images/watch-28.jpg',
+      '/watch-images/watch-21.jpg',
     ],
     specifications: [
       { label: 'Brand Name', value: 'Huke Times' },
@@ -123,9 +124,9 @@ export const products: Product[] = [
     },
     moq: 2000,
     images: [
-      'https://images.unsplash.com/photo-1572107679093-7a81fcbb7705?w=800&q=80',
-      'https://images.unsplash.com/photo-1587925358712-091b5ff6cd84?w=800&q=80',
-      'https://images.unsplash.com/photo-1731700538481-8418639c5f1a?w=800&q=80'
+      '/watch-images/watch-16.jpg',
+      '/watch-images/watch-01.jpg',
+      '/watch-images/watch-02.jpg',
     ],
     specifications: [
       { label: 'Brand', value: 'Huke Times' },
@@ -158,9 +159,9 @@ export const products: Product[] = [
     },
     moq: 2000,
     images: [
-      'https://images.unsplash.com/photo-1584378687113-8739c327634c?w=800&q=80',
-      'https://images.unsplash.com/photo-1589553557938-d4c3ce169d52?w=800&q=80',
-      'https://images.unsplash.com/photo-1568154106189-717dc85b0a3b?w=800&q=80'
+      '/watch-images/watch-03.jpg',
+      '/watch-images/watch-04.jpg',
+      '/watch-images/watch-05.jpg',
     ],
     specifications: [
       { label: 'Brand', value: 'Huke Times' },
