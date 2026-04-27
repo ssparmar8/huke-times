@@ -151,19 +151,19 @@ echo "  ✓ Bucket policy applied"
 echo "[4/5] Building..."
 cd "$ROOT_DIR"
 pnpm build
-echo "  ✓ Build complete"
+echo "  ✓ Build complete (out/)"
 
 # ─────────────────────────────────────────────
 # 5. Sync to S3 + invalidate
 # ─────────────────────────────────────────────
 echo "[5/5] Uploading to S3..."
-aws s3 sync dist/ "s3://$BUCKET_NAME/" \
+aws s3 sync out/ "s3://$BUCKET_NAME/" \
   --delete \
   --exclude "index.html" \
   --cache-control "public, max-age=31536000, immutable" \
   --region "$REGION"
 
-aws s3 cp dist/index.html "s3://$BUCKET_NAME/index.html" \
+aws s3 cp out/index.html "s3://$BUCKET_NAME/index.html" \
   --cache-control "no-cache, no-store, must-revalidate" \
   --content-type "text/html; charset=utf-8" \
   --region "$REGION"

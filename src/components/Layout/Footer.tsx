@@ -1,12 +1,9 @@
+import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faEnvelope, faPhone, faCommentDots, faClock, faAward, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { companyInfo } from '../../data/company';
 
-interface FooterProps {
-  onNavigate: (path: string) => void;
-}
-
-export default function Footer({ onNavigate }: FooterProps) {
+export default function Footer() {
   return (
     <footer className="bg-[#e8e8e8] text-black border-t border-[#d0d0d0]">
 
@@ -16,11 +13,11 @@ export default function Footer({ onNavigate }: FooterProps) {
 
           {/* Col 1: Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <button onClick={() => onNavigate('/')} className="inline-flex items-baseline mb-6 group">
+            <Link href="/" className="inline-flex items-baseline mb-6 group">
               <span className="text-2xl font-black tracking-tight text-black uppercase group-hover:text-gray-600 transition-colors">HUKE</span>
               <span className="text-2xl font-thin tracking-tight text-black uppercase ml-2 group-hover:text-gray-600 transition-colors">TIMES</span>
               <span className="text-xs font-medium text-gray-400 ml-2 tracking-widest">LLP</span>
-            </button>
+            </Link>
             <div className="flex gap-3 mb-6">
               <span className="inline-flex items-center gap-1.5 bg-white border border-[#d0d0d0] text-xs font-bold px-3 py-1.5 tracking-wider">
                 <FontAwesomeIcon icon={faClock} size="xs" />
@@ -55,12 +52,12 @@ export default function Footer({ onNavigate }: FooterProps) {
                 { label: 'Sustainability', path: '/sustainability' },
               ].map(({ label, path }) => (
                 <li key={path}>
-                  <button
-                    onClick={() => onNavigate(path)}
+                  <Link
+                    href={path}
                     className="text-sm text-gray-500 hover:text-black transition-colors font-medium"
                   >
                     {label}
-                  </button>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -80,12 +77,12 @@ export default function Footer({ onNavigate }: FooterProps) {
                 { label: 'Privacy Policy', path: '/privacy' },
               ].map(({ label, path }) => (
                 <li key={path}>
-                  <button
-                    onClick={() => onNavigate(path)}
+                  <Link
+                    href={path}
                     className="text-sm text-gray-500 hover:text-black transition-colors font-medium"
                   >
                     {label}
-                  </button>
+                  </Link>
                 </li>
               ))}
             </ul>

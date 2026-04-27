@@ -36,7 +36,7 @@ echo ""
 echo "[1/3] Building..."
 cd "$ROOT_DIR"
 pnpm build
-echo "  ✓ Build complete (dist/)"
+echo "  ✓ Build complete (out/)"
 
 # ── 2. Sync to S3 ────────────────────────────────────────────
 # Hashed assets (JS/CSS/images) get long-lived cache headers.
@@ -46,14 +46,14 @@ echo ""
 echo "[2/3] Syncing to S3..."
 
 # Upload hashed assets with immutable long-term cache
-aws s3 sync dist/ "s3://$BUCKET_NAME/" \
+aws s3 sync out/ "s3://$BUCKET_NAME/" \
   --delete \
   --exclude "index.html" \
   --cache-control "public, max-age=31536000, immutable" \
   --region "$REGION"
 
 # Upload index.html with no-cache so users always get latest
-aws s3 cp dist/index.html "s3://$BUCKET_NAME/index.html" \
+aws s3 cp out/index.html "s3://$BUCKET_NAME/index.html" \
   --cache-control "no-cache, no-store, must-revalidate" \
   --content-type "text/html; charset=utf-8" \
   --region "$REGION"

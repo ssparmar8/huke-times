@@ -1,5 +1,7 @@
 dist
 dist-ssr
+out
+.next
 *.local
 
 # dependencies

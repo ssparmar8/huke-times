@@ -1,9 +1,13 @@
+'use client';
 import { useState, useRef, useEffect, createContext, useContext } from 'react';
 
+import { useRouter } from 'next/navigation';
+
 /* ── geometry helper ── */
+const r6 = (n: number) => Math.round(n * 1e6) / 1e6;
 const pt = (cx: number, cy: number, r: number, deg: number) => {
   const a = (deg - 90) * (Math.PI / 180);
-  return { x: cx + r * Math.cos(a), y: cy + r * Math.sin(a) };
+  return { x: r6(cx + r * Math.cos(a)), y: r6(cy + r * Math.sin(a)) };
 };
 
 /* ── live time ── */
@@ -15,14 +19,15 @@ function useTime(): TimeAngles {
     const now = new Date();
     const hr  = now.getHours(), mn = now.getMinutes(), sc = now.getSeconds();
     return {
-      h:     (hr % 12 + mn / 60) * 30,          // 0–360°
-      m:     mn * 6 + sc * 0.1,                  // 0–360°
-      s:     sc * 6,                              // 0–360°
+      h:     (hr % 12 + mn / 60) * 30,
+      m:     mn * 6 + sc * 0.1,
+      s:     sc * 6,
       label: `${hr % 12 || 12}:${String(mn).padStart(2, '0')}`,
     };
   };
-  const [t, setT] = useState(calc);
+  const [t, setT] = useState<TimeAngles>({ h: 0, m: 0, s: 0, label: '12:00' });
   useEffect(() => {
+    setT(calc());
     const id = setInterval(() => setT(calc()), 1000);
     return () => clearInterval(id);
   }, []);
@@ -309,8 +314,7 @@ function DiverDial() {
 
 function GMTDial() {
   const { h, m } = useContext(TimeCtx);
-  const utcH      = new Date().getUTCHours();
-  const gmtAngle  = (utcH / 24) * 360;
+  const gmtAngle  = 0; // updated after mount via TimeCtx — avoids SSR mismatch
   const gmtTip    = pt(100,100,62,gmtAngle), gmtTail = pt(100,100,-16,gmtAngle);
   const gmtAL     = pt(100,100,56,gmtAngle-6), gmtAR = pt(100,100,56,gmtAngle+6);
   const toRad     = (d: number) => d * Math.PI / 180;
@@ -320,8 +324,8 @@ function GMTDial() {
       {/* 24h bicolor ring */}
       {Array.from({length:24},(_,i)=>{
         const a1=(i/24)*360-90, a2=((i+1)/24)*360-90, r=75;
-        const x1=100+r*Math.cos(toRad(a1)), y1=100+r*Math.sin(toRad(a1));
-        const x2=100+r*Math.cos(toRad(a2)), y2=100+r*Math.sin(toRad(a2));
+        const x1=r6(100+r*Math.cos(toRad(a1))), y1=r6(100+r*Math.sin(toRad(a1)));
+        const x2=r6(100+r*Math.cos(toRad(a2))), y2=r6(100+r*Math.sin(toRad(a2)));
         return <path key={i} d={`M100,100 L${x1},${y1} A${r},${r} 0 0,1 ${x2},${y2} Z`}
           fill={(i>=6&&i<18)?'rgba(220,190,80,0.14)':'rgba(20,40,100,0.35)'}/>;
       })}
@@ -603,15 +607,12 @@ const dialItems = [
   { label: 'Stick Dial',      Dial: StickDial        },
 ];
 
-interface PickPerfectDialProps {
-  onNavigate: (path: string) => void;
-}
-
 const N       = dialItems.length;
 const SLIDE_W = 240;  // horizontal slot width per slide (px)
 const CONT_H  = 360;  // carousel window height (px)
 
-export default function PickPerfectDial({ onNavigate }: PickPerfectDialProps) {
+export default function PickPerfectDial() {
+  const router  = useRouter();
   const [current, setCurrent] = useState(2);
   const touchX = useRef(0);
   const time   = useTime();
@@ -663,7 +664,7 @@ export default function PickPerfectDial({ onNavigate }: PickPerfectDialProps) {
                 return (
                   <button
                     key={label}
-                    onClick={() => isActive ? onNavigate('/products') : setCurrent(i)}
+                    onClick={() => isActive ? router.push('/products') : setCurrent(i)}
                     style={{
                       position: 'absolute',
                       top: '50%', left: '50%',
