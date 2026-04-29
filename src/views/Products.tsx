@@ -47,32 +47,33 @@ export default function Products() {
   return (
     <div>
       {/* Page Header */}
-      <section className="bg-black text-white py-14">
+      <section className="bg-[#0a0a0a] text-white py-16">
         <div className="max-w-[1300px] mx-auto px-6 lg:px-8">
-          <div className="flex items-center gap-2 text-xs text-gray-400 mb-4 uppercase tracking-widest">
+          <div className="flex items-center gap-2 text-[10px] text-gray-600 mb-5 uppercase tracking-widest">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span>/</span>
-            <span>Products</span>
+            <span className="text-gray-400">Products</span>
           </div>
-          <h1 className="text-5xl md:text-6xl font-black uppercase">Our Products</h1>
-          <p className="text-gray-400 mt-3 text-sm uppercase tracking-wider">
+          <h1 className="text-5xl md:text-6xl font-black uppercase tracking-tight">Our Products</h1>
+          <div className="w-12 h-[2px] bg-white/20 mt-6 mb-4" />
+          <p className="text-gray-500 text-[11px] uppercase tracking-widest">
             Premium Quality Wrist Watches &amp; Components
           </p>
         </div>
       </section>
 
       {/* Filter Bar */}
-      <section className="bg-white border-b border-[#e5e5e5] sticky top-0 z-40">
+      <section className="bg-[#0a0a0a] border-b border-white/10 sticky top-[70px] z-40">
         <div className="max-w-[1300px] mx-auto px-6 lg:px-8">
           <div className="flex gap-0 overflow-x-auto">
             {categories.map(cat => (
               <button
                 key={cat.key}
                 onClick={() => handleCategoryChange(cat.key as typeof selectedCategory)}
-                className={`flex-shrink-0 px-6 py-4 text-xs font-bold uppercase tracking-wider border-b-2 transition-colors ${
+                className={`flex-shrink-0 px-6 py-4 text-[11px] font-bold uppercase tracking-widest border-b-2 transition-colors ${
                   selectedCategory === cat.key
-                    ? 'border-black text-black'
-                    : 'border-transparent text-gray-500 hover:text-black hover:border-gray-300'
+                    ? 'border-white text-white'
+                    : 'border-transparent text-gray-500 hover:text-gray-300 hover:border-gray-600'
                 }`}
               >
                 {cat.label} ({cat.count})
@@ -83,12 +84,12 @@ export default function Products() {
       </section>
 
       {/* Products / Gallery Grid */}
-      <section className="py-16 bg-[#f5f5f5]">
+      <section className="py-14 bg-white">
         <div className="max-w-[1300px] mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between mb-8">
-            <p className="text-xs text-gray-500 uppercase tracking-wider">{totalItems} products</p>
+            <p className="text-[11px] text-gray-400 uppercase tracking-widest">{totalItems} products</p>
             {totalPages > 1 && (
-              <p className="text-xs text-gray-400 uppercase tracking-wider">Page {currentPage} of {totalPages}</p>
+              <p className="text-[11px] text-gray-400 uppercase tracking-widest">Page {currentPage} / {totalPages}</p>
             )}
           </div>
 
@@ -202,19 +203,21 @@ export default function Products() {
       </section>
 
       {/* CTA Strip */}
-      <section className="bg-black text-white py-16">
+      <section className="bg-[#0a0a0a] text-white py-16 border-t border-white/10">
         <div className="max-w-[1300px] mx-auto px-6 lg:px-8 text-center">
+          <p className="text-[11px] font-bold tracking-[0.3em] text-gray-500 uppercase mb-4">Wholesale &amp; Bulk</p>
           <h2 className="text-3xl md:text-4xl font-black uppercase mb-4">
             Interested in Bulk Orders?
           </h2>
-          <p className="text-gray-400 mb-8 text-sm uppercase tracking-wider">
+          <div className="w-12 h-[2px] bg-white/20 mx-auto mb-6" />
+          <p className="text-gray-500 mb-8 text-sm">
             Contact us for custom requirements and wholesale pricing
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 bg-white text-black font-black text-xs uppercase tracking-widest px-8 py-3 hover:bg-gray-100 transition-colors"
+            className="inline-flex items-center gap-2 border border-white/20 hover:border-white hover:bg-white hover:text-black text-white font-black text-[11px] uppercase tracking-widest px-8 py-3.5 transition-all duration-200"
           >
-            <span>Request a Quote</span>
+            Request a Quote
             <FontAwesomeIcon icon={faArrowRight} size="sm" />
           </Link>
         </div>

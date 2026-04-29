@@ -51,16 +51,19 @@ const navigation: NavItem[] = [
 function DropdownMenu({ items, onClose }: { items: DropdownItem[]; onClose: () => void }) {
   const pathname = usePathname();
   return (
-    <div className="absolute top-full left-0 mt-0 min-w-[200px] bg-white border border-[#e5e5e5] border-t-0 shadow-lg z-50">
+    <div className="absolute top-full left-0 mt-0 min-w-[220px] bg-[#111111] border border-white/10 shadow-2xl z-50">
       {items.map(item => (
         <Link
           key={item.path}
           href={item.path}
           onClick={onClose}
-          className={`w-full text-left px-5 py-3 text-xs font-semibold uppercase tracking-wider transition-colors border-b border-[#f0f0f0] last:border-b-0 block ${
-            pathname === item.path ? 'text-black bg-[#f5f5f5]' : 'text-gray-500 hover:text-black hover:bg-[#f5f5f5]'
+          className={`w-full text-left px-5 py-3.5 text-[11px] font-semibold uppercase tracking-widest transition-colors border-b border-white/5 last:border-b-0 flex items-center gap-2 group ${
+            pathname === item.path
+              ? 'text-white bg-white/10'
+              : 'text-gray-400 hover:text-white hover:bg-white/5'
           }`}
         >
+          <span className="w-1 h-1 rounded-full bg-white/20 group-hover:bg-white transition-colors flex-shrink-0" />
           {item.label}
         </Link>
       ))}
@@ -97,16 +100,16 @@ export default function Header() {
 
       {/* Announcement Bar */}
       {announcementVisible && (
-        <div className="bg-black text-white">
-          <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center justify-between gap-4">
+        <div className="bg-white border-b border-[#e5e5e5]">
+          <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between gap-4">
             <div className="flex-1" />
-            <p className="text-center text-xs sm:text-sm font-medium tracking-wide">
-              Premium Wrist Watches &mdash; Manufacturer &amp; Supplier &nbsp;&middot;&nbsp; Pan India Delivery &nbsp;&middot;&nbsp; ISO Certified
+            <p className="text-center text-[11px] text-gray-500 font-medium tracking-widest uppercase">
+              Premium Wrist Watches &nbsp;&bull;&nbsp; Manufacturer &amp; Supplier &nbsp;&bull;&nbsp; Pan India Delivery &nbsp;&bull;&nbsp; ISO Certified
             </p>
             <div className="flex-1 flex justify-end">
               <button
                 onClick={() => setAnnouncementVisible(false)}
-                className="text-white/60 hover:text-white transition-colors text-lg leading-none"
+                className="text-gray-300 hover:text-gray-600 transition-colors text-sm leading-none"
                 aria-label="Dismiss"
               >
                 &#x2715;
@@ -117,16 +120,16 @@ export default function Header() {
       )}
 
       {/* Main Header */}
-      <div className="bg-white border-b border-[#e5e5e5]">
+      <div className="bg-[#0a0a0a] border-b border-white/10">
         <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-2">
+          <div className="flex justify-between items-center h-16 md:h-[70px]">
 
             {/* Logo */}
             <Link href="/" className="flex items-center flex-shrink-0">
               <img
                 src="/logo.png"
                 alt="Huke Times LLP"
-                className="h-14 md:h-16 w-auto object-contain"
+                className="h-10 md:h-12 w-auto object-contain brightness-0 invert"
               />
             </Link>
 
@@ -140,23 +143,23 @@ export default function Header() {
                     {item.path ? (
                       <Link
                         href={item.path}
-                        className={`relative flex items-center px-4 text-xs font-semibold tracking-widest transition-colors ${
-                          active ? 'text-black' : 'text-gray-400 hover:text-black'
+                        className={`relative flex items-center px-4 text-[11px] font-bold tracking-widest transition-colors ${
+                          active ? 'text-white' : 'text-gray-400 hover:text-white'
                         }`}
                       >
                         {item.name}
-                        {active && <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-black" />}
+                        {active && <span className="absolute bottom-0 left-4 right-4 h-[2px] bg-white" />}
                       </Link>
                     ) : (
                       <button
                         onClick={() => setOpenDropdown(isOpen ? null : item.name)}
-                        className={`relative flex items-center gap-1 px-4 text-xs font-semibold tracking-widest transition-colors ${
-                          active || isOpen ? 'text-black' : 'text-gray-400 hover:text-black'
+                        className={`relative flex items-center gap-1.5 px-4 text-[11px] font-bold tracking-widest transition-colors ${
+                          active || isOpen ? 'text-white' : 'text-gray-400 hover:text-white'
                         }`}
                       >
                         {item.name}
-                        <FontAwesomeIcon icon={faChevronDown} size="xs" className={`transition-transform ${isOpen ? 'rotate-180' : ''}`} />
-                        {(active || isOpen) && <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-black" />}
+                        <FontAwesomeIcon icon={faChevronDown} size="xs" className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+                        {(active || isOpen) && <span className="absolute bottom-0 left-4 right-4 h-[2px] bg-white" />}
                       </button>
                     )}
                     {item.dropdown && isOpen && (
@@ -173,7 +176,7 @@ export default function Header() {
             {/* Desktop CTA */}
             <Link
               href="/contact"
-              className="hidden lg:flex items-center gap-2 bg-black hover:bg-gray-800 text-white px-5 py-2.5 text-xs font-bold tracking-widest uppercase transition-colors"
+              className="hidden lg:flex items-center gap-2 border border-white/20 hover:border-white hover:bg-white hover:text-black text-white px-5 py-2.5 text-[11px] font-bold tracking-widest uppercase transition-all duration-200"
             >
               <FontAwesomeIcon icon={faBagShopping} size="sm" />
               REQUEST QUOTE
@@ -181,7 +184,7 @@ export default function Header() {
 
             {/* Mobile Menu Toggle */}
             <button
-              className="md:hidden p-2 text-black"
+              className="md:hidden p-2 text-white"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -192,8 +195,8 @@ export default function Header() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-[#e5e5e5] max-h-[80vh] overflow-y-auto">
-            <div className="max-w-[1300px] mx-auto px-4 py-4 space-y-1">
+          <div className="md:hidden border-t border-white/10 max-h-[80vh] overflow-y-auto bg-[#0a0a0a]">
+            <div className="max-w-[1300px] mx-auto px-4 py-4 space-y-0.5">
               {navigation.map((item) => {
                 const active = isActiveSection(item);
                 const expanded = mobileExpanded === item.name;
@@ -203,32 +206,36 @@ export default function Header() {
                       <Link
                         href={item.path}
                         onClick={() => setMobileMenuOpen(false)}
-                        className={`w-full text-left py-3 px-4 text-xs font-bold tracking-widest uppercase transition-colors block ${
-                          active ? 'text-black bg-[#f5f5f5]' : 'text-gray-400 hover:text-black hover:bg-[#f5f5f5]'
+                        className={`w-full text-left py-3.5 px-4 text-[11px] font-bold tracking-widest uppercase transition-colors flex items-center gap-3 ${
+                          active ? 'text-white bg-white/10' : 'text-gray-400 hover:text-white hover:bg-white/5'
                         }`}
                       >
+                        <span className={`w-1 h-1 rounded-full flex-shrink-0 ${active ? 'bg-white' : 'bg-white/20'}`} />
                         {item.name}
                       </Link>
                     ) : (
                       <>
                         <button
                           onClick={() => setMobileExpanded(expanded ? null : item.name)}
-                          className={`w-full text-left py-3 px-4 text-xs font-bold tracking-widest uppercase transition-colors flex items-center justify-between ${
-                            active || expanded ? 'text-black bg-[#f5f5f5]' : 'text-gray-400 hover:text-black hover:bg-[#f5f5f5]'
+                          className={`w-full text-left py-3.5 px-4 text-[11px] font-bold tracking-widest uppercase transition-colors flex items-center justify-between ${
+                            active || expanded ? 'text-white bg-white/10' : 'text-gray-400 hover:text-white hover:bg-white/5'
                           }`}
                         >
-                          {item.name}
-                          <FontAwesomeIcon icon={faChevronDown} size="xs" className={`transition-transform ${expanded ? 'rotate-180' : ''}`} />
+                          <span className="flex items-center gap-3">
+                            <span className={`w-1 h-1 rounded-full flex-shrink-0 ${active || expanded ? 'bg-white' : 'bg-white/20'}`} />
+                            {item.name}
+                          </span>
+                          <FontAwesomeIcon icon={faChevronDown} size="xs" className={`transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`} />
                         </button>
                         {expanded && item.dropdown && (
-                          <div className="bg-[#fafafa] border-l-2 border-black ml-4">
+                          <div className="border-l border-white/10 ml-6 mb-1">
                             {item.dropdown.map(sub => (
                               <Link
                                 key={sub.path}
                                 href={sub.path}
                                 onClick={() => { setMobileMenuOpen(false); setMobileExpanded(null); }}
-                                className={`w-full text-left py-3 px-5 text-xs font-semibold tracking-wider uppercase transition-colors block ${
-                                  pathname === sub.path ? 'text-black' : 'text-gray-500 hover:text-black'
+                                className={`w-full text-left py-3 px-5 text-[10px] font-semibold tracking-wider uppercase transition-colors block ${
+                                  pathname === sub.path ? 'text-white' : 'text-gray-500 hover:text-white'
                                 }`}
                               >
                                 {sub.label}
@@ -241,24 +248,15 @@ export default function Header() {
                   </div>
                 );
               })}
-              <div className="pt-4 border-t border-[#e5e5e5] space-y-2">
+              <div className="pt-4 border-t border-white/10">
                 <Link
                   href="/contact"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full bg-black text-white font-bold py-3 px-4 text-xs tracking-widest uppercase flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors"
+                  className="w-full border border-white/20 hover:bg-white hover:text-black text-white font-bold py-3 px-4 text-[11px] tracking-widest uppercase flex items-center justify-center gap-2 transition-all duration-200"
                 >
                   <FontAwesomeIcon icon={faBagShopping} size="sm" />
                   REQUEST QUOTE
                 </Link>
-                <a
-                  href={`https://wa.me/${companyInfo.whatsapp.replace(/[^0-9]/g, '')}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full border border-black text-black font-bold py-3 px-4 text-xs tracking-widest uppercase flex items-center justify-center gap-2 hover:bg-black hover:text-white transition-colors"
-                >
-                  <FontAwesomeIcon icon={faCommentDots} size="sm" />
-                  WHATSAPP US
-                </a>
               </div>
             </div>
           </div>
@@ -267,3 +265,4 @@ export default function Header() {
     </header>
   );
 }
+

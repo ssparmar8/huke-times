@@ -48,9 +48,9 @@ export default function Home() {
       </section>
 
       {/* ── TRUST BADGES ── */}
-      <section className="border-y border-[#e5e5e5] bg-[#f5f5f5]">
-        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-wrap justify-center gap-6 md:gap-12 lg:gap-20">
+      <section className="bg-[#0a0a0a] border-b border-white/10">
+        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap justify-center divide-x divide-white/10">
             {[
               { icon: faAward, label: 'ISO Certified' },
               { icon: faShield, label: 'Premium Quality' },
@@ -58,9 +58,9 @@ export default function Home() {
               { icon: faUsers, label: '500+ B2B Clients' },
               { icon: faStar, label: '4.7★ Rated' },
             ].map(({ icon, label }) => (
-              <div key={label} className="flex items-center gap-2.5 text-gray-600">
-                <FontAwesomeIcon icon={icon} size="lg" className="text-black flex-shrink-0" />
-                <span className="text-xs font-bold tracking-wider uppercase">{label}</span>
+              <div key={label} className="flex items-center gap-2.5 text-gray-400 px-6 lg:px-10 py-4">
+                <FontAwesomeIcon icon={icon} size="sm" className="text-white/60 flex-shrink-0" />
+                <span className="text-[11px] font-bold tracking-widest uppercase whitespace-nowrap">{label}</span>
               </div>
             ))}
           </div>
@@ -107,16 +107,16 @@ export default function Home() {
       <PickPerfectDial />
 
       {/* ── FEATURED PRODUCTS ── */}
-      <section className="bg-[#f5f5f5] py-20">
+      <section className="bg-white py-20">
         <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between mb-12">
             <div>
-              <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-3">FEATURED COLLECTION</p>
+              <p className="text-[11px] font-bold tracking-[0.3em] text-gray-400 uppercase mb-3">FEATURED COLLECTION</p>
               <h2 className="text-3xl md:text-4xl font-black text-black uppercase tracking-tight">
                 Our Latest Products
               </h2>
             </div>
-            <Link href="/products" className="hidden sm:inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-black border-b border-black pb-0.5 hover:text-gray-500 hover:border-gray-500 transition-colors">View All <FontAwesomeIcon icon={faArrowRight} size="xs" /></Link>
+            <Link href="/products" className="hidden sm:inline-flex items-center gap-2 text-[11px] font-bold tracking-widest uppercase text-black border-b border-black pb-0.5 hover:text-gray-400 hover:border-gray-400 transition-colors">View All <FontAwesomeIcon icon={faArrowRight} size="xs" /></Link>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[#e5e5e5]">
@@ -124,15 +124,14 @@ export default function Home() {
               <Link
                 key={product.id}
                 href={`/product/${product.slug}`}
-                className="group relative bg-white cursor-pointer overflow-hidden flex flex-col"
+                className="group bg-white cursor-pointer overflow-hidden flex flex-col"
               >
-                {index === 0 && (
-                  <div className="absolute top-3 left-3 z-20 bg-black text-white px-2.5 py-1 text-xs font-black tracking-widest">
-                    BESTSELLER
-                  </div>
-                )}
-
                 <div className="relative aspect-square overflow-hidden bg-[#f5f5f5]">
+                  {index === 0 && (
+                    <div className="absolute top-3 left-3 z-20 bg-black text-white px-2.5 py-1 text-[10px] font-black tracking-widest">
+                      BESTSELLER
+                    </div>
+                  )}
                   <img
                     src={product.images[0]}
                     alt={product.name}
@@ -140,68 +139,68 @@ export default function Home() {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent group-hover:from-black/60 group-hover:via-black/20 transition-all duration-300" />
-                  <div className="absolute inset-x-0 bottom-0 p-4 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <div className="w-full text-white text-xs font-bold tracking-widest uppercase flex items-center justify-center gap-2 py-2">
-                      QUICK VIEW <FontAwesomeIcon icon={faArrowRight} size="xs" />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300" />
+                  <div className="absolute inset-x-0 bottom-0 p-4 bg-[#0a0a0a] translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <div className="w-full text-white text-[11px] font-bold tracking-widest uppercase flex items-center justify-center gap-2 py-1.5">
+                      VIEW DETAILS <FontAwesomeIcon icon={faArrowRight} size="xs" />
                     </div>
                   </div>
                 </div>
 
-                <div className="p-5 border-t border-[#e5e5e5]">
-                  <p className="text-xs text-gray-400 font-bold tracking-widest uppercase mb-1">HUKE TIMES</p>
-                  <h3 className="font-bold text-sm text-black line-clamp-2 mb-3 min-h-[40px]">
+                <div className="p-5 border-t border-[#e5e5e5] flex-1 flex flex-col">
+                  <p className="text-[10px] text-gray-400 font-bold tracking-widest uppercase mb-1.5">HUKE TIMES</p>
+                  <h3 className="font-bold text-sm text-black line-clamp-2 flex-1">
                     {product.name}
                   </h3>
-                  <div className="mt-4 w-full bg-black text-white text-xs font-bold tracking-widest uppercase py-3 hover:bg-gray-800 transition-colors flex items-center justify-center gap-2">
-                    VIEW DETAILS <FontAwesomeIcon icon={faArrowRight} size="xs" />
-                  </div>
                 </div>
               </Link>
             ))}
           </div>
 
           <div className="text-center mt-10 sm:hidden">
-            <Link href="/products" className="inline-flex items-center gap-2 bg-black text-white text-xs font-bold tracking-widest uppercase py-4 px-10 hover:bg-gray-800 transition-colors">VIEW ALL PRODUCTS <FontAwesomeIcon icon={faArrowRight} size="xs" /></Link>
+            <Link href="/products" className="inline-flex items-center gap-2 bg-black text-white text-[11px] font-bold tracking-widest uppercase py-4 px-10 hover:bg-gray-800 transition-colors">VIEW ALL PRODUCTS <FontAwesomeIcon icon={faArrowRight} size="xs" /></Link>
           </div>
         </div>
       </section>
 
       {/* ── WHY CHOOSE US ── */}
-      <section className="bg-white py-20">
+      <section className="bg-[#f5f5f5] py-20">
         <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-3">OUR STRENGTHS</p>
+            <p className="text-[11px] font-bold tracking-[0.3em] text-gray-400 uppercase mb-3">OUR STRENGTHS</p>
             <h2 className="text-3xl md:text-4xl font-black text-black uppercase tracking-tight">Why Choose Huke Times</h2>
-            <div className="w-16 h-0.5 bg-black mx-auto mt-6" />
+            <div className="w-12 h-[2px] bg-black mx-auto mt-6" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#e5e5e5]">
             {[
               {
+                num: '01',
                 icon: faIndustry,
                 title: 'Who We Are',
                 desc: 'Based in Rajkot, Gujarat — committed to the fine craft of watchmaking with dedication to quality and perfection.'
               },
               {
+                num: '02',
                 icon: faBolt,
                 title: 'Innovation in Every Tick',
                 desc: 'Engineers and artisans creating timepieces that are both stylish and practical, combining age-old methods with cutting-edge innovation.'
               },
               {
+                num: '03',
                 icon: faWandMagicSparkles,
                 title: 'Commitment to Quality',
                 desc: 'Every watch undergoes thorough testing and multiple quality inspections. Great care in every aspect — from material selection to final delivery.'
               },
-            ].map(({ icon, title, desc }) => (
-              <div key={title} className="bg-white p-10 group hover:bg-black transition-colors duration-300">
-                <div className="mb-6 w-12 h-12 bg-[#f5f5f5] group-hover:bg-white/10 flex items-center justify-center transition-colors duration-300">
-                  <FontAwesomeIcon icon={icon} size="xl" className="text-black group-hover:text-white transition-colors duration-300" />
+            ].map(({ num, icon, title, desc }) => (
+              <div key={title} className="bg-white p-10 group hover:bg-[#0a0a0a] transition-colors duration-300 flex flex-col">
+                <div className="flex items-start justify-between mb-8">
+                  <span className="text-5xl font-black text-[#f0f0f0] group-hover:text-white/10 leading-none transition-colors duration-300 select-none">{num}</span>
+                  <div className="w-10 h-10 border border-[#e5e5e5] group-hover:border-white/20 flex items-center justify-center transition-colors duration-300">
+                    <FontAwesomeIcon icon={icon} size="sm" className="text-black group-hover:text-white transition-colors duration-300" />
+                  </div>
                 </div>
-                <h3 className="text-lg font-black text-black group-hover:text-white uppercase tracking-tight mb-4 transition-colors duration-300">{title}</h3>
-                <p className="text-sm text-gray-500 group-hover:text-gray-300 leading-relaxed transition-colors duration-300">{desc}</p>
-                <div className="mt-6 inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-black group-hover:text-white border-b border-black group-hover:border-white pb-0.5 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                  Learn More <FontAwesomeIcon icon={faArrowRight} size="xs" />
-                </div>
+                <h3 className="text-base font-black text-black group-hover:text-white uppercase tracking-tight mb-3 transition-colors duration-300">{title}</h3>
+                <p className="text-sm text-gray-500 group-hover:text-gray-400 leading-relaxed transition-colors duration-300 flex-1">{desc}</p>
               </div>
             ))}
           </div>
@@ -234,93 +233,105 @@ export default function Home() {
       </section>
 
       {/* ── TESTIMONIALS ── */}
-      <section className="bg-[#f5f5f5] py-20">
+      <section className="bg-white py-20">
         <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-3">CUSTOMER REVIEWS</p>
-            <h2 className="text-3xl md:text-4xl font-black text-black uppercase tracking-tight">What Our Customers Say</h2>
-            <div className="w-16 h-0.5 bg-black mx-auto mt-6" />
+          <div className="flex items-end justify-between mb-12">
+            <div>
+              <p className="text-[11px] font-bold tracking-[0.3em] text-gray-400 uppercase mb-3">CUSTOMER REVIEWS</p>
+              <h2 className="text-3xl md:text-4xl font-black text-black uppercase tracking-tight">What Our Customers Say</h2>
+            </div>
+            <Link href="/testimonials" className="hidden sm:inline-flex items-center gap-2 text-[11px] font-bold tracking-widest uppercase text-black border-b border-black pb-0.5 hover:text-gray-400 hover:border-gray-400 transition-colors">All Reviews <FontAwesomeIcon icon={faArrowRight} size="xs" /></Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#e5e5e5]">
             {testimonials.slice(0, 3).map((testimonial) => (
-              <div key={testimonial.id} className="bg-white p-8 border border-[#e5e5e5] hover:border-black hover:shadow-lg transition-all duration-300 group relative">
-                <FontAwesomeIcon icon={faQuoteLeft} size="2x" className="text-[#e5e5e5] group-hover:text-gray-200 absolute top-6 right-6 transition-colors duration-300" />
-                <div className="flex items-center gap-1 mb-5">
+              <div key={testimonial.id} className="bg-[#f9f9f9] p-8 group hover:bg-[#0a0a0a] transition-colors duration-300 flex flex-col">
+                <div className="flex items-center gap-0.5 mb-5">
                   {Array.from({ length: testimonial.rating }).map((_, i) => (
-                    <FontAwesomeIcon key={i} icon={faStar} size="sm" className="text-black" />
+                    <FontAwesomeIcon key={i} icon={faStar} size="xs" className="text-black group-hover:text-white transition-colors duration-300" />
                   ))}
-                  <span className="ml-2 text-sm font-black text-black">{testimonial.rating}.0</span>
+                  <span className="ml-2 text-xs font-black text-black group-hover:text-white transition-colors duration-300">{testimonial.rating}.0</span>
                 </div>
                 {testimonial.review && (
-                  <p className="text-gray-600 mb-6 leading-relaxed text-sm italic">"{testimonial.review}"</p>
+                  <p className="text-sm text-gray-600 group-hover:text-gray-300 leading-relaxed italic flex-1 mb-6 transition-colors duration-300">&ldquo;{testimonial.review}&rdquo;</p>
                 )}
-                <div className="border-t border-[#e5e5e5] pt-5">
-                  <p className="font-black text-black text-base">{testimonial.customerName}</p>
-                  <p className="text-xs text-gray-500 mt-1 font-semibold uppercase tracking-wider">{testimonial.product}</p>
-                  <p className="text-xs text-gray-400 mt-0.5">{testimonial.date}</p>
+                <div className="border-t border-[#e5e5e5] group-hover:border-white/10 pt-5 transition-colors duration-300">
+                  <p className="font-black text-sm text-black group-hover:text-white transition-colors duration-300">{testimonial.customerName}</p>
+                  <p className="text-[10px] text-gray-400 group-hover:text-gray-500 mt-1 font-semibold uppercase tracking-widest transition-colors duration-300">{testimonial.product}</p>
                 </div>
               </div>
             ))}
           </div>
-          <div className="text-center mt-12">
-            <Link href="/testimonials" className="inline-flex items-center gap-2 bg-black text-white text-xs font-bold tracking-widest uppercase py-4 px-10 hover:bg-gray-800 transition-colors">VIEW ALL REVIEWS <FontAwesomeIcon icon={faArrowRight} size="xs" /></Link>
+          <div className="text-center mt-10 sm:hidden">
+            <Link href="/testimonials" className="inline-flex items-center gap-2 bg-black text-white text-[11px] font-bold tracking-widest uppercase py-4 px-10 hover:bg-gray-800 transition-colors">VIEW ALL REVIEWS <FontAwesomeIcon icon={faArrowRight} size="xs" /></Link>
           </div>
         </div>
       </section>
 
       {/* ── WORKMANSHIP ── */}
-      <section className="bg-white border-t border-[#e5e5e5] py-20">
+      <section className="bg-[#0a0a0a] py-24">
         <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-3">Our Craft</p>
-            <h2 className="text-4xl sm:text-5xl font-black uppercase">HUKE'S WORKMANSHIP</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#e5e5e5]">
-            <div className="p-8 md:p-10">
-              <h3 className="text-sm font-black uppercase mb-4 tracking-wider">Who We Are</h3>
-              <p className="text-sm text-gray-600 leading-relaxed">{companyDescription.intro}</p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+            {/* Left – heading */}
+            <div>
+              <p className="text-[11px] font-bold tracking-[0.3em] text-gray-500 uppercase mb-4">Our Craft</p>
+              <h2 className="text-4xl sm:text-5xl font-black uppercase text-white leading-tight mb-6">HUKE'S<br />WORKMANSHIP</h2>
+              <div className="w-12 h-[2px] bg-white/30 mb-8" />
+              <p className="text-sm text-gray-400 leading-relaxed mb-8">{companyDescription.intro}</p>
+              <Link href="/about" className="inline-flex items-center gap-2 border border-white/20 hover:border-white hover:bg-white hover:text-black text-white text-[11px] font-bold tracking-widest uppercase px-6 py-3 transition-all duration-200">
+                About Us <FontAwesomeIcon icon={faArrowRight} size="xs" />
+              </Link>
             </div>
-            <div className="p-8 md:p-10">
-              <h3 className="text-sm font-black uppercase mb-4 tracking-wider">{companyDescription.innovation.title}</h3>
-              <ul className="space-y-2">
-                {companyDescription.innovation.points.slice(0, 4).map((point, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
-                    <span className="text-black mt-1 flex-shrink-0">—</span>
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
+
+            {/* Right – two columns of points */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/10">
+              <div className="bg-[#111111] p-8">
+                <p className="text-[11px] font-bold tracking-widest uppercase text-gray-500 mb-5">{companyDescription.innovation.title}</p>
+                <ul className="space-y-3">
+                  {companyDescription.innovation.points.slice(0, 4).map((point, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm text-gray-400">
+                      <span className="w-1 h-1 rounded-full bg-white/40 mt-2 flex-shrink-0" />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bg-[#111111] p-8">
+                <p className="text-[11px] font-bold tracking-widest uppercase text-gray-500 mb-5">{companyDescription.quality.title}</p>
+                <ul className="space-y-3">
+                  {companyDescription.quality.points.slice(0, 4).map((point, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm text-gray-400">
+                      <span className="w-1 h-1 rounded-full bg-white/40 mt-2 flex-shrink-0" />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            <div className="p-8 md:p-10">
-              <h3 className="text-sm font-black uppercase mb-4 tracking-wider">{companyDescription.quality.title}</h3>
-              <ul className="space-y-2">
-                {companyDescription.quality.points.slice(0, 4).map((point, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
-                    <span className="text-black mt-1 flex-shrink-0">—</span>
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+
           </div>
         </div>
       </section>
 
       {/* ── NEWSLETTER ── */}
-      <section className="bg-black text-white py-14 border-t border-[#1a1a1a]">
-        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-3">Stay Updated</p>
-          <h2 className="text-3xl sm:text-4xl font-black uppercase mb-2">Get Wholesale Pricing Updates</h2>
-          <p className="text-gray-400 text-sm mb-8">Subscribe for new product launches, bulk offers, and trade updates.</p>
-          <div className="flex flex-col sm:flex-row gap-0 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 px-5 py-3 bg-white text-black placeholder-gray-400 text-sm focus:outline-none"
-            />
-            <button className="bg-white text-black font-black text-xs uppercase tracking-widest px-8 py-3 border-l border-gray-200 hover:bg-gray-100 transition-colors whitespace-nowrap">
-              SUBSCRIBE
-            </button>
+      <section className="bg-[#f5f5f5] border-y border-[#e5e5e5] py-14">
+        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div>
+              <p className="text-[11px] font-bold tracking-[0.3em] text-gray-400 uppercase mb-2">Stay Updated</p>
+              <h2 className="text-2xl sm:text-3xl font-black uppercase text-black">Get Wholesale Pricing Updates</h2>
+              <p className="text-sm text-gray-500 mt-2">Subscribe for new product launches, bulk offers, and trade updates.</p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-0 w-full md:w-auto md:min-w-[400px] flex-shrink-0">
+              <input
+                type="email"
+                placeholder="Enter your business email"
+                className="flex-1 px-5 py-3.5 bg-white border border-[#e5e5e5] border-r-0 text-black placeholder-gray-400 text-sm focus:outline-none focus:border-black transition-colors"
+              />
+              <button className="bg-black text-white font-black text-[11px] uppercase tracking-widest px-7 py-3.5 hover:bg-gray-800 transition-colors whitespace-nowrap">
+                SUBSCRIBE
+              </button>
+            </div>
           </div>
         </div>
       </section>
