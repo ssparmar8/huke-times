@@ -5,10 +5,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { getProductBySlug, products } from '../data/products';
 import { companyInfo } from '../data/company';
+import ImageLightbox from '../components/ImageLightbox';
 
 export default function ProductDetail({ slug }: { slug: string }) {
   const product = getProductBySlug(slug);
   const [activeImage, setActiveImage] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   if (!product) {
     return (
@@ -53,7 +55,10 @@ export default function ProductDetail({ slug }: { slug: string }) {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Product Image + Gallery */}
             <div>
-              <div className="bg-white border border-[#e5e5e5] overflow-hidden">
+              <div
+                className="bg-white border border-[#e5e5e5] overflow-hidden cursor-zoom-in"
+                onClick={() => setLightboxOpen(true)}
+              >
                 <img
                   src={product.images[activeImage]}
                   alt={product.name}
@@ -86,17 +91,9 @@ export default function ProductDetail({ slug }: { slug: string }) {
               </div>
               <h1 className="text-4xl md:text-5xl font-extrabold mb-6 text-[#333333]">{product.name}</h1>
 
-              {/* Price & MOQ */}
+              {/* MOQ */}
               <div className="bg-[#f5f5f5] border border-[#e5e5e5] p-8 mb-6">
-                <div className="mb-4">
-                  <div className="text-sm text-[#888888] mb-1">Price</div>
-                  <div className="text-4xl font-bold text-[#333333]">
-                    {product.price.currency}{product.price.min}
-                    {product.price.max && ` - ${product.price.currency}${product.price.max}`}
-                  </div>
-                  <div className="text-[#888888]">per piece</div>
-                </div>
-                <div className="border-t border-gray-100 pt-4">
+                <div>
                   <div className="text-sm text-[#888888] mb-1">Minimum Order Quantity</div>
                   <div className="text-2xl font-bold text-[#333333]">{product.moq} Pieces</div>
                 </div>
@@ -195,17 +192,23 @@ export default function ProductDetail({ slug }: { slug: string }) {
                 </div>
                 <div className="p-4">
                   <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">HUKE TIMES</p>
-                  <h3 className="text-sm font-bold text-black mb-1 line-clamp-2">{p.name}</h3>
-                  <p className="text-sm font-black text-black">
-                    {p.price.currency}{p.price.min}
-                    {p.price.max && <span className="text-gray-500 font-normal"> &ndash; {p.price.currency}{p.price.max}</span>}
-                  </p>
+                  <h3 className="text-sm font-bold text-black line-clamp-2">{p.name}</h3>
                 </div>
               </Link>
             ))}
           </div>
         </div>
       </section>
+
+      {lightboxOpen && (
+        <ImageLightbox
+          images={product.images}
+          alts={product.images.map((_, i) => `${product.name} view ${i + 1}`)}
+          activeIndex={activeImage}
+          onClose={() => setLightboxOpen(false)}
+          onNavigate={setActiveImage}
+        />
+      )}
     </div>
   );
 }

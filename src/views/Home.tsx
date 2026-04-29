@@ -153,13 +153,6 @@ export default function Home() {
                   <h3 className="font-bold text-sm text-black line-clamp-2 mb-3 min-h-[40px]">
                     {product.name}
                   </h3>
-                  <div className="flex items-center justify-between">
-                    <p className="text-lg font-black text-black">
-                      {product.price.currency}{product.price.min}
-                      {product.price.max && <span className="text-sm text-gray-400 font-normal">–{product.price.currency}{product.price.max}</span>}
-                    </p>
-                    <span className="text-xs text-gray-500 font-medium">MOQ: {product.moq}</span>
-                  </div>
                   <div className="mt-4 w-full bg-black text-white text-xs font-bold tracking-widest uppercase py-3 hover:bg-gray-800 transition-colors flex items-center justify-center gap-2">
                     VIEW DETAILS <FontAwesomeIcon icon={faArrowRight} size="xs" />
                   </div>
@@ -217,7 +210,7 @@ export default function Home() {
 
       {/* ── STATS ── */}
       <section className="bg-black text-white py-20 relative" style={{backgroundImage: "url('/watch-images/watch-06.jpg')", backgroundSize: 'cover', backgroundPosition: 'center'}}>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10" />
+        <div className="absolute inset-0 bg-black/60" />
         <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative z-10 text-center mb-14">
             <p className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase mb-3">OUR JOURNEY</p>
@@ -230,7 +223,7 @@ export default function Home() {
               { icon: faBagShopping, value: '5+', label: 'Product Categories' },
               { icon: faStar, value: '4.7★', label: 'Customer Rating' },
             ].map(({ icon, value, label }) => (
-              <div key={label} className="bg-black p-8 lg:p-10 text-center group hover:bg-white transition-colors duration-300">
+              <div key={label} className="bg-black/60 p-8 lg:p-10 text-center group hover:bg-white transition-colors duration-300 backdrop-blur-sm">
                 <FontAwesomeIcon icon={icon} size="xl" className="mx-auto mb-5 text-white group-hover:text-black transition-colors duration-300" />
                 <div className="text-4xl lg:text-5xl font-black mb-2 text-white group-hover:text-black transition-colors duration-300">{value}</div>
                 <div className="text-xs font-bold tracking-widest uppercase text-gray-400 group-hover:text-gray-600 transition-colors duration-300">{label}</div>

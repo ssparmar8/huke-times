@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { products } from '../data/products';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import ImageLightbox from '../components/ImageLightbox';
 
 
 const PRODUCTS_PER_PAGE = 12;
@@ -20,6 +21,7 @@ const allWatchImages = Array.from({ length: 32 }, (_, i) => {
 export default function Products() {
   const [selectedCategory, setSelectedCategory] = useState<'all' | 'mens-watches' | 'watch-parts'>('all');
   const [currentPage, setCurrentPage] = useState(1);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const isAll = selectedCategory === 'all';
   const filteredProducts = products.filter(p => p.category === selectedCategory);
@@ -93,28 +95,35 @@ export default function Products() {
           {/* Product Cards */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-[#e5e5e5]">
             {isAll
-              ? (pagedItems as typeof allWatchImages).map(img => (
-                <div key={img.id} className="group bg-white cursor-pointer">
-                  <div className="relative aspect-square overflow-hidden bg-[#f5f5f5]">
-                    <img
-                      src={img.url}
-                      alt={img.alt}
-                      sizes="(max-width: 640px) 50vw, 25vw"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent group-hover:from-black/85 group-hover:via-black/30 transition-all duration-300 flex items-center justify-center">
-                      <span className="text-white text-xs font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300 border border-white px-5 py-2">
-                        VIEW
-                      </span>
+              ? (pagedItems as typeof allWatchImages).map((img, pageIdx) => {
+                const globalIndex = (currentPage - 1) * PRODUCTS_PER_PAGE + pageIdx;
+                return (
+                  <div
+                    key={img.id}
+                    className="group bg-white cursor-zoom-in"
+                    onClick={() => setLightboxIndex(globalIndex)}
+                  >
+                    <div className="relative aspect-square overflow-hidden bg-[#f5f5f5]">
+                      <img
+                        src={img.url}
+                        alt={img.alt}
+                        sizes="(max-width: 640px) 50vw, 25vw"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent group-hover:from-black/85 group-hover:via-black/30 transition-all duration-300 flex items-center justify-center">
+                        <span className="text-white text-xs font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300 border border-white px-5 py-2">
+                          VIEW
+                        </span>
+                      </div>
+                    </div>
+                    <div className="p-4">
+                      <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">HUKE TIMES</p>
+                      <p className="text-sm font-bold text-black line-clamp-2 capitalize">{img.alt}</p>
                     </div>
                   </div>
-                  <div className="p-4">
-                    <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">HUKE TIMES</p>
-                    <p className="text-sm font-bold text-black line-clamp-2 capitalize">{img.alt}</p>
-                  </div>
-                </div>
-              ))
+                );
+              })
               : (pagedItems as typeof products).map(product => (
                 <Link
                   key={product.id}
@@ -137,12 +146,7 @@ export default function Products() {
                   </div>
                   <div className="p-4">
                     <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">HUKE TIMES</p>
-                    <h3 className="text-sm font-bold text-black mb-2 line-clamp-2">{product.name}</h3>
-                    <p className="text-sm font-bold text-black">
-                      {product.price.currency}{product.price.min}
-                      {product.price.max && <span className="text-gray-500 font-normal"> &ndash; {product.price.currency}{product.price.max}</span>}
-                    </p>
-                    <p className="text-xs text-gray-500 mt-1">MOQ: {product.moq} pcs</p>
+                    <h3 className="text-sm font-bold text-black line-clamp-2">{product.name}</h3>
                   </div>
                 </Link>
               ))
@@ -215,6 +219,16 @@ export default function Products() {
           </Link>
         </div>
       </section>
+
+      {lightboxIndex !== null && (
+        <ImageLightbox
+          images={allWatchImages.map(img => img.url)}
+          alts={allWatchImages.map(img => img.alt)}
+          activeIndex={lightboxIndex}
+          onClose={() => setLightboxIndex(null)}
+          onNavigate={setLightboxIndex}
+        />
+      )}
     </div>
   );
 }
